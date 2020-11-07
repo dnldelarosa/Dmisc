@@ -1,5 +1,7 @@
 #' Insert HTML file
 #'
+#' \lifecycle{experimental}
+#'
 #' @param path character the path where the HTML file exists. May end with /
 #' @param name character the name of HTML file to insert
 #'

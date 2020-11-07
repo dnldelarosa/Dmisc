@@ -20,8 +20,10 @@ Imports:
     rvest,
     stringr,
     knitr,
-    htmltools
+    htmltools,
+    lifecycle
 Suggests: 
     spelling,
     testthat
 Language: en-US
+RdMacros: lifecycle

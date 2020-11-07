@@ -15,7 +15,7 @@ insertHTML(path, name)
 character an HTML character string
 }
 \description{
-Insert HTML file
+\lifecycle{experimental}
 }
 \details{
 This function was created to insert MatLab published HTML into
