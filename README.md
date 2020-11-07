@@ -14,7 +14,7 @@ status](https://www.r-pkg.org/badges/version/Dmisc)](https://CRAN.R-project.org/
 <!-- badges: end -->
 
 This package contains functions that I use and they do not belong to a
-specific package. It contains functions for each thing.
+specific package. It contains functions for any thing.
 
 ## Installation
 

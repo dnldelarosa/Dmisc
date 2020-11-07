@@ -2,12 +2,12 @@
 % Please edit documentation in R/insertHTML.R
 \name{insertHTML}
 \alias{insertHTML}
-\title{Insert HTML file}
+\title{Insert HTML file into another}
 \usage{
 insertHTML(path, name)
 }
 \arguments{
-\item{path}{character the path where the HTML file exists. May end with /}
+\item{path}{character the path where the HTML file exists. Should end with /}
 
 \item{name}{character the name of HTML file to insert}
 }
@@ -33,5 +33,10 @@ A caption with de file name is added to each image.
 \item{
 The output is wrapped by a \code{<pre></pre>} tag.
 }
+}
+}
+\examples{
+\dontrun{
+insertHTML('html/', 'index.html')
 }
 }

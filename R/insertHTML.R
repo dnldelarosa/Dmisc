@@ -1,8 +1,8 @@
-#' Insert HTML file
+#' Insert HTML file into another
 #'
 #' \lifecycle{experimental}
 #'
-#' @param path character the path where the HTML file exists. May end with /
+#' @param path character the path where the HTML file exists. Should end with /
 #' @param name character the name of HTML file to insert
 #'
 #' @return character an HTML character string
@@ -27,6 +27,9 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#' insertHTML('html/', 'index.html')
+#' }
 insertHTML <- function(path, name) {
   file <- xml2::read_html(paste0(path, name))
   file2 <- as.character(rvest::html_node(file,'body'))
