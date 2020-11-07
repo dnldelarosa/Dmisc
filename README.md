@@ -11,6 +11,8 @@ status](https://github.com/drdsdaniel/Dmisc/workflows/R-CMD-check/badge.svg)](ht
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/Dmisc)](https://CRAN.R-project.org/package=Dmisc)
+[![Codecov test
+coverage](https://codecov.io/gh/drdsdaniel/Dmisc/branch/master/graph/badge.svg)](https://codecov.io/gh/drdsdaniel/Dmisc?branch=master)
 <!-- badges: end -->
 
 This package contains functions that I use and they do not belong to a

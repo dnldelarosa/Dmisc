@@ -2,7 +2,7 @@ Package: Dmisc
 Title: Daniel miscellaneous functions
 Version: 0.1.0.9000
 Authors@R: 
-    person(given = "Daniel",
+    person(given = "Daniel E.",
            family = "de la Rosa",
            role = c("aut", "cre"),
            email = "drdsdaniel@gmail.com")
@@ -24,6 +24,7 @@ Imports:
     lifecycle
 Suggests: 
     spelling,
-    testthat
+    testthat,
+    covr
 Language: en-US
 RdMacros: lifecycle
