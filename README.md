@@ -34,3 +34,7 @@ You can install the development version from
 # install.packages("devtools")
 devtools::install_github("drdsdaniel/Dmisc")
 ```
+
+## Functions
+
+Browse the package site: [Dmisc](https://drdsdaniel.github.io/Dmisc/)
