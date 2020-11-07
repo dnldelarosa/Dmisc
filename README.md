@@ -37,4 +37,5 @@ devtools::install_github("drdsdaniel/Dmisc")
 
 ## Functions
 
-Browse the package site: [Dmisc](https://drdsdaniel.github.io/Dmisc/)
+Browse the package site:
+[Dmisc](https://drdsdaniel.github.io/Dmisc/reference/index.html)
