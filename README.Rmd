@@ -20,6 +20,7 @@ knitr::opts_chunk$set(
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![CRAN status](https://www.r-pkg.org/badges/version/Dmisc)](https://CRAN.R-project.org/package=Dmisc)
 [![Codecov test coverage](https://codecov.io/gh/drdsdaniel/Dmisc/branch/master/graph/badge.svg)](https://codecov.io/gh/drdsdaniel/Dmisc?branch=master)
+[![Travis build status](https://travis-ci.com/drdsdaniel/Dmisc.svg?branch=master)](https://travis-ci.com/drdsdaniel/Dmisc)
 <!-- badges: end -->
 
 This package contains functions that I use and they do not belong to a specific package. It contains functions for any thing.
