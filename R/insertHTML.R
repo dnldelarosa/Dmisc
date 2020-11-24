@@ -39,7 +39,7 @@ insertHTML <- function(path, name) {
     imageType <- strsplit(images[[image]], 'src=')[[1]][2]
     imageType <- strsplit(imageType, ';')[[1]][2]
     imageType <- strsplit(imageType, ',')[[1]][1]
-    if(imageType != 'base64'){
+    if(is.na(imageType)){
       image_name <- strsplit(strsplit(strsplit(images[[image]], 'src=')[[1]][2], ' ')[[1]][1], '/', perl = T)[[1]]
       image_name <- noquote(image_name)
       image_name <- stringr::str_remove_all(image_name[length(image_name)], '"')
