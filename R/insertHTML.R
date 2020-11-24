@@ -30,7 +30,7 @@
 #' \dontrun{
 #' insertHTML('html/', 'index.html')
 #' }
-insertHTML <- function(path, name) {
+insertHTML <- function(path = './', name) {
   file <- xml2::read_html(paste0(path, name))
   file2 <- as.character(rvest::html_node(file,'body'))
   images <- stringr::str_extract_all(file2, '<img.*?src="(.*?)"[^>]+>')

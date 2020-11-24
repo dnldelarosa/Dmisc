@@ -4,7 +4,7 @@
 \alias{insertHTML}
 \title{Insert HTML file into another}
 \usage{
-insertHTML(path, name)
+insertHTML(path = "./", name)
 }
 \arguments{
 \item{path}{character the path where the HTML file exists. Should end with /}

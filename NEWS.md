@@ -6,3 +6,7 @@
 # Dmisc 0.1.1.9001
 
 * Fixed backward incompatibility added in previous mod
+
+# Dmisc 0.1.1.9002
+
+* Set current path as default path insertHTML function
