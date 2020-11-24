@@ -25,7 +25,7 @@ RMarkdown documents. Important considerations:
 Only the body of the document if returned.
 }
 \item{
-The images are converted to base64 strings.
+The images are converted to base64 strings if needed.
 }
 \item{
 A caption with de file name is added to each image.

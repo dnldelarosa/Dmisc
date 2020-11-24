@@ -14,7 +14,7 @@
 #'      Only the body of the document if returned.
 #'    }
 #'    \item{
-#'      The images are converted to base64 strings.
+#'      The images are converted to base64 strings if needed.
 #'    }
 #'    \item{
 #'      A caption with de file name is added to each image.
@@ -36,16 +36,21 @@ insertHTML <- function(path, name) {
   images <- stringr::str_extract_all(file2, '<img.*?src="(.*?)"[^>]+>')
   images <- images[[1]]
   for (image in seq_along(images)) {
-    image_name <- strsplit(strsplit(strsplit(images[[image]], 'src=')[[1]][2], ' ')[[1]][1], '/', perl = T)[[1]]
-    image_name <- noquote(image_name)
-    image_name <- stringr::str_remove_all(image_name[length(image_name)], '"')
-    image_path = paste0(path, image_name)
-    uri=knitr::image_uri(image_path)
-    file2 <- stringr::str_replace(file2, images[[image]], paste0(
-      '<img src=\"', uri, '\" />\n',
-      '<figure><figcaption>','Fig. ', image, ': ',stringr::str_remove(image_name, '.png'),'</figcaption>',
-      '</figure>'
-    ))
+    imageType <- strsplit(images[[image]], 'src=')[[1]][2]
+    imageType <- strsplit(imageType, ';')[[1]][2]
+    imageType <- strsplit(imageType, ',')[[1]][1]
+    if(imageType != 'base64'){
+      image_name <- strsplit(strsplit(strsplit(images[[image]], 'src=')[[1]][2], ' ')[[1]][1], '/', perl = T)[[1]]
+      image_name <- noquote(image_name)
+      image_name <- stringr::str_remove_all(image_name[length(image_name)], '"')
+      image_path = paste0(path, image_name)
+      uri=knitr::image_uri(image_path)
+      file2 <- stringr::str_replace(file2, images[[image]], paste0(
+        '<img src=\"', uri, '\" />\n',
+        '<figure><figcaption>','Fig. ', image, ': ',stringr::str_remove(image_name, '.png'),'</figcaption>',
+        '</figure>'
+      ))
+    }
   }
   htmltools::HTML(paste0('<pre> ',file2,' </pre>'))
 }
