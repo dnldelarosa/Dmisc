@@ -4,12 +4,14 @@
 \alias{insertHTML}
 \title{Insert HTML file into another}
 \usage{
-insertHTML(path = "./", name)
+insertHTML(path = "./", name, source_code = "matlab")
 }
 \arguments{
 \item{path}{character the path where the HTML file exists. Should end with /}
 
 \item{name}{character the name of HTML file to insert}
+
+\item{source_code}{character used for highlighting the code into the document}
 }
 \value{
 character an HTML character string

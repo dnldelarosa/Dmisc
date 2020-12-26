@@ -10,3 +10,7 @@
 # Dmisc 0.1.1.9002
 
 * Set current path as default path insertHTML function
+
+# Dmisc 0.1.2.9002
+
+* New vars_to_date function

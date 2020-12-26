@@ -44,9 +44,15 @@ devtools::install_github("drdsdaniel/Dmisc")
 Browse the package site:
 [Dmisc](https://drdsdaniel.github.io/Dmisc/reference/index.html)
 
-## Code of Conduct
+## Contributing
 
-Please note that the Dmisc project is released with a [Contributor Code
+Have a feedback or want to contribute?
+
+Please take a look at the [contributing
+guidelines](https://drdsdaniel.github.io/Dmisc/CONTRIBUTING.html) before
+filing an issue or pull request.
+
+Please note that the Rmdx project is released with a [Contributor Code
 of
 Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.

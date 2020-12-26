@@ -4,6 +4,7 @@
 #'
 #' @param path character the path where the HTML file exists. Should end with /
 #' @param name character the name of HTML file to insert
+#' @param source_code character used for highlighting the code into the document
 #'
 #' @return character an HTML character string
 #'
@@ -30,7 +31,7 @@
 #' \dontrun{
 #' insertHTML('html/', 'index.html')
 #' }
-insertHTML <- function(path = './', name) {
+insertHTML <- function(path = './', name, source_code = 'matlab') {
   file <- xml2::read_html(paste0(path, name))
   file2 <- as.character(rvest::html_node(file,'body'))
   images <- stringr::str_extract_all(file2, '<img.*?src="(.*?)"[^>]+>')
@@ -52,5 +53,7 @@ insertHTML <- function(path = './', name) {
       ))
     }
   }
-  htmltools::HTML(paste0('<pre> ',file2,' </pre>'))
+  file2 <- paste0('<pre>',file2,' </pre>')
+  file2 <- stringr::str_replace_all(file2, '<pre', paste0('<pre class="sourceCode ', source_code,'"'))
+  htmltools::HTML(file2)
 }

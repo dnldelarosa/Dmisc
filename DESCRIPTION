@@ -1,6 +1,6 @@
 Package: Dmisc
 Title: Daniel miscellaneous functions
-Version: 0.1.1.9002
+Version: 0.1.2.9003
 Authors@R: 
     person(given = "Daniel E.",
            family = "de la Rosa",
@@ -21,9 +21,10 @@ Imports:
     stringr,
     knitr,
     htmltools,
-    lifecycle
+    lifecycle,
+    dplyr,
+    zoo
 Suggests: 
-    spelling,
     testthat,
     covr
 Language: en-US
