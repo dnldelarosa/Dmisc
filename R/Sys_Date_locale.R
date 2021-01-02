@@ -17,6 +17,6 @@ Sys_Date_locale <- function(locale = "es_DO.utf8", format = "%a de %B de %Y"){
   if(is.null(format)){
     withr::with_locale(new = c("LC_TIME" = locale), Sys.Date())
   } else {
-    withr::with_locale(new = c("LC_TIME" = locale), format(Sys.Date()))
+    withr::with_locale(new = c("LC_TIME" = locale), format(Sys.Date(), format))
   }
 }
