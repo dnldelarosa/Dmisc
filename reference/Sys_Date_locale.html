@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Multiple variables to unique date variable — vars_to_date • Dmisc</title>
+<title>System date with specific format and locale — Sys_Date_locale • Dmisc</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Multiple variables to unique date variable — vars_to_date" />
-<meta property="og:description" content="Multiple variables to unique date variable" />
+<meta property="og:title" content="System date with specific format and locale — Sys_Date_locale" />
+<meta property="og:description" content="You need to have installed the specified locale." />
 
 
 
@@ -121,60 +121,37 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Multiple variables to unique date variable</h1>
-    <small class="dont-index">Source: <a href='https://github.com/drdsdaniel/Dmisc/blob/master/R/vars_to_date.R'><code>R/vars_to_date.R</code></a></small>
-    <div class="hidden name"><code>vars_to_date.Rd</code></div>
+    <h1>System date with specific format and locale</h1>
+    <small class="dont-index">Source: <a href='https://github.com/drdsdaniel/Dmisc/blob/master/R/Sys_Date_locale.R'><code>R/Sys_Date_locale.R</code></a></small>
+    <div class="hidden name"><code>Sys_Date_locale.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Multiple variables to unique date variable</p>
+    <p>You need to have installed the specified locale.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>vars_to_date</span><span class='op'>(</span>
-  <span class='va'>tbl</span>,
-  year <span class='op'>=</span> <span class='cn'>NULL</span>,
-  trim <span class='op'>=</span> <span class='cn'>NULL</span>,
-  month <span class='op'>=</span> <span class='cn'>NULL</span>,
-  month_type <span class='op'>=</span> <span class='st'>"char"</span>,
-  day <span class='op'>=</span> <span class='cn'>NULL</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>Sys_Date_locale</span><span class='op'>(</span>locale <span class='op'>=</span> <span class='st'>"es_DO.utf8"</span>, format <span class='op'>=</span> <span class='st'>"%a de %B de %Y"</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>tbl</th>
-      <td><p>data.frame or tbl connection</p></td>
+      <th>locale</th>
+      <td><p>a currently installed locale string</p></td>
     </tr>
     <tr>
-      <th>year</th>
-      <td><p>year variable position or name</p></td>
-    </tr>
-    <tr>
-      <th>trim</th>
-      <td><p>trimester variable position or name</p></td>
-    </tr>
-    <tr>
-      <th>month</th>
-      <td><p>month variable position or name</p></td>
-    </tr>
-    <tr>
-      <th>month_type</th>
-      <td><p>character the char or num type of month variable</p></td>
-    </tr>
-    <tr>
-      <th>day</th>
-      <td><p>day variable position or name</p></td>
+      <th>format</th>
+      <td><p>a valid format for dates or NULL</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>tbl a new data.frame with the compute variable</p>
+    <p>a date with specified locale and format</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>tbl</span> <span class='op'>&lt;-</span> <span class='fu'>vars_to_date</span><span class='op'>(</span><span class='va'>tbl</span><span class='op'>)</span>
+ <span class='fu'>Sys_Date_locale</span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>}</span>
 </div></pre>
   </div>
