@@ -13,7 +13,7 @@
 #' \dontrun{
 #'  Sys_Date_locale()
 #' }
-Sys_Date_locale <- function(locale = "es_DO.utf8", format = "%a de %B de %Y"){
+Sys_Date_locale <- function(locale = "es_DO.utf8", format = "%d de %B de %Y"){
   if(is.null(format)){
     withr::with_locale(new = c("LC_TIME" = locale), Sys.Date())
   } else {
