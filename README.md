@@ -12,9 +12,7 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![CRAN
 status](https://www.r-pkg.org/badges/version/Dmisc)](https://CRAN.R-project.org/package=Dmisc)
 [![Codecov test
-coverage](https://codecov.io/gh/drdsdaniel/Dmisc/branch/main/graph/badge.svg)](https://codecov.io/gh/drdsdaniel/Dmisc?branch=main)
-[![Travis build
-status](https://travis-ci.com/drdsdaniel/Dmisc.svg?branch=main)](https://travis-ci.com/drdsdaniel/Dmisc)
+coverage](https://codecov.io/gh/drdsdaniel/Dmisc/branch/main/graph/badge.svg)](https://codecov.io/gh/drdsdaniel/Dmisc?branch=master)
 <!-- badges: end -->
 
 This package contains functions that I use and they do not belong to a

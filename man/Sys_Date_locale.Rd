@@ -4,7 +4,7 @@
 \alias{Sys_Date_locale}
 \title{System date with specific format and locale}
 \usage{
-Sys_Date_locale(locale = "es_DO.utf8", format = "\%d de \%B de \%Y")
+Sys_Date_locale(locale = "es_DO.utf8", format = "\%B \%d, \%Y")
 }
 \arguments{
 \item{locale}{a currently installed locale string}
