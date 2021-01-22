@@ -12,3 +12,7 @@
 # Dmisc 0.1.3
 
 * New Sys_Date_locale function
+
+# Dmisc 0.1.4
+
+* New dbConnect function

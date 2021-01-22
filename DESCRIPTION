@@ -1,6 +1,6 @@
 Package: Dmisc
 Title: Daniel miscellaneous functions
-Version: 0.1.3.9003
+Version: 0.1.4.9000
 Authors@R: 
     person(given = "Daniel E.",
            family = "de la Rosa",
@@ -24,7 +24,10 @@ Imports:
     lifecycle,
     dplyr,
     zoo,
-    withr
+    withr,
+    DBI,
+    RPostgres,
+    keyring
 Suggests: 
     testthat,
     covr
