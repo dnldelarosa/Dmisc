@@ -3,4 +3,6 @@
 export(Sys_Date_locale)
 export(dbConnect)
 export(insertHTML)
+export(octave_path)
 export(vars_to_date)
+importFrom(lifecycle,deprecate_soft)
