@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • Dmisc</title>
+<title>Conexión a bases de datos — dbConnect • Dmisc</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,8 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Conexión a bases de datos — dbConnect" />
+<meta property="og:description" content="" />
 
 
 
@@ -68,7 +69,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -118,66 +119,77 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Conexión a bases de datos</h1>
+    <small class="dont-index">Source: <a href='https://github.com/drdsdaniel/Dmisc/blob/master/R/dbConnect.R'><code>R/dbConnect.R</code></a></small>
+    <div class="hidden name"><code>dbConnect.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p><a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a></p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>dbConnect</span><span class='op'>(</span>
+  db_user <span class='op'>=</span> <span class='cn'>NULL</span>,
+  db_pass <span class='op'>=</span> <span class='cn'>NULL</span>,
+  db_sys <span class='op'>=</span> <span class='st'>"PostgreSQL"</span>,
+  db_name <span class='op'>=</span> <span class='st'>"encft"</span>,
+  db_host <span class='op'>=</span> <span class='st'>"localhost"</span>,
+  db_port <span class='op'>=</span> <span class='fl'>5432</span>,
+  k_service_id <span class='op'>=</span> <span class='st'>"postgre"</span>
+<span class='op'>)</span></pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="Sys_Date_locale.html">Sys_Date_locale()</a></code> </p>
-        </td>
-        <td><p>System date with specific format and locale</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dbConnect.html">dbConnect()</a></code> </p>
-        </td>
-        <td><p>Conexión a bases de datos</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="insertHTML.html">insertHTML()</a></code> </p>
-        </td>
-        <td><p>Insert HTML file into another</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="octave_path.html">octave_path()</a></code> </p>
-        </td>
-        <td><p>Retrieve octave path</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="vars_to_date.html">vars_to_date()</a></code> </p>
-        </td>
-        <td><p>Multiple variables to unique date variable</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>db_user</th>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a>: nombre de usuario de la base de datos.</p></td>
+    </tr>
+    <tr>
+      <th>db_pass</th>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a>: contraseña de la base de datos.</p></td>
+    </tr>
+    <tr>
+      <th>db_sys</th>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a>: nombre del sistema de base de datos. Para utilizar el driver correcto.</p></td>
+    </tr>
+    <tr>
+      <th>db_name</th>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a>: nombre de la base de datos</p></td>
+    </tr>
+    <tr>
+      <th>db_host</th>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a>: dirección del host de la base de datos</p></td>
+    </tr>
+    <tr>
+      <th>db_port</th>
+      <td><p><a href='https://rdrr.io/r/base/numeric.html'>numeric</a>: puerto de la base de datos</p></td>
+    </tr>
+    <tr>
+      <th>k_service_id</th>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a>: "keyring service id" si está utilizando keyring
+para almacenar sus credenciales.</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>conexión a base de datos. Vea <code>DBI::<a href='https://dbi.r-dbi.org/reference/dbConnect.html'>dbConnect</a></code></p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Crea una conexión con un sistema de base de datos.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><a href='https://db.rstudio.com/best-practices/managing-credentials/#encrypt-credentials-with-keyring'>Databases using R</a></p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>conn</span> <span class='op'>&lt;-</span> <span class='fu'>dbConnect</span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
