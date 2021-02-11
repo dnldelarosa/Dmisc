@@ -16,3 +16,7 @@
 # Dmisc 0.1.4
 
 * New dbConnect function
+
+# Dmisc 0.1.6
+
+* New cut3 function

@@ -41,7 +41,7 @@ Crea una conexión con un sistema de base de datos.
 }
 \examples{
 \dontrun{
-  conn <- dbConnect()
+conn <- dbConnect()
 }
 }
 \seealso{

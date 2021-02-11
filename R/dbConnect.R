@@ -23,24 +23,24 @@
 #'
 #' @examples
 #' \dontrun{
-#'   conn <- dbConnect()
+#' conn <- dbConnect()
 #' }
 dbConnect <- function(db_user = NULL,
-                       db_pass = NULL,
-                       db_sys = 'PostgreSQL',
-                       db_name = 'encft',
-                       db_host = 'localhost',
-                       db_port = 5432,
-                       k_service_id = 'postgre'){
-
-  uname <- ifelse(!is.null(k_service_id), keyring::key_list(k_service_id)[1,2], db_user)
+                      db_pass = NULL,
+                      db_sys = "PostgreSQL",
+                      db_name = "encft",
+                      db_host = "localhost",
+                      db_port = 5432,
+                      k_service_id = "postgre") {
+  uname <- ifelse(!is.null(k_service_id), keyring::key_list(k_service_id)[1, 2], db_user)
   pass <- ifelse(!is.null(k_service_id), keyring::key_get(k_service_id, uname), db_pass)
-  if(db_sys == 'PostgreSQL'){
+  if (db_sys == "PostgreSQL") {
     DBI::dbConnect(RPostgres::Postgres(),
-                   dbname = db_name,
-                   host = db_host,
-                   port = db_port,
-                   user = uname,
-                   password = pass)
+      dbname = db_name,
+      host = db_host,
+      port = db_port,
+      user = uname,
+      password = pass
+    )
   }
 }

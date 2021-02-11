@@ -1,6 +1,6 @@
 Package: Dmisc
 Title: Daniel miscellaneous functions
-Version: 0.1.5.9000
+Version: 0.1.6.9000
 Authors@R: 
     person(given = "Daniel E.",
            family = "de la Rosa",
@@ -28,9 +28,12 @@ Imports:
     DBI,
     RPostgres,
     keyring,
-    glue
+    glue,
+    Hmisc
 Suggests: 
     testthat,
-    covr
+    covr,
+    rmarkdown
 Language: en-US
 RdMacros: lifecycle
+VignetteBuilder: knitr
