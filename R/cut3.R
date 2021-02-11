@@ -1,5 +1,7 @@
 #' Convert numeric to factor weighted and by group
 #'
+#'   `r lifecycle::badge("experimental")`
+#'
 #' @param tbl [data.frame]: Database connection or data.frame
 #' @param var_name [character]: variable name
 #' @param breaks [numeric]: break points. See \code{base::\link[base:cut]{cut}}
@@ -53,6 +55,8 @@ cut3  <- function(tbl, var_name, breaks, groups = NULL, ...) {
 
 
 #' Cut3: quantiles
+#'
+#'   `r lifecycle::badge("experimental")`
 #'
 #'  Helper function for convert numeric variables into categorical variables
 #'   based on their own quantiles.

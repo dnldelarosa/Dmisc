@@ -16,7 +16,7 @@ A character string with the location of the program based on the inputs
 arguments
 }
 \description{
-\lifecycle{experimental}
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
 }
 \details{
 It is intended to be used in R Markdown files that use Octave

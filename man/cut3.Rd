@@ -21,7 +21,7 @@ cut3(tbl, var_name, breaks, groups = NULL, ...)
 same as \code{tbl} input with \code{var_name} converted to factor
 }
 \description{
-Convert numeric to factor weighted and by group
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
 }
 \examples{
 datos <- data.frame(edad = seq(1:100))

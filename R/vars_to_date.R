@@ -1,5 +1,7 @@
 #' Multiple variables to unique date variable
 #'
+#'   `r lifecycle::badge("experimental")`
+#'
 #' @param tbl data.frame or tbl connection
 #' @param year  year variable position or name
 #' @param trim trimester variable position or name

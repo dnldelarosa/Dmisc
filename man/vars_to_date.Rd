@@ -30,7 +30,7 @@ vars_to_date(
 tbl a new data.frame with the compute variable
 }
 \description{
-Multiple variables to unique date variable
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
 }
 \examples{
 \dontrun{

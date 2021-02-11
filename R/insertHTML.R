@@ -1,5 +1,7 @@
 #' Insert HTML file into another
 #'
+#'   `r lifecycle::badge("experimental")`
+#'
 #' \lifecycle{experimental}
 #'
 #' @param path character the path where the HTML file exists. Should end with /

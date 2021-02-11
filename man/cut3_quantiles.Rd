@@ -21,6 +21,9 @@ cut3_quantiles(tbl, var_name, weights, probs, ...)
 vector of specified quantiles
 }
 \description{
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+}
+\details{
 Helper function for convert numeric variables into categorical variables
 based on their own quantiles.
 }

@@ -15,6 +15,9 @@ Sys_Date_locale(locale = "es_DO.utf8", format = "\%B \%d, \%Y")
 a date with specified locale and format
 }
 \description{
+\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+}
+\details{
 You need to have installed the specified locale.
 }
 \examples{

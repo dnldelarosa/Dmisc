@@ -1,5 +1,7 @@
 #' System date with specific format and locale
 #'
+#'   `r lifecycle::badge("experimental")`
+#'
 #'  You need to have installed the specified locale.
 #'
 #' @param locale a currently installed locale string
