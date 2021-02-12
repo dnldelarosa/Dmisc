@@ -20,3 +20,4 @@
 # Dmisc 0.1.6
 
 * New cut3 function
+* New progress_var function
