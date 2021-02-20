@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>System date with specific format and locale — Sys_Date_locale • Dmisc</title>
+<title>Convert numeric to factor weighted and by group — cut3 • Dmisc</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="System date with specific format and locale — Sys_Date_locale" />
+<meta property="og:title" content="Convert numeric to factor weighted and by group — cut3" />
 <meta property="og:description" content="" />
 
 
@@ -121,42 +121,154 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>System date with specific format and locale</h1>
-    <small class="dont-index">Source: <a href='https://github.com/drdsdaniel/Dmisc/blob/master/R/Sys_Date_locale.R'><code>R/Sys_Date_locale.R</code></a></small>
-    <div class="hidden name"><code>Sys_Date_locale.Rd</code></div>
+    <h1>Convert numeric to factor weighted and by group</h1>
+    <small class="dont-index">Source: <a href='https://github.com/drdsdaniel/Dmisc/blob/master/R/cut3.R'><code>R/cut3.R</code></a></small>
+    <div class="hidden name"><code>cut3.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p><a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a></p>
     </div>
 
-    <pre class="usage"><span class='fu'>Sys_Date_locale</span><span class='op'>(</span>locale <span class='op'>=</span> <span class='st'>"es_DO.utf8"</span>, format <span class='op'>=</span> <span class='st'>"%B %d, %Y"</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>cut3</span><span class='op'>(</span><span class='va'>tbl</span>, <span class='va'>var_name</span>, <span class='va'>breaks</span>, groups <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>locale</th>
-      <td><p>a currently installed locale string</p></td>
+      <th>tbl</th>
+      <td><p><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a>: Database connection or data.frame</p></td>
     </tr>
     <tr>
-      <th>format</th>
-      <td><p>a valid format for dates or NULL</p></td>
+      <th>var_name</th>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a>: variable name</p></td>
+    </tr>
+    <tr>
+      <th>breaks</th>
+      <td><p><a href='https://rdrr.io/r/base/numeric.html'>numeric</a>: break points. See <code>base::<a href='https://rdrr.io/r/base/cut.html'>cut</a></code></p></td>
+    </tr>
+    <tr>
+      <th>groups</th>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a>: name of a numeric variable of groups</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>argument passed to cut and/or breaks functions</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a date with specified locale and format</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <p>same as <code>tbl</code> input with <code>var_name</code> converted to factor</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>You need to have installed the specified locale.</p>
+    <div class='dont-index'><p><code>vignette("cut3", package = "Dmisc")</code>
+<code>base::<a href='https://rdrr.io/r/base/cut.html'>cut</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
- <span class='fu'>Sys_Date_locale</span><span class='op'>(</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+    <pre class="examples"><div class='input'><span class='va'>datos</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>edad <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>100</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>cut3</span><span class='op'>(</span><span class='va'>datos</span>, <span class='st'>"edad"</span>, <span class='fl'>5</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;             edad
+#&gt; 1   (0.901,20.8]
+#&gt; 2   (0.901,20.8]
+#&gt; 3   (0.901,20.8]
+#&gt; 4   (0.901,20.8]
+#&gt; 5   (0.901,20.8]
+#&gt; 6   (0.901,20.8]
+#&gt; 7   (0.901,20.8]
+#&gt; 8   (0.901,20.8]
+#&gt; 9   (0.901,20.8]
+#&gt; 10  (0.901,20.8]
+#&gt; 11  (0.901,20.8]
+#&gt; 12  (0.901,20.8]
+#&gt; 13  (0.901,20.8]
+#&gt; 14  (0.901,20.8]
+#&gt; 15  (0.901,20.8]
+#&gt; 16  (0.901,20.8]
+#&gt; 17  (0.901,20.8]
+#&gt; 18  (0.901,20.8]
+#&gt; 19  (0.901,20.8]
+#&gt; 20  (0.901,20.8]
+#&gt; 21   (20.8,40.6]
+#&gt; 22   (20.8,40.6]
+#&gt; 23   (20.8,40.6]
+#&gt; 24   (20.8,40.6]
+#&gt; 25   (20.8,40.6]
+#&gt; 26   (20.8,40.6]
+#&gt; 27   (20.8,40.6]
+#&gt; 28   (20.8,40.6]
+#&gt; 29   (20.8,40.6]
+#&gt; 30   (20.8,40.6]
+#&gt; 31   (20.8,40.6]
+#&gt; 32   (20.8,40.6]
+#&gt; 33   (20.8,40.6]
+#&gt; 34   (20.8,40.6]
+#&gt; 35   (20.8,40.6]
+#&gt; 36   (20.8,40.6]
+#&gt; 37   (20.8,40.6]
+#&gt; 38   (20.8,40.6]
+#&gt; 39   (20.8,40.6]
+#&gt; 40   (20.8,40.6]
+#&gt; 41   (40.6,60.4]
+#&gt; 42   (40.6,60.4]
+#&gt; 43   (40.6,60.4]
+#&gt; 44   (40.6,60.4]
+#&gt; 45   (40.6,60.4]
+#&gt; 46   (40.6,60.4]
+#&gt; 47   (40.6,60.4]
+#&gt; 48   (40.6,60.4]
+#&gt; 49   (40.6,60.4]
+#&gt; 50   (40.6,60.4]
+#&gt; 51   (40.6,60.4]
+#&gt; 52   (40.6,60.4]
+#&gt; 53   (40.6,60.4]
+#&gt; 54   (40.6,60.4]
+#&gt; 55   (40.6,60.4]
+#&gt; 56   (40.6,60.4]
+#&gt; 57   (40.6,60.4]
+#&gt; 58   (40.6,60.4]
+#&gt; 59   (40.6,60.4]
+#&gt; 60   (40.6,60.4]
+#&gt; 61   (60.4,80.2]
+#&gt; 62   (60.4,80.2]
+#&gt; 63   (60.4,80.2]
+#&gt; 64   (60.4,80.2]
+#&gt; 65   (60.4,80.2]
+#&gt; 66   (60.4,80.2]
+#&gt; 67   (60.4,80.2]
+#&gt; 68   (60.4,80.2]
+#&gt; 69   (60.4,80.2]
+#&gt; 70   (60.4,80.2]
+#&gt; 71   (60.4,80.2]
+#&gt; 72   (60.4,80.2]
+#&gt; 73   (60.4,80.2]
+#&gt; 74   (60.4,80.2]
+#&gt; 75   (60.4,80.2]
+#&gt; 76   (60.4,80.2]
+#&gt; 77   (60.4,80.2]
+#&gt; 78   (60.4,80.2]
+#&gt; 79   (60.4,80.2]
+#&gt; 80   (60.4,80.2]
+#&gt; 81    (80.2,100]
+#&gt; 82    (80.2,100]
+#&gt; 83    (80.2,100]
+#&gt; 84    (80.2,100]
+#&gt; 85    (80.2,100]
+#&gt; 86    (80.2,100]
+#&gt; 87    (80.2,100]
+#&gt; 88    (80.2,100]
+#&gt; 89    (80.2,100]
+#&gt; 90    (80.2,100]
+#&gt; 91    (80.2,100]
+#&gt; 92    (80.2,100]
+#&gt; 93    (80.2,100]
+#&gt; 94    (80.2,100]
+#&gt; 95    (80.2,100]
+#&gt; 96    (80.2,100]
+#&gt; 97    (80.2,100]
+#&gt; 98    (80.2,100]
+#&gt; 99    (80.2,100]
+#&gt; 100   (80.2,100]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

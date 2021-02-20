@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>System date with specific format and locale — Sys_Date_locale • Dmisc</title>
+<title>Cut3: quantiles — cut3_quantiles • Dmisc</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="System date with specific format and locale — Sys_Date_locale" />
+<meta property="og:title" content="Cut3: quantiles — cut3_quantiles" />
 <meta property="og:description" content="" />
 
 
@@ -121,42 +121,87 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>System date with specific format and locale</h1>
-    <small class="dont-index">Source: <a href='https://github.com/drdsdaniel/Dmisc/blob/master/R/Sys_Date_locale.R'><code>R/Sys_Date_locale.R</code></a></small>
-    <div class="hidden name"><code>Sys_Date_locale.Rd</code></div>
+    <h1>Cut3: quantiles</h1>
+    <small class="dont-index">Source: <a href='https://github.com/drdsdaniel/Dmisc/blob/master/R/cut3.R'><code>R/cut3.R</code></a></small>
+    <div class="hidden name"><code>cut3_quantiles.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p><a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a></p>
     </div>
 
-    <pre class="usage"><span class='fu'>Sys_Date_locale</span><span class='op'>(</span>locale <span class='op'>=</span> <span class='st'>"es_DO.utf8"</span>, format <span class='op'>=</span> <span class='st'>"%B %d, %Y"</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>cut3_quantiles</span><span class='op'>(</span><span class='va'>tbl</span>, <span class='va'>var_name</span>, <span class='va'>weights</span>, <span class='va'>probs</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>locale</th>
-      <td><p>a currently installed locale string</p></td>
+      <th>tbl</th>
+      <td><p><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a>: Database connection or data.frame</p></td>
     </tr>
     <tr>
-      <th>format</th>
-      <td><p>a valid format for dates or NULL</p></td>
+      <th>var_name</th>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a>: variable name</p></td>
+    </tr>
+    <tr>
+      <th>weights</th>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a>: name of a numeric variable of weights</p></td>
+    </tr>
+    <tr>
+      <th>probs</th>
+      <td><p>See <code>Hmisc::<a href='https://rdrr.io/pkg/Hmisc/man/wtd.stats.html'>wtd.quantile</a></code></p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>other arguments passed to quantile functions</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a date with specified locale and format</p>
+    <p>vector of specified quantiles</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>You need to have installed the specified locale.</p>
+    <p>Helper function for convert numeric variables into categorical variables
+based on their own quantiles.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code>vignette("cut3", package = "Dmisc")</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
- <span class='fu'>Sys_Date_locale</span><span class='op'>(</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+    <pre class="examples"><div class='input'>  <span class='op'>(</span><span class='va'>tbl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>
+    edad <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>,
+    peso <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span><span class='op'>*</span><span class='fl'>10</span><span class='op'>)</span>,
+    grupo <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"H"</span>, <span class='st'>"M"</span><span class='op'>)</span>, <span class='fl'>10</span>, replace <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;    edad peso grupo
+#&gt; 1     1    1     M
+#&gt; 2     2    8     H
+#&gt; 3     3    6     H
+#&gt; 4     4    2     H
+#&gt; 5     5    0     H
+#&gt; 6     6    5     M
+#&gt; 7     7    5     H
+#&gt; 8     8    3     H
+#&gt; 9     9    7     M
+#&gt; 10   10    8     M</div><div class='input'>
+    <span class='fu'><a href='cut3.html'>cut3</a></span><span class='op'>(</span><span class='va'>tbl</span>,
+         <span class='st'>"edad"</span>,
+         <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='va'>cut3_quantiles</span><span class='op'>)</span>,
+         labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"1"</span>, <span class='st'>"2"</span>, <span class='st'>"3"</span>, <span class='st'>"4"</span><span class='op'>)</span>,
+         groups <span class='op'>=</span> <span class='st'>"grupo"</span>,
+         weights <span class='op'>=</span> <span class='st'>"peso"</span>,
+         probs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.25</span>, <span class='fl'>0.5</span>, <span class='fl'>0.75</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;    edad peso grupo
+#&gt; 1     1    1     M
+#&gt; 2     1    8     H
+#&gt; 3     1    6     H
+#&gt; 4     2    2     H
+#&gt; 5     2    0     H
+#&gt; 6     2    5     M
+#&gt; 7     2    5     H
+#&gt; 8     3    3     H
+#&gt; 9     3    7     M
+#&gt; 10    4    8     M</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
