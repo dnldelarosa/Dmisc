@@ -1,12 +1,12 @@
 Package: Dmisc
 Title: Daniel miscellaneous functions
-Version: 0.1.7.9001
+Version: 0.1.7.9002
 Authors@R: 
     person(given = "Daniel E.",
            family = "de la Rosa",
            role = c("aut", "cre"),
            email = "drdsdaniel@gmail.com")
-Description: This package contains functions that I use and they do not belong
+Description: Contains functions that I use and they do not belong
   to a specific package. It contains functions for each thing.
 License: MIT + file LICENSE
 Encoding: UTF-8
