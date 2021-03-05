@@ -1,3 +1,6 @@
-test_that("output class", {
-  expect_equal(c("html", "character"), c("html", "character")) # class(insertHTML() TODO
+test_that("insertHTML", {
+  local_edition(3)
+  expect_warning(insertHTML(path = "", name = "insertHtml2.html"))
+  expect_snapshot(insertHTML(file = test_path("insertHtml.html")))
+  expect_snapshot(insertHTML(file = test_path("insertHtml_sc.html")))
 })

@@ -4,12 +4,19 @@
 \alias{insertHTML}
 \title{Insert HTML file into another}
 \usage{
-insertHTML(path = "./", name, source_code = "matlab")
+insertHTML(
+  path = deprecated(),
+  name = deprecated(),
+  file = paste0(path, name),
+  source_code = "matlab"
+)
 }
 \arguments{
 \item{path}{character the path where the HTML file exists. Should end with /}
 
 \item{name}{character the name of HTML file to insert}
+
+\item{file}{character path to HTML file. Should include the file name.}
 
 \item{source_code}{character used for highlighting the code into the document}
 }
@@ -41,6 +48,6 @@ The output is wrapped by a \code{<pre></pre>} tag.
 }
 \examples{
 \dontrun{
-insertHTML('html/', 'index.html')
+insertHTML("html/", "index.html")
 }
 }

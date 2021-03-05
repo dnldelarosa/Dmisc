@@ -43,7 +43,7 @@ cut3  <- function(tbl, var_name, breaks, groups = NULL, ...) {
   }
   if(!is.null(groups)){
     tbl[[var_name]] <- as.character(tbl[[var_name]])
-    for (group in unique(tbl[[groups]])) {
+    for (group in unique(tbl[[groups]])) { # use split-apply-combine strategy
       tbl[tbl[[groups]] == group, var_name] <- as.character(cut(as.numeric(tbl[tbl[[groups]] == group, var_name]), breaks, ...))
     }
     tbl[[var_name]] <- as.factor(tbl[[var_name]])
