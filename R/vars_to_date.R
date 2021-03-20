@@ -51,7 +51,7 @@ vars_to_date <- function(tbl, year = NULL, trim = NULL, month = NULL, month_type
                               month == "Dic" ~ "Dec",
                               TRUE ~ month
                             ),
-                            date = zoo::as.Date(zoo::as.yearmon(paste(month, year)))
+                            date = as.Date(tsibble::yearmonth(paste(year, month)))
       )
     }
     tbl[, month] <- NULL
