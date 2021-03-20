@@ -8,17 +8,22 @@ insertHTML(
   path = deprecated(),
   name = deprecated(),
   file = paste0(path, name),
-  source_code = "matlab"
+  source_code = NULL,
+  keep_styles = TRUE
 )
 }
 \arguments{
-\item{path}{character the path where the HTML file exists. Should end with /}
+\item{path}{\link{character}: the path where the HTML file exists. Should end with /}
 
-\item{name}{character the name of HTML file to insert}
+\item{name}{\link{character}: the name of HTML file to insert}
 
-\item{file}{character path to HTML file. Should include the file name.}
+\item{file}{\link{character} path to HTML file. Should include the file name.}
 
-\item{source_code}{character used for highlighting the code into the document}
+\item{source_code}{\link{character}: used for highlighting the code into the document.
+Also the output is wrapped by a \code{<pre></pre>} tags.}
+
+\item{keep_styles}{\link{logical}: indicates if the styles of the file to be
+included are preserved. They only apply to their own content.}
 }
 \value{
 character an HTML character string
@@ -27,27 +32,19 @@ character an HTML character string
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
 \details{
-\lifecycle{experimental}
-
-This function was created to insert MatLab published HTML into
-RMarkdown documents. Important considerations:
+This function was created to insert HTML file content into
+RMarkdown HTML documents. Important considerations:
 \itemize{
-\item{
-Only the body of the document if returned.
-}
 \item{
 The images are converted to base64 strings if needed.
 }
 \item{
 A caption with de file name is added to each image.
 }
-\item{
-The output is wrapped by a \code{<pre></pre>} tag.
-}
 }
 }
 \examples{
 \dontrun{
-insertHTML("html/", "index.html")
+insertHTML(file = "html/index.html")
 }
 }
