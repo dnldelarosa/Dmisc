@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Dmisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.7.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.2.9000</span>
       </span>
     </div>
 
@@ -130,22 +130,38 @@
     <p><a href='https://lifecycle.r-lib.org/articles/stages.html#experimental'><img src='figures/lifecycle-experimental.svg' alt='[Experimental]' /></a></p>
     </div>
 
-    <pre class="usage"><span class='fu'>insertHTML</span><span class='op'>(</span>path <span class='op'>=</span> <span class='st'>"./"</span>, <span class='va'>name</span>, source_code <span class='op'>=</span> <span class='st'>"matlab"</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>insertHTML</span><span class='op'>(</span>
+  path <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Deprecated.html'>deprecated</a></span><span class='op'>(</span><span class='op'>)</span>,
+  name <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Deprecated.html'>deprecated</a></span><span class='op'>(</span><span class='op'>)</span>,
+  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>path</span>, <span class='va'>name</span><span class='op'>)</span>,
+  source_code <span class='op'>=</span> <span class='cn'>NULL</span>,
+  keep_styles <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>path</th>
-      <td><p>character the path where the HTML file exists. Should end with /</p></td>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a>: the path where the HTML file exists. Should end with /</p></td>
     </tr>
     <tr>
       <th>name</th>
-      <td><p>character the name of HTML file to insert</p></td>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a>: the name of HTML file to insert</p></td>
+    </tr>
+    <tr>
+      <th>file</th>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a> path to HTML file. Should include the file name.</p></td>
     </tr>
     <tr>
       <th>source_code</th>
-      <td><p>character used for highlighting the code into the document</p></td>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a>: used for highlighting the code into the document.
+Also the output is wrapped by a <code>&lt;pre&gt;&lt;/pre&gt;</code> tags.</p></td>
+    </tr>
+    <tr>
+      <th>keep_styles</th>
+      <td><p><a href='https://rdrr.io/r/base/logical.html'>logical</a>: indicates if the styles of the file to be
+included are preserved. They only apply to their own content.</p></td>
     </tr>
     </table>
 
@@ -154,19 +170,16 @@
     <p>character an HTML character string</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><a href='https://lifecycle.r-lib.org/articles/stages.html#experimental'><img src='figures/lifecycle-experimental.svg' alt='[Experimental]' /></a></p>
-<p>This function was created to insert MatLab published HTML into
-RMarkdown documents. Important considerations:</p><ul>
-<li><p>Only the body of the document if returned.</p></li>
+    <p>This function was created to insert HTML file content into
+RMarkdown HTML documents. Important considerations:</p><ul>
 <li><p>The images are converted to base64 strings if needed.</p></li>
 <li><p>A caption with de file name is added to each image.</p></li>
-<li><p>The output is wrapped by a <code>&lt;pre&gt;&lt;/pre&gt;</code> tag.</p></li>
 </ul>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'>insertHTML</span><span class='op'>(</span><span class='st'>'html/'</span>, <span class='st'>'index.html'</span><span class='op'>)</span>
+<span class='fu'>insertHTML</span><span class='op'>(</span>file <span class='op'>=</span> <span class='st'>"html/index.html"</span><span class='op'>)</span>
 <span class='op'>}</span>
 </div></pre>
   </div>
