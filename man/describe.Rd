@@ -4,7 +4,7 @@
 \alias{describe}
 \title{Create a table of summaries for an entery dataframe}
 \usage{
-describe(data, digits = 4, t = TRUE, flextable = FALSE, ...)
+describe(data, digits = 4, t = TRUE, flextable = FALSE, ft_args = list(), ...)
 }
 \arguments{
 \item{data}{\link{data.frame}: a dataframe with the data}
@@ -13,7 +13,10 @@ describe(data, digits = 4, t = TRUE, flextable = FALSE, ...)
 
 \item{t}{\link{logical}: indicates if the resulting table is transposed}
 
-\item{flextable}{\link{logical}: indicates if the table is converted to a simple flextable}
+\item{flextable}{\link{logical}: indicates if the table is converted to a simple flextable.
+See \code{base::\link[flextable:flextable]{flextable}}}
+
+\item{ft_args}{\link{list}: other arguments passed to \code{base::\link[flextable:flextable]{flextable}} function}
 
 \item{...}{other arguments passed to summary function}
 }
@@ -21,10 +24,11 @@ describe(data, digits = 4, t = TRUE, flextable = FALSE, ...)
 a table containing the summary of every variable in the provided dataframe
 }
 \description{
-Create a table of summaries for an entery dataframe
+\lifecycle{stable}
 }
 \examples{
 \dontrun{
 describe(cars, flextable = T)
+describe(cars, flextable = T, ft_args = list(cwidth = 1))
 }
 }
