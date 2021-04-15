@@ -14,9 +14,9 @@ describe(data, digits = 4, t = TRUE, flextable = FALSE, ft_args = list(), ...)
 \item{t}{\link{logical}: indicates if the resulting table is transposed}
 
 \item{flextable}{\link{logical}: indicates if the table is converted to a simple flextable.
-See \code{base::\link[flextable:flextable]{flextable}}}
+See \code{flextable::\link[flextable:flextable]{flextable}}}
 
-\item{ft_args}{\link{list}: other arguments passed to \code{base::\link[flextable:flextable]{flextable}} function}
+\item{ft_args}{\link{list}: other arguments passed to \code{flextable::\link[flextable:flextable]{flextable}} function}
 
 \item{...}{other arguments passed to summary function}
 }

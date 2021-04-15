@@ -6,8 +6,8 @@
 #' @param digits [numeric]: number of digits for the numbers
 #' @param t [logical]: indicates if the resulting table is transposed
 #' @param flextable [logical]: indicates if the table is converted to a simple flextable.
-#'    See \code{base::\link[flextable:flextable]{flextable}}
-#' @param ft_args [list]: other arguments passed to \code{base::\link[flextable:flextable]{flextable}} function
+#'    See \code{flextable::\link[flextable:flextable]{flextable}}
+#' @param ft_args [list]: other arguments passed to \code{flextable::\link[flextable:flextable]{flextable}} function
 #' @param ... other arguments passed to summary function
 #'
 #' @return a table containing the summary of every variable in the provided dataframe
