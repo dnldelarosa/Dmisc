@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="Create a table of summaries for an entery dataframe — describe" />
-<meta property="og:description" content="Create a table of summaries for an entery dataframe" />
+<meta property="og:description" content="" />
 
 
 
@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Dmisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.2.9000</span>
       </span>
     </div>
 
@@ -127,10 +127,10 @@
     </div>
 
     <div class="ref-description">
-    <p>Create a table of summaries for an entery dataframe</p>
+    <p><a href='https://lifecycle.r-lib.org/articles/stages.html#stable'><img src='figures/lifecycle-stable.svg' alt='[Stable]' /></a></p>
     </div>
 
-    <pre class="usage"><span class='fu'>describe</span><span class='op'>(</span><span class='va'>data</span>, digits <span class='op'>=</span> <span class='fl'>4</span>, t <span class='op'>=</span> <span class='cn'>TRUE</span>, flextable <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>describe</span><span class='op'>(</span><span class='va'>data</span>, digits <span class='op'>=</span> <span class='fl'>4</span>, t <span class='op'>=</span> <span class='cn'>TRUE</span>, flextable <span class='op'>=</span> <span class='cn'>FALSE</span>, ft_args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -149,7 +149,12 @@
     </tr>
     <tr>
       <th>flextable</th>
-      <td><p><a href='https://rdrr.io/r/base/logical.html'>logical</a>: indicates if the table is converted to a simple flextable</p></td>
+      <td><p><a href='https://rdrr.io/r/base/logical.html'>logical</a>: indicates if the table is converted to a simple flextable.
+See <code>base::<a href='https://davidgohel.github.io/flextable/reference/flextable.html'>flextable</a></code></p></td>
+    </tr>
+    <tr>
+      <th>ft_args</th>
+      <td><p><a href='https://rdrr.io/r/base/list.html'>list</a>: other arguments passed to <code>base::<a href='https://davidgohel.github.io/flextable/reference/flextable.html'>flextable</a></code> function</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -164,6 +169,7 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='fu'>describe</span><span class='op'>(</span><span class='va'>cars</span>, flextable <span class='op'>=</span> <span class='cn'>T</span><span class='op'>)</span>
+<span class='fu'>describe</span><span class='op'>(</span><span class='va'>cars</span>, flextable <span class='op'>=</span> <span class='cn'>T</span>, ft_args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>cwidth <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
 <span class='op'>}</span>
 </div></pre>
   </div>
