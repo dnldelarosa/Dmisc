@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Insert HTML file into another — insertHTML • Dmisc</title>
+<title>Pipe operator — %&gt;% • Dmisc</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Insert HTML file into another — insertHTML" />
-<meta property="og:description" content="" />
+<meta property="og:title" content="Pipe operator — %&gt;%" />
+<meta property="og:description" content="See magrittr::%&amp;gt;% for details." />
 
 
 
@@ -121,67 +121,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Insert HTML file into another</h1>
-    <small class="dont-index">Source: <a href='https://github.com/drdsdaniel/Dmisc/blob/master/R/insertHTML.R'><code>R/insertHTML.R</code></a></small>
-    <div class="hidden name"><code>insertHTML.Rd</code></div>
+    <h1>Pipe operator</h1>
+    <small class="dont-index">Source: <a href='https://github.com/drdsdaniel/Dmisc/blob/master/R/utils-pipe.R'><code>R/utils-pipe.R</code></a></small>
+    <div class="hidden name"><code>pipe.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><a href='https://lifecycle.r-lib.org/articles/stages.html#experimental'><img src='figures/lifecycle-experimental.svg' alt='[Experimental]' /></a></p>
+    <p>See <code>magrittr::%&gt;%</code> for details.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>insertHTML</span><span class='op'>(</span>
-  path <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Deprecated.html'>deprecated</a></span><span class='op'>(</span><span class='op'>)</span>,
-  name <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Deprecated.html'>deprecated</a></span><span class='op'>(</span><span class='op'>)</span>,
-  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>path</span>, <span class='va'>name</span><span class='op'>)</span>,
-  source_code <span class='op'>=</span> <span class='cn'>NULL</span>,
-  keep_styles <span class='op'>=</span> <span class='cn'>TRUE</span>
-<span class='op'>)</span></pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>path</th>
-      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a>: the path where the HTML file exists. Should end with /</p></td>
-    </tr>
-    <tr>
-      <th>name</th>
-      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a>: the name of HTML file to insert</p></td>
-    </tr>
-    <tr>
-      <th>file</th>
-      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a> path to HTML file. Should include the file name.</p></td>
-    </tr>
-    <tr>
-      <th>source_code</th>
-      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a>: used for highlighting the code into the document.
-Also the output is wrapped by a <code>&lt;pre&gt;&lt;/pre&gt;</code> tags.</p></td>
-    </tr>
-    <tr>
-      <th>keep_styles</th>
-      <td><p><a href='https://rdrr.io/r/base/logical.html'>logical</a>: indicates if the styles of the file to be
-included are preserved. They only apply to their own content.</p></td>
-    </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>character an HTML character string</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>This function was created to insert HTML file content into
-RMarkdown HTML documents. Important considerations:</p><ul>
-<li><p>The images are converted to base64 strings if needed.</p></li>
-<li><p>A caption with de file name is added to each image.</p></li>
-</ul>
+    <pre class="usage"><span class='va'>lhs</span> <span class='op'>%&gt;%</span> <span class='va'>rhs</span></pre>
 
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'>insertHTML</span><span class='op'>(</span>file <span class='op'>=</span> <span class='st'>"html/index.html"</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
