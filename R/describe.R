@@ -28,6 +28,7 @@ describe <- function(data, digits = 4, t = TRUE, flextable = FALSE, ...){
       res <- res %>%
         tibble::column_to_rownames("var")
     }
+    res <- utils::type.convert(res)
     if(flextable){
       res <- res %>%
         tibble::rownames_to_column(" ") %>%
