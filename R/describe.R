@@ -20,6 +20,7 @@
 #' describe(cars, flextable = T, ft_args = list(cwidth = 1))
 #' }
 describe <- function(data, digits = 4, t = TRUE, flextable = FALSE, ft_args = list(), ...){
+  data <- as.data.frame(data)
   res <- list()
   for (variable in seq_along(data)) {
     res[[names(data)[[variable]]]] <- summary(data[[variable]], digits = digits, ...)
