@@ -7,9 +7,9 @@
 vars_to_date(
   tbl,
   year = NULL,
-  trim = NULL,
+  trim = deprecated(),
   month = NULL,
-  month_type = "char",
+  month_type = deprecated(),
   day = NULL
 )
 }
@@ -33,7 +33,14 @@ tbl a new data.frame with the compute variable
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
 \examples{
-\dontrun{
-tbl <- vars_to_date(tbl)
-}
+tbl <- data.frame(
+year = rep("2021", 12),
+month = 1:12,
+day = sample(1:3, 12, TRUE),
+value = sample(100:1000, 12, TRUE)
+)
+
+tbl
+
+vars_to_date(tbl)
 }
