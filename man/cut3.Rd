@@ -4,7 +4,7 @@
 \alias{cut3}
 \title{Convert numeric to factor weighted and by group}
 \usage{
-cut3(tbl, var_name, breaks, groups = NULL, ...)
+cut3(tbl, var_name, breaks, groups = NULL, bf_args = list(), ...)
 }
 \arguments{
 \item{tbl}{\link{data.frame}: Database connection or data.frame}
@@ -13,9 +13,11 @@ cut3(tbl, var_name, breaks, groups = NULL, ...)
 
 \item{breaks}{\link{numeric}: break points. See \code{base::\link[base:cut]{cut}}}
 
-\item{groups}{\link{character}: name of a numeric variable of groups}
+\item{groups}{\link{character}: name of a groups variable}
 
-\item{...}{argument passed to cut and/or breaks functions}
+\item{bf_args}{\link{list}: arguments to be passed to break function}
+
+\item{...}{argument passed to cut}
 }
 \value{
 same as \code{tbl} input with \code{var_name} converted to factor
