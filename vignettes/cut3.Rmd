@@ -1,0 +1,181 @@
+---
+title: "Cut Cut Cut"
+subtitle: "Why cut3?"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Cut Cut Cut}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(Dmisc)
+```
+
+Sometimes it is interesting to convert a numeric variable into a categorical one. For these purposes, there are several functions in R. Here we present some of them and how they compare to `cut3`.
+
+# Breaks
+
+The first and most important argument of these functions is `breaks`, which consists of an indicative of how are constructed the intervals in which the desired variable is to be cut.
+
+## A single number
+
+If the `breaks` argument consists of a single number, this is interpreted as the number of breaks to be applied to the variable of interest.
+```{r}
+tbl <- data.frame(
+  age = 1:10,
+  freq = c(5,5,5,4,3,3,5,3,4,5)
+)
+
+tbl
+
+tbl$age = cut(tbl$age, breaks = 2)
+tbl
+```
+
+The same could be done using `cut3`, the only difference is that the latter is designed to work with dataframe instead of vectors, so the syntax could be a bit different, but the result is the same.
+
+```{r}
+tbl <- data.frame(
+  age = 1:10,
+  freq = c(5,5,5,4,3,3,5,3,4,5)
+)
+
+tbl
+
+cut3(tbl, var_name = "age", breaks = 2)
+```
+
+## A numeric vector
+
+Another option available in both functions is to supply a numeric vector. In this case, the values contained in said vector will be treated as the cut-off points for the construction of the intervals in which the variable in question has to be cut.
+```{r}
+tbl <- data.frame(
+  age = 1:10,
+  freq = c(5,5,5,4,3,3,5,3,4,5)
+)
+
+tbl
+
+tbl$age = cut(tbl$age, breaks = c(0, 5, 10))
+tbl
+```
+
+Again, the same can be achieved with the `cut3` function.
+
+```{r}
+tbl <- data.frame(
+  age = 1:10,
+  freq = c(5,5,5,4,3,3,5,3,4,5)
+)
+
+tbl
+
+cut3(tbl, var_name = "age", breaks = c(0, 5, 10))
+```
+
+It is important to note that this vector of values must contain an initial value that is less than the minimum of the variable and a last value greater than or equal to the maximum of the variable. This is so due to the way in which the intervals are constructed.
+
+Note in the label of the created variable `(0,5]` that the lower limit of the interval is open `(`, which means that only values `greater than 0` are included. You can change this behavior, and do the first range closed using the argument `include.lowest`. While the upper bound is closed`] `, which means that only` values less than or equal to 5` are included.
+
+If the vector of values does not meet the criteria described above, the values that do not fit in any interval will be marked as `NA` in the resulting variable.
+
+```{r}
+tbl <- data.frame(
+  age = 1:10,
+  freq = c(5,5,5,4,3,3,5,3,4,5)
+)
+
+tbl
+
+cut3(tbl, var_name = "age", breaks = c(1, 5, 10))
+cut3(tbl, var_name = "age", breaks = c(1, 5, 10), include.lowest = T)
+```
+
+If for some reason the minimum and maximum values of the variable are not known a priori, the `-Inf` and` Inf` values can be used for these purposes. Although this should be avoided as it decrease information from the label of the resulting variable.
+```{r}
+tbl <- data.frame(
+  age = 1:10,
+  freq = c(5,5,5,4,3,3,5,3,4,5)
+)
+
+tbl
+
+cut3(tbl, var_name = "age", breaks = c(-Inf, 5, Inf))
+```
+
+Additionally, it is essential that the values of said vector be unique.
+
+## Functions
+
+One of the main novelties of `cut3 ()` compared to `cut ()` is that the vector of `breaks` can be a function that generates the numerical vector of the cuts, or preferably, a vector that includes the minimum values and maximum, and said function.
+
+The most common use case for this functionality is perhaps if you want to use quantiles to divide the variable. 
+
+For these purposes, the `bf_args` argument must be used in which additional arguments are specified, which must be passed to the function used to construct the breakpoints.
+```{r}
+tbl <- data.frame(
+  age = 1:10,
+  freq = c(5,5,5,4,3,3,5,3,4,5)
+)
+
+tbl
+
+cut3(tbl, var_name = "age", breaks = quantile, bf_args = list(x = tbl$age))
+cut3(tbl, var_name = "age", breaks = quantile, bf_args = list(x = tbl$age), include.lowest = T)
+cut3(tbl, var_name = "age", breaks = c(0, quantile), bf_args = list(x = tbl$age))
+```
+
+
+# Labels
+
+As you may have already noticed in the previous examples, the data labels of the resulting variable are constructed using the corresponding interval notation. However, this behavior can be overridden by supplying the `labels = F` argument. In this case, a simple autoincrementing number will be used to name the intervals.
+```{r}
+tbl <- data.frame(
+  age = 1:10,
+  freq = c(5,5,5,4,3,3,5,3,4,5)
+)
+
+tbl
+
+cut3(tbl, var_name = "age", breaks = 2)
+cut3(tbl, var_name = "age", breaks = 2, labels = F)
+```
+
+Additionally, you can supply a vector specifying the labels you want to use in the construction of the variable. Labels will be assigned in the order they are specified. Also, the number of labels must be exactly equal to the number of resulting bins.
+```{r}
+tbl <- data.frame(
+  age = 1:10,
+  freq = c(5,5,5,4,3,3,5,3,4,5)
+)
+
+tbl
+
+cut3(tbl, var_name = "age", breaks = 2)
+cut3(tbl, var_name = "age", breaks = 2, labels = c("Menor o igual que 5", "Mayor a 5"))
+```
+
+
+# Groups
+
+Another addition to `cut3 ()` consists of being able to define different cuts for different groups. This is especially useful when breaks are specified with functions.
+```{r}
+tbl <- data.frame(
+  sex = c(rep("M", 5), rep("F", 5)),
+  age = c(1:5, 6:10),
+  freq = c(5,5,5,4,3,3,5,3,4,5)
+)
+
+tbl
+
+cut3(tbl, var_name = "age", breaks = 2)
+cut3(tbl, var_name = "age", breaks = 2, groups = "sex")
+```
+
