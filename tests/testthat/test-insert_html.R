@@ -1,0 +1,10 @@
+test_that("insert_html", {
+  local_edition(3)
+  expect_warning(insert_html(path = "", name = "insertHtml2.html"))
+  expect_snapshot(insert_html(file = test_path("insertHtml.html")))
+  expect_snapshot(insertHTML(file = test_path("insertHtml.html")))
+  expect_snapshot(insert_html(file = test_path("insertHtml_sc.html")))
+  expect_snapshot(insert_html(file = test_path("insertHtml_sc.html"), source_code = "r"))
+  expect_snapshot(insert_html(file = test_path("insertHtml_sc.html"), keep_styles = F))
+  expect_snapshot(insert_html(file = test_path("insertHtml_sc.html"), source_code = "r", keep_styles = F))
+})
