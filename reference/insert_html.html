@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Multiple variables to unique date variable — vars_to_date • Dmisc</title>
+<title>Insert HTML file into another — insert_html • Dmisc</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Multiple variables to unique date variable — vars_to_date" />
+<meta property="og:title" content="Insert HTML file into another — insert_html" />
 <meta property="og:description" content="" />
 
 
@@ -133,93 +133,67 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Multiple variables to unique date variable</h1>
-    <small class="dont-index">Source: <a href='https://github.com/drdsdaniel/Dmisc/blob/master/R/vars_to_date.R'><code>R/vars_to_date.R</code></a></small>
-    <div class="hidden name"><code>vars_to_date.Rd</code></div>
+    <h1>Insert HTML file into another</h1>
+    <small class="dont-index">Source: <a href='https://github.com/drdsdaniel/Dmisc/blob/master/R/insert_html.R'><code>R/insert_html.R</code></a></small>
+    <div class="hidden name"><code>insert_html.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p><a href='https://lifecycle.r-lib.org/articles/stages.html#experimental'><img src='figures/lifecycle-experimental.svg' alt='[Experimental]' /></a></p>
     </div>
 
-    <pre class="usage"><span class='fu'>vars_to_date</span><span class='op'>(</span>
-  <span class='va'>tbl</span>,
-  year <span class='op'>=</span> <span class='cn'>NULL</span>,
-  trim <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Deprecated.html'>deprecated</a></span><span class='op'>(</span><span class='op'>)</span>,
-  month <span class='op'>=</span> <span class='cn'>NULL</span>,
-  month_type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Deprecated.html'>deprecated</a></span><span class='op'>(</span><span class='op'>)</span>,
-  day <span class='op'>=</span> <span class='cn'>NULL</span>
+    <pre class="usage"><span class='fu'>insert_html</span><span class='op'>(</span>
+  path <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Deprecated.html'>deprecated</a></span><span class='op'>(</span><span class='op'>)</span>,
+  name <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Deprecated.html'>deprecated</a></span><span class='op'>(</span><span class='op'>)</span>,
+  file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>path</span>, <span class='va'>name</span><span class='op'>)</span>,
+  source_code <span class='op'>=</span> <span class='cn'>NULL</span>,
+  keep_styles <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>tbl</th>
-      <td><p>data.frame or tbl connection</p></td>
+      <th>path</th>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a>: the path where the HTML file exists. Should end with /</p></td>
     </tr>
     <tr>
-      <th>year</th>
-      <td><p>year variable position or name</p></td>
+      <th>name</th>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a>: the name of HTML file to insert</p></td>
     </tr>
     <tr>
-      <th>trim</th>
-      <td><p>trimester variable position or name</p></td>
+      <th>file</th>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a>: path to HTML file. Should include the file name.</p></td>
     </tr>
     <tr>
-      <th>month</th>
-      <td><p>month variable position or name</p></td>
+      <th>source_code</th>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a>: used for highlighting the code into the document.
+Also the output is wrapped by a <code>&lt;pre&gt;&lt;/pre&gt;</code> tags.</p></td>
     </tr>
     <tr>
-      <th>month_type</th>
-      <td><p>character the char or num type of month variable</p></td>
-    </tr>
-    <tr>
-      <th>day</th>
-      <td><p>day variable position or name</p></td>
+      <th>keep_styles</th>
+      <td><p><a href='https://rdrr.io/r/base/logical.html'>logical</a>: indicates if the styles of the file to be
+included are preserved. They only apply to their own content.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>tbl a new data.frame with the compute variable</p>
+    <p>character an HTML character string</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>This function was created to insert HTML file content into
+RMarkdown HTML documents. Important considerations:</p><ul>
+<li><p>The images are converted to base64 strings if needed.</p></li>
+<li><p>A caption with de file name is added to each image.</p></li>
+</ul>
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>tbl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>
-year <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"2021"</span>, <span class='fl'>12</span><span class='op'>)</span>,
-month <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>12</span>,
-day <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, <span class='fl'>12</span>, <span class='cn'>TRUE</span><span class='op'>)</span>,
-value <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>:</span><span class='fl'>1000</span>, <span class='fl'>12</span>, <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='op'>)</span>
-
-<span class='va'>tbl</span>
-</div><div class='output co'>#&gt;    year month day value
-#&gt; 1  2021     1   1   866
-#&gt; 2  2021     2   3   635
-#&gt; 3  2021     3   3   946
-#&gt; 4  2021     4   1   176
-#&gt; 5  2021     5   2   997
-#&gt; 6  2021     6   3   545
-#&gt; 7  2021     7   3   666
-#&gt; 8  2021     8   3   526
-#&gt; 9  2021     9   2   161
-#&gt; 10 2021    10   1   654
-#&gt; 11 2021    11   1   872
-#&gt; 12 2021    12   1   568</div><div class='input'>
-<span class='fu'>vars_to_date</span><span class='op'>(</span><span class='va'>tbl</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;         date value
-#&gt; 1   2021-1-1   866
-#&gt; 2   2021-2-3   635
-#&gt; 3   2021-3-3   946
-#&gt; 4   2021-4-1   176
-#&gt; 5   2021-5-2   997
-#&gt; 6   2021-6-3   545
-#&gt; 7   2021-7-3   666
-#&gt; 8   2021-8-3   526
-#&gt; 9   2021-9-2   161
-#&gt; 10 2021-10-1   654
-#&gt; 11 2021-11-1   872
-#&gt; 12 2021-12-1   568</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'>insert_html</span><span class='op'>(</span>file <span class='op'>=</span> <span class='st'>"html/index.html"</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

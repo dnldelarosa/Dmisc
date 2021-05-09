@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Dmisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.2.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1.9001</span>
       </span>
     </div>
 
@@ -96,6 +96,18 @@
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/cut3.html">Cut Cut Cut</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -130,18 +142,22 @@
     <p><a href='https://lifecycle.r-lib.org/articles/stages.html#experimental'><img src='figures/lifecycle-experimental.svg' alt='[Experimental]' /></a></p>
     </div>
 
-    <pre class="usage"><span class='fu'>octave_path</span><span class='op'>(</span>drive <span class='op'>=</span> <span class='st'>"C"</span>, version <span class='op'>=</span> <span class='st'>"5.2.0"</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>octave_path</span><span class='op'>(</span>drive <span class='op'>=</span> <span class='st'>"C"</span>, version <span class='op'>=</span> <span class='st'>"5.2.0"</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>drive</th>
-      <td><p>drive letter on which the program is installed</p></td>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a>: drive letter on which the program is installed</p></td>
     </tr>
     <tr>
       <th>version</th>
-      <td><p>octave version</p></td>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a>: octave version</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>for development use</p></td>
     </tr>
     </table>
 
@@ -151,7 +167,10 @@
 arguments</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>It is intended to be used in R Markdown files that use Octave</p>
+    <p>It is intended to be used in R Markdown files that use Octave.
+The advantage of using this function instead of specifying the path
+directly is that it allows you to move an Rmd between one operating system
+and another.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>

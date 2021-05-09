@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Multiple variables to unique date variable — vars_to_date • Dmisc</title>
+<title>Conexión a bases de datos — db_connect • Dmisc</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Multiple variables to unique date variable — vars_to_date" />
+<meta property="og:title" content="Conexión a bases de datos — db_connect" />
 <meta property="og:description" content="" />
 
 
@@ -133,93 +133,74 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Multiple variables to unique date variable</h1>
-    <small class="dont-index">Source: <a href='https://github.com/drdsdaniel/Dmisc/blob/master/R/vars_to_date.R'><code>R/vars_to_date.R</code></a></small>
-    <div class="hidden name"><code>vars_to_date.Rd</code></div>
+    <h1>Conexión a bases de datos</h1>
+    <small class="dont-index">Source: <a href='https://github.com/drdsdaniel/Dmisc/blob/master/R/db_connect.R'><code>R/db_connect.R</code></a></small>
+    <div class="hidden name"><code>db_connect.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p><a href='https://lifecycle.r-lib.org/articles/stages.html#experimental'><img src='figures/lifecycle-experimental.svg' alt='[Experimental]' /></a></p>
     </div>
 
-    <pre class="usage"><span class='fu'>vars_to_date</span><span class='op'>(</span>
-  <span class='va'>tbl</span>,
-  year <span class='op'>=</span> <span class='cn'>NULL</span>,
-  trim <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Deprecated.html'>deprecated</a></span><span class='op'>(</span><span class='op'>)</span>,
-  month <span class='op'>=</span> <span class='cn'>NULL</span>,
-  month_type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Deprecated.html'>deprecated</a></span><span class='op'>(</span><span class='op'>)</span>,
-  day <span class='op'>=</span> <span class='cn'>NULL</span>
+    <pre class="usage"><span class='fu'>db_connect</span><span class='op'>(</span>
+  db_user <span class='op'>=</span> <span class='cn'>NULL</span>,
+  db_pass <span class='op'>=</span> <span class='cn'>NULL</span>,
+  db_sys <span class='op'>=</span> <span class='st'>"PostgreSQL"</span>,
+  db_name <span class='op'>=</span> <span class='st'>"encft"</span>,
+  db_host <span class='op'>=</span> <span class='st'>"localhost"</span>,
+  db_port <span class='op'>=</span> <span class='fl'>5432</span>,
+  k_service_id <span class='op'>=</span> <span class='st'>"postgre"</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>tbl</th>
-      <td><p>data.frame or tbl connection</p></td>
+      <th>db_user</th>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a>: nombre de usuario de la base de datos.</p></td>
     </tr>
     <tr>
-      <th>year</th>
-      <td><p>year variable position or name</p></td>
+      <th>db_pass</th>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a>: contraseña de la base de datos.</p></td>
     </tr>
     <tr>
-      <th>trim</th>
-      <td><p>trimester variable position or name</p></td>
+      <th>db_sys</th>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a>: nombre del sistema de base de datos. Para utilizar el driver correcto.</p></td>
     </tr>
     <tr>
-      <th>month</th>
-      <td><p>month variable position or name</p></td>
+      <th>db_name</th>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a>: nombre de la base de datos</p></td>
     </tr>
     <tr>
-      <th>month_type</th>
-      <td><p>character the char or num type of month variable</p></td>
+      <th>db_host</th>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a>: dirección del host de la base de datos</p></td>
     </tr>
     <tr>
-      <th>day</th>
-      <td><p>day variable position or name</p></td>
+      <th>db_port</th>
+      <td><p><a href='https://rdrr.io/r/base/numeric.html'>numeric</a>: puerto de la base de datos</p></td>
+    </tr>
+    <tr>
+      <th>k_service_id</th>
+      <td><p><a href='https://rdrr.io/r/base/character.html'>character</a>: "keyring service id" si está utilizando keyring
+para almacenar sus credenciales.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>tbl a new data.frame with the compute variable</p>
+    <p>conexión a base de datos. Vea <code>DBI::<a href='https://dbi.r-dbi.org/reference/dbConnect.html'>dbConnect</a></code></p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Crea una conexión con un sistema de base de datos.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><a href='https://db.rstudio.com/best-practices/managing-credentials/#encrypt-credentials-with-keyring'>Databases using R</a></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>tbl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>
-year <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"2021"</span>, <span class='fl'>12</span><span class='op'>)</span>,
-month <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>12</span>,
-day <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, <span class='fl'>12</span>, <span class='cn'>TRUE</span><span class='op'>)</span>,
-value <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>:</span><span class='fl'>1000</span>, <span class='fl'>12</span>, <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='op'>)</span>
-
-<span class='va'>tbl</span>
-</div><div class='output co'>#&gt;    year month day value
-#&gt; 1  2021     1   1   866
-#&gt; 2  2021     2   3   635
-#&gt; 3  2021     3   3   946
-#&gt; 4  2021     4   1   176
-#&gt; 5  2021     5   2   997
-#&gt; 6  2021     6   3   545
-#&gt; 7  2021     7   3   666
-#&gt; 8  2021     8   3   526
-#&gt; 9  2021     9   2   161
-#&gt; 10 2021    10   1   654
-#&gt; 11 2021    11   1   872
-#&gt; 12 2021    12   1   568</div><div class='input'>
-<span class='fu'>vars_to_date</span><span class='op'>(</span><span class='va'>tbl</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;         date value
-#&gt; 1   2021-1-1   866
-#&gt; 2   2021-2-3   635
-#&gt; 3   2021-3-3   946
-#&gt; 4   2021-4-1   176
-#&gt; 5   2021-5-2   997
-#&gt; 6   2021-6-3   545
-#&gt; 7   2021-7-3   666
-#&gt; 8   2021-8-3   526
-#&gt; 9   2021-9-2   161
-#&gt; 10 2021-10-1   654
-#&gt; 11 2021-11-1   872
-#&gt; 12 2021-12-1   568</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>conn</span> <span class='op'>&lt;-</span> <span class='fu'>db_connect</span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
