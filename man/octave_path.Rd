@@ -4,12 +4,14 @@
 \alias{octave_path}
 \title{Retrieve octave path}
 \usage{
-octave_path(drive = "C", version = "5.2.0")
+octave_path(drive = "C", version = "5.2.0", ...)
 }
 \arguments{
-\item{drive}{drive letter on which the program is installed}
+\item{drive}{\link{character}: drive letter on which the program is installed}
 
-\item{version}{octave version}
+\item{version}{\link{character}: octave version}
+
+\item{...}{for development use}
 }
 \value{
 A character string with the location of the program based on the inputs
@@ -19,7 +21,10 @@ arguments
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
 \details{
-It is intended to be used in R Markdown files that use Octave
+It is intended to be used in R Markdown files that use Octave.
+The advantage of using this function instead of specifying the path
+directly is that it allows you to move an Rmd between one operating system
+and another.
 }
 \examples{
 \dontrun{
