@@ -1,11 +1,16 @@
 #' Insert a HTML big button
 #'
 #' @param text [character]: text to display in the button
-#' @param href HTML a tag href
-#' @param bg_color [character]: color of the button
+#' @param href [character]: HTML a tag href
+#' @param bg_color [character]: HEX code for the button color
 #'
 #' @return a HTML element button
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#'   big_button(text = "Get started", href = "./articles/Dmisc.html", bg_color = "#00a65a")
+#' }
 big_button <- function(text = "Get started", href = "./articles/Dmisc.html", bg_color = "#00a65a"){
   htmltools::HTML(
     glue::glue('

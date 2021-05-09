@@ -13,13 +13,18 @@ big_button(
 \arguments{
 \item{text}{\link{character}: text to display in the button}
 
-\item{href}{HTML a tag href}
+\item{href}{\link{character}: HTML a tag href}
 
-\item{bg_color}{\link{character}: color of the button}
+\item{bg_color}{\link{character}: HEX code for the button color}
 }
 \value{
 a HTML element button
 }
 \description{
 Insert a HTML big button
+}
+\examples{
+\dontrun{
+  big_button(text = "Get started", href = "./articles/Dmisc.html", bg_color = "#00a65a")
+}
 }
