@@ -38,7 +38,7 @@ insert_html <- function(path = deprecated(), name = deprecated(), file = paste0(
   }
   splitter_pos <- max(stringr::str_locate_all(file, "/")[[1]])
   path <- stringr::str_sub(file, end = splitter_pos)
-  file <- xml2::read_html(file)
+  file <- rvest::read_html(file)
   style <- as.character(rvest::html_node(file, "style"))
   style <- stringr::str_replace(style, "style", "style scoped")
   file2 <- as.character(rvest::html_node(file, "body"))

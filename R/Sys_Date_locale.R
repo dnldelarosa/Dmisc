@@ -16,6 +16,9 @@
 #'  Sys_Date_locale()
 #' }
 Sys_Date_locale <- function(locale = "es_DO.utf8", format = "%B %d, %Y"){
+  if (!requireNamespace("withr", quietly = TRUE)) {
+    stop("Package \"withr\" needed for this function to work. Please install it.", call. = FALSE)
+  }
   if(is.null(format)){
     withr::with_locale(new = c("LC_TIME" = locale), Sys.Date())
   } else {

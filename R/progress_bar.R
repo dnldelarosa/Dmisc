@@ -22,7 +22,7 @@ progress_bar <- function(complete, total){
     progress >= 75 ~ "background-color: #5cb85c;"
   )
 
-  htmltools::HTML(glue::glue(
+  htmltools::HTML(paste0(
     '<div style="display:inline-block;
                  vertical-align:baseline;
                  width:100%;
@@ -42,9 +42,9 @@ progress_bar <- function(complete, total){
     text-align: center;
     box-shadow: inset 0 -1px 0 rgb(0 0 0 / 15%);
     transition: width .6s ease;
-    {status}  width: {progress}%;">
+    ', status, '  width: ', progress, '%;">
 
-      {progress}%
+      ', progress, '%
 
     </div>
       </div>'

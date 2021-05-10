@@ -5,9 +5,10 @@ test_that("vars_to_date", {
     month = 1:12,
     day = 1:12,
     value = 100:111,
-    trim = 2,
-    month_type = "num"
-  )))
+    trim = 2
+  ),
+  trim = 5,
+  month_type = "num"))
   expect_snapshot(vars_to_date(data.frame(
     year = rep("2021", 12),
     month = 1:12,

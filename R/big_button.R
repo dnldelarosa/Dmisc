@@ -13,11 +13,11 @@
 #' }
 big_button <- function(text = "Get started", href = "./articles/Dmisc.html", bg_color = "#00a65a"){
   htmltools::HTML(
-    glue::glue('
-<a href="{href}"><button type="button"
+    paste0('
+<a href="', href, '"><button type="button"
 style = "
     border: 1px solid transparent;
-    background-color: {bg_color};
+    background-color: ', bg_color, ';
     display: block;
     padding: 10px 16px;
     font-size: 18px;
@@ -30,6 +30,6 @@ style = "
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;">
-    {text}</button></a>')
+    ', text, '</button></a>')
   )
 }

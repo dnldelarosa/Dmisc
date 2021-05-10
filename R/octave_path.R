@@ -27,7 +27,7 @@ octave_path <- function(drive = "C", version = "5.2.0", ...) {
     sysname <- Sys.info()["sysname"][[1]]
   }
   if (sysname == "Windows") {
-    glue::glue("{drive}:/Octave/Octave-{version}/mingw64/bin/octave-cli-{version}.exe")
+    paste0(drive, ":/Octave/Octave-", version, "/mingw64/bin/octave-cli-", version, ".exe")
   } else {
     "/usr/bin/octave-cli"
   }

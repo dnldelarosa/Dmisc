@@ -28,14 +28,18 @@ describe <- function(data, digits = 4, t = TRUE, flextable = FALSE, ft_args = li
     res <- dplyr::bind_rows(res, .id = "var")
     if(t){
       res <- t(res) %>%
-        as.data.frame() %>%
-        janitor::row_to_names(1)
+        as.data.frame()
+      names(res) <- res[1,]
+      res <- res[-1,]
     } else {
       res <- res %>%
         tibble::column_to_rownames("var")
     }
     res <- utils::type.convert(res)
     if(flextable){
+      if (!requireNamespace("flextable", quietly = TRUE)) {
+        stop("Package \"flextable\" needed for this function to work. Please install it.", call. = FALSE)
+      }
       if(length(ft_args) > 0){
         res <- res %>%
           tibble::rownames_to_column(" ")

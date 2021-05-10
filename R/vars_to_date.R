@@ -33,7 +33,6 @@ vars_to_date <- function(tbl, year = NULL, trim = deprecated(), month = NULL, mo
     deprecate_warn("0.2.4", "Dmisc::vars_to_date(month_type = )")
   }
 
-
   if (!is.null(year)) {
     if (is.character(year)) {
       year <- match(year, names(tbl))
@@ -88,6 +87,9 @@ vars_to_date <- function(tbl, year = NULL, trim = deprecated(), month = NULL, mo
           date = paste(year, month, "01", sep = "-")
         )
       } else {
+        if (!requireNamespace("tsibble", quietly = TRUE)) {
+          stop("Package \"tsibble\" needed for yearmonth format work. Please install it.", call. = FALSE)
+        }
         tbl <- dplyr::mutate(
           tbl,
           date = as.Date(tsibble::yearmonth(paste(year, month)))

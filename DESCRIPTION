@@ -1,6 +1,6 @@
 Package: Dmisc
 Title: Daniel miscellaneous functions
-Version: 0.3.1.9001
+Version: 0.3.1.9002
 Authors@R: 
     person(given = "Daniel E.",
            family = "de la Rosa",
@@ -16,28 +16,24 @@ RoxygenNote: 7.1.1
 URL: https://drdsdaniel.github.io/Dmisc/, https://github.com/drdsdaniel/Dmisc
 BugReports: https://github.com/drdsdaniel/Dmisc/issues
 Imports: 
-    xml2,
     rvest,
     stringr,
     knitr,
     htmltools,
     lifecycle,
     dplyr,
-    withr,
-    DBI,
-    RPostgres,
-    keyring,
-    glue,
-    Hmisc,
-    tsibble,
     magrittr,
-    janitor,
-    flextable,
     tibble
 Suggests: 
     testthat,
     covr,
-    rmarkdown
+    rmarkdown,
+    DBI,
+    RPostgres,
+    keyring,
+    withr,
+    flextable,
+    tsibble
 Language: en-US
 RdMacros: lifecycle
 VignetteBuilder: knitr
