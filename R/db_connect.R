@@ -33,6 +33,10 @@ db_connect <- function(db_user = NULL,
                        db_port = 5432,
                        k_service_id = "postgre") {
 
+  if(db_name %in% c("enft1", "enft2")){
+    warning(paste0("Usa db_name = 'enft' en lugar de db_name = '", db_name, "'."))
+  }
+
   if (!requireNamespace("DBI", quietly = TRUE)) {
     stop("Package \"DBI\" needed for this function to work. Please install it.", call. = FALSE)
   }
