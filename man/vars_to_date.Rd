@@ -10,7 +10,10 @@ vars_to_date(
   trim = deprecated(),
   month = NULL,
   month_type = deprecated(),
-  day = NULL
+  day = NULL,
+  date = NULL,
+  date_format = "\%d-\%m-\%y",
+  origin = "1900-01-01"
 )
 }
 \arguments{
@@ -25,6 +28,12 @@ vars_to_date(
 \item{month_type}{character the char or num type of month variable}
 
 \item{day}{day variable position or name}
+
+\item{date}{a variable name or position containing a like date format}
+
+\item{date_format}{actual date format of variable in \code{date} argument}
+
+\item{origin}{base date for variable convertion to date}
 }
 \value{
 tbl a new data.frame with the compute variable
@@ -34,10 +43,10 @@ tbl a new data.frame with the compute variable
 }
 \examples{
 tbl <- data.frame(
-year = rep("2021", 12),
-month = 1:12,
-day = sample(1:3, 12, TRUE),
-value = sample(100:1000, 12, TRUE)
+  year = rep("2021", 12),
+  month = 1:12,
+  day = sample(1:3, 12, TRUE),
+  value = sample(100:1000, 12, TRUE)
 )
 
 tbl

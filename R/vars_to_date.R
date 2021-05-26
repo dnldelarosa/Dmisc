@@ -8,6 +8,9 @@
 #' @param month month variable position or name
 #' @param month_type character the char or num type of month variable
 #' @param day day variable position or name
+#' @param date a variable name or position containing a like date format
+#' @param date_format actual date format of variable in \code{date} argument
+#' @param origin base date for variable convertion to date
 #'
 #' @return tbl a new data.frame with the compute variable
 #'
@@ -15,22 +18,38 @@
 #'
 #' @examples
 #' tbl <- data.frame(
-#' year = rep("2021", 12),
-#' month = 1:12,
-#' day = sample(1:3, 12, TRUE),
-#' value = sample(100:1000, 12, TRUE)
+#'   year = rep("2021", 12),
+#'   month = 1:12,
+#'   day = sample(1:3, 12, TRUE),
+#'   value = sample(100:1000, 12, TRUE)
 #' )
 #'
 #' tbl
 #'
 #' vars_to_date(tbl)
-vars_to_date <- function(tbl, year = NULL, trim = deprecated(), month = NULL, month_type = deprecated(), day = NULL) {
+vars_to_date <- function(tbl,
+                         year = NULL,
+                         trim = deprecated(),
+                         month = NULL,
+                         month_type = deprecated(),
+                         day = NULL,
+                         date = NULL,
+                         date_format = "%d-%m-%y",
+                         origin = "1900-01-01") {
+
   if (lifecycle::is_present(trim)) {
     deprecate_warn("0.2.4", "Dmisc::vars_to_date(trim = )")
   }
 
   if (lifecycle::is_present(month_type)) {
     deprecate_warn("0.2.4", "Dmisc::vars_to_date(month_type = )")
+  }
+
+  if (!is.null(date)) {
+    if (is.character(date)) {
+      date <- match(date, names(tbl))
+    }
+    names(tbl)[date] <- "date"
   }
 
   if (!is.null(year)) {
@@ -69,35 +88,89 @@ vars_to_date <- function(tbl, year = NULL, trim = deprecated(), month = NULL, mo
     )
   }
 
-  if ("year" %in% names(tbl)) {
-    tbl[["date"]] <- tbl[["year"]]
-    if ("day" %in% names(tbl)) {
-      if (!is.numeric(tbl[["month"]])) {
-        tbl <- dplyr::mutate(
-          tbl,
-          month = match(month, month.abb)
+  if (!is.null(date)) {
+    tbl <- tbl %>%
+      dplyr::mutate(
+        date = dplyr::case_when(
+          is.na(as.numeric(date)) ~ stringr::str_remove_all(stringr::str_remove_all(date, "\\."), "\\*"),
+          TRUE ~ date
+        ),
+        date = dplyr::case_when(
+          stringr::str_detect(tolower(date), "enero") ~ stringr::str_replace(tolower(date), "enero", "jan"),
+          stringr::str_detect(tolower(date), "ene") ~ stringr::str_replace(tolower(date), "ene", "jan"),
+          stringr::str_detect(tolower(date), "abril") ~ stringr::str_replace(tolower(date), "abril", "apr"),
+          stringr::str_detect(tolower(date), "abr") ~ stringr::str_replace(tolower(date), "abr", "apr"),
+          stringr::str_detect(tolower(date), "agosto") ~ stringr::str_replace(tolower(date), "agosto", "aug"),
+          stringr::str_detect(tolower(date), "ago") ~ stringr::str_replace(tolower(date), "ago", "aug"),
+          stringr::str_detect(tolower(date), "diciembre") ~ stringr::str_replace(tolower(date), "diciembre", "dec"),
+          stringr::str_detect(tolower(date), "dic") ~ stringr::str_replace(tolower(date), "dic", "dec"),
+          TRUE ~ date
+        ),
+        date = dplyr::case_when(
+          stringr::str_detect(
+            date,
+            stringr::regex("[a-z]{3}-")
+            ) ~ stringr::str_replace(
+              date,
+              stringr::regex("[a-z]{3}"),
+              paste0(
+                match(
+                  stringr::str_to_title(stringr::str_extract(date, "[a-z]{3}")),
+                  month.abb
+                )
+              )
+            ),
+          TRUE ~ date
         )
-      }
-      tbl <- dplyr::mutate(tbl,
-        date = paste(year, month, day, sep = "-")
       )
-    } else if ("month" %in% names(tbl)) {
-      if (is.numeric(tbl$month)) {
-        tbl <- dplyr::mutate(tbl,
-          date = paste(year, month, "01", sep = "-")
+    if(date_format %in% c("%d-%m-%y", "%m-%y")){
+      tbl <- tbl %>%
+        dplyr::mutate(
+          date = dplyr::case_when(
+            stringr::str_count(date, "-") == 1 & stringr::str_starts(date, "[0-9]") ~ paste0(1, "-", date),
+            TRUE ~ date
+          ),
+          date = dplyr::case_when(
+            stringr::str_count(date, "-") == 2 ~ as.character(difftime(as.Date(date, format = date_format), as.Date(origin), units = "days")),
+            TRUE ~ date
+          )
         )
-      } else {
-        if (!requireNamespace("tsibble", quietly = TRUE)) {
-          stop("Package \"tsibble\" needed for yearmonth format work. Please install it.", call. = FALSE)
-        }
-        tbl <- dplyr::mutate(
-          tbl,
-          date = as.Date(tsibble::yearmonth(paste(year, month)))
-        )
-      }
     }
+    tbl <- tbl %>%
+      dplyr::mutate(
+        date = as.Date(as.numeric(date), origin = origin)
+      )
   } else {
-    stop("Please. Specifies the position or name of the year variable.")
+    if ("year" %in% names(tbl)) {
+      tbl[["date"]] <- tbl[["year"]]
+      if ("day" %in% names(tbl)) {
+        if (!is.numeric(tbl[["month"]])) {
+          tbl <- dplyr::mutate(
+            tbl,
+            month = match(month, month.abb)
+          )
+        }
+        tbl <- dplyr::mutate(tbl,
+          date = paste(year, month, day, sep = "-")
+        )
+      } else if ("month" %in% names(tbl)) {
+        if (is.numeric(tbl$month)) {
+          tbl <- dplyr::mutate(tbl,
+            date = paste(year, month, "01", sep = "-")
+          )
+        } else {
+          if (!requireNamespace("tsibble", quietly = TRUE)) {
+            stop("Package \"tsibble\" needed for yearmonth format work. Please install it.", call. = FALSE)
+          }
+          tbl <- dplyr::mutate(
+            tbl,
+            date = as.Date(tsibble::yearmonth(paste(year, month)))
+          )
+        }
+      }
+    } else {
+      stop("Please. Specifies the position or name of the year variable.")
+    }
   }
   tbl[["day"]] <- NULL
   tbl[["month"]] <- NULL
