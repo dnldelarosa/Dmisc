@@ -4,7 +4,8 @@
 #'
 #' @param tbl data.frame or tbl connection
 #' @param year  year variable position or name
-#' @param trim trimester variable position or name
+#' @param quarter quarter variable position or name
+#' @param trim quarter variable position or name
 #' @param month month variable position or name
 #' @param month_type character the char or num type of month variable
 #' @param day day variable position or name
@@ -29,6 +30,7 @@
 #' vars_to_date(tbl)
 vars_to_date <- function(tbl,
                          year = NULL,
+                         quarter = NULL,
                          trim = deprecated(),
                          month = NULL,
                          month_type = deprecated(),
@@ -38,11 +40,15 @@ vars_to_date <- function(tbl,
                          origin = "1900-01-01") {
 
   if (lifecycle::is_present(trim)) {
-    deprecate_warn("0.2.4", "Dmisc::vars_to_date(trim = )")
+    deprecate_warn("0.2.4", "Dmisc::vars_to_date(trim = )", "Dmisc::vars_to_date(quarter = )")
   }
 
   if (lifecycle::is_present(month_type)) {
     deprecate_warn("0.2.4", "Dmisc::vars_to_date(month_type = )")
+  }
+
+  if(all(is.null(year), is.null(date))){
+    stop("One of 'year' or 'date' variable needs to be non-null")
   }
 
   if (!is.null(date)) {
@@ -59,6 +65,13 @@ vars_to_date <- function(tbl,
     names(tbl)[year] <- "year"
   }
 
+  if (!is.null(quarter)) {
+    if (is.character(quarter)) {
+      quarter <- match(quarter, names(tbl))
+    }
+    names(tbl)[quarter] <- "quarter"
+  }
+
   if (!is.null(month)) {
     if (is.character(month)) {
       month <- match(month, names(tbl))
@@ -71,6 +84,10 @@ vars_to_date <- function(tbl,
       day <- match(day, names(tbl))
     }
     names(tbl)[day] <- "day"
+  }
+
+  if(!is.null(quarter)){
+    return(qdate(tbl))
   }
 
   if (all("month" %in% names(tbl), !is.numeric(tbl[["month"]]))) {
@@ -177,4 +194,20 @@ vars_to_date <- function(tbl,
   tbl[["year"]] <- NULL
   tbl <- dplyr::relocate(tbl, date)
   tbl
+}
+
+qdate <- function(tbl){
+  tbl %>%
+    dplyr::mutate(
+      quarter = stringr::str_replace(quarter, "[eEjJ]-[mM]", "Q1"),
+      quarter = stringr::str_replace(quarter, "[eEjJaA]-[jJ]", "Q2"),
+      quarter = stringr::str_replace(quarter, "[eEjJ]-[sS]", "Q3"),
+      quarter = stringr::str_replace(quarter, "[eEjJoO]-[dD]", "Q4"),
+      date = tsibble::yearquarter(paste(year, quarter)),
+      date = as.Date(date),
+      date = lubridate::ceiling_date(date, unit = "quarter"),
+      date = lubridate::add_with_rollback(date, lubridate::days(-1))
+    ) %>%
+    dplyr::relocate(date) %>%
+    dplyr::select(-year, -quarter)
 }
