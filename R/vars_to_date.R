@@ -222,14 +222,12 @@ clean_date <- function(tbl) {
 qdate <- function(tbl) {
   tbl %>%
     dplyr::mutate(
-      quarter = stringr::str_replace(quarter, stringr::regex("enero-marzo", ignore_case = T), "Q1"),
-      quarter = stringr::str_replace(quarter, stringr::regex("abril-junio", ignore_case = T), "Q2"),
-      quarter = stringr::str_replace(quarter, stringr::regex("julio-septiembre", ignore_case = T), "Q3"),
-      quarter = stringr::str_replace(quarter, stringr::regex("octubre-diciembre", ignore_case = T), "Q4"),
-      quarter = stringr::str_replace(quarter, "[eEjJ].+-.?[mM].+", "Q1"),
-      quarter = stringr::str_replace(quarter, "[eEjJaA].+-.?[jJ].+", "Q2"),
-      quarter = stringr::str_replace(quarter, "[eEjJ].+-.?[sS].+", "Q3"),
-      quarter = stringr::str_replace(quarter, "[eEjJoO].+-.?[dD].+", "Q4"),
+      quarter = dplyr::case_when(
+        stringr::str_detect(quarter, "[eEjJ].*?-.*?[mM].*?") ~ "Q1",
+        stringr::str_detect(quarter, "[aAeEjJ].*?-.*?[jJ].*?") ~ "Q2",
+        stringr::str_detect(quarter, "[jJeE].*?-.*?[sS].*?") ~ "Q3",
+        stringr::str_detect(quarter, "[oOjJeE].*?-.*?[dD].*?") ~ "Q4"
+      ),
       quarter = stringr::str_replace(quarter, "IV", "Q4"),
       quarter = stringr::str_replace(quarter, "III", "Q3"),
       quarter = stringr::str_replace(quarter, "II", "Q2"),
