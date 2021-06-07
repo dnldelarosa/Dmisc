@@ -226,7 +226,8 @@ qdate <- function(tbl) {
         stringr::str_detect(quarter, "[eEjJ].*?-.*?[mM].*?") ~ "Q1",
         stringr::str_detect(quarter, "[aAeEjJ].*?-.*?[jJ].*?") ~ "Q2",
         stringr::str_detect(quarter, "[jJeE].*?-.*?[sS].*?") ~ "Q3",
-        stringr::str_detect(quarter, "[oOjJeE].*?-.*?[dD].*?") ~ "Q4"
+        stringr::str_detect(quarter, "[oOjJeE].*?-.*?[dD].*?") ~ "Q4",
+        TRUE ~ quarter
       ),
       quarter = stringr::str_replace(quarter, "IV", "Q4"),
       quarter = stringr::str_replace(quarter, "III", "Q3"),
