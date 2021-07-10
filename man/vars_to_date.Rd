@@ -7,9 +7,8 @@
 vars_to_date(
   tbl,
   year = NULL,
-  trim = deprecated(),
+  quarter = NULL,
   month = NULL,
-  month_type = deprecated(),
   day = NULL,
   date = NULL,
   date_format = "\%d-\%m-\%y",
@@ -21,11 +20,9 @@ vars_to_date(
 
 \item{year}{year variable position or name}
 
-\item{trim}{trimester variable position or name}
+\item{quarter}{quarter variable position or name}
 
 \item{month}{month variable position or name}
-
-\item{month_type}{character the char or num type of month variable}
 
 \item{day}{day variable position or name}
 

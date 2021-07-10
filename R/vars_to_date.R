@@ -5,9 +5,7 @@
 #' @param tbl data.frame or tbl connection
 #' @param year  year variable position or name
 #' @param quarter quarter variable position or name
-#' @param trim quarter variable position or name
 #' @param month month variable position or name
-#' @param month_type character the char or num type of month variable
 #' @param day day variable position or name
 #' @param date a variable name or position containing a like date format
 #' @param date_format actual date format of variable in \code{date} argument
@@ -28,141 +26,161 @@
 #' tbl
 #'
 #' vars_to_date(tbl)
-vars_to_date <- function(tbl,
-                         year = NULL,
-                         quarter = NULL,
-                         trim = deprecated(),
-                         month = NULL,
-                         month_type = deprecated(),
-                         day = NULL,
-                         date = NULL,
-                         date_format = "%d-%m-%y",
-                         origin = "1900-01-01") {
-  if (lifecycle::is_present(trim)) {
-    deprecate_warn("0.2.4", "Dmisc::vars_to_date(trim = )", "Dmisc::vars_to_date(quarter = )")
-  }
+vars_to_date <- function(tbl, year = NULL, quarter = NULL, month = NULL, day = NULL,
+                         date = NULL, date_format = "%d-%m-%y", origin = "1900-01-01") {
 
-  if (lifecycle::is_present(month_type)) {
-    deprecate_warn("0.2.4", "Dmisc::vars_to_date(month_type = )")
-  }
-
-  if (all(is.null(year), is.null(date))) {
-    stop("One of 'year' or 'date' variable needs to be non-null")
-  }
-
-  if (!is.null(date)) {
-    if (is.character(date)) {
-      date <- match(date, names(tbl))
-    }
-    names(tbl)[date] <- "date"
-  }
-
-  if (!is.null(year)) {
-    if (is.character(year)) {
-      year <- match(year, names(tbl))
-    }
-    names(tbl)[year] <- "year"
-  }
-
-  if (!is.null(quarter)) {
-    if (is.character(quarter)) {
-      quarter <- match(quarter, names(tbl))
-    }
-    names(tbl)[quarter] <- "quarter"
-  }
-
-  if (!is.null(month)) {
-    if (is.character(month)) {
-      month <- match(month, names(tbl))
-    }
-    names(tbl)[month] <- "month"
-  }
-
-  if (!is.null(day)) {
-    if (is.character(day)) {
-      day <- match(day, names(tbl))
-    }
-    names(tbl)[day] <- "day"
-  }
-
-  if (!is.null(date)) {
-    tbl <- clean_date(tbl)
-  }
-
-  if (all("month" %in% names(tbl), !is.numeric(tbl[["month"]]))) {
-    tbl <- abb_months(tbl)
-  }
-
-  if ("year" %in% names(tbl)) {
-    if ("day" %in% names(tbl)) {
-      tbl <- ddate(tbl)
-    } else if (!is.null(month)) {
-      tbl <- mdate(tbl)
-    } else if (!is.null(quarter)) {
-      tbl <- qdate(tbl)
-    }
+  if(!is.null(day)){
+    day <- get_pos(day, names(tbl))
+    dayn <- names(tbl)[day]
   } else {
-    stop("Argument vars_to_date(year = ) is required.")
+    day <- FALSE
   }
 
-  tbl[["day"]] <- NULL
-  tbl[["month"]] <- NULL
-  tbl[["quarter"]] <- NULL
-  tbl[["year"]] <- NULL
-  tbl <- dplyr::relocate(tbl, date)
+  if(!is.null(month)){
+    month <- get_pos(month, names(tbl))
+    monthn <- names(tbl)[month]
+    tbl <- make_month(tbl, monthn)
+  } else {
+    month <- FALSE
+  }
+
+  if(!is.null(quarter)){
+    quarter <- get_pos(quarter, names(tbl))
+    quartern <- names(tbl)[quarter]
+    tbl <- make_quarter(tbl, quartern)
+  } else {
+    quarter <- FALSE
+  }
+
+  if(!is.null(year)){
+    year <- get_pos(year, names(tbl))
+    yearn <- names(tbl)[year]
+  } else {
+    year <- FALSE
+  }
+
+  if(!is.null(date)){
+    date <- get_pos(date, names(tbl))
+    daten <- names(tbl)[date]
+  } else {
+    date <- FALSE
+  }
+
+  if(day){
+    if(is.null(year)){
+      stop("Falta ano")
+    }
+    if(is.null(month)){
+      stop("Falta mes")
+    }
+
+    tbl$date <- as.Date(paste0(tbl[,yearn], '-', tbl[, monthn], '-', tbl[, dayn]))
+    tbl <- tbl %>%
+      dplyr::relocate(date)
+
+    tbl[, yearn] <- NULL
+    tbl[, monthn] <- NULL
+    tbl[, dayn] <- NULL
+
+    return(tbl)
+  }
+
+  if(month){
+    if(!year){
+      stop("Falta ano")
+    }
+
+    tbl$date <- as.Date(paste0(tbl[,yearn], '-', tbl[, monthn], '-', '01'))
+    tbl$date <- lubridate::ceiling_date(tbl$date, unit = "month")
+    tbl$date <- lubridate::add_with_rollback(tbl$date, lubridate::days(-1))
+
+    tbl[, yearn] <- NULL
+    tbl[, monthn] <- NULL
+
+    return(tbl)
+  }
+
+  if(quarter){
+    if(!year){
+      stop("Falta ano")
+    }
+
+    tbl <- vars_to_date(tbl, year = year, month = quarter)
+
+    tbl[, yearn] <- NULL
+    tbl[, quartern] <- NULL
+
+    return(tbl)
+  }
+
+  if(date){
+    nombres <- names(tbl)
+    nombres[nombres == daten] <- "date"
+    names(tbl) <- nombres
+    tbl <- clean_date(tbl, date_format, origin)
+    nombres[nombres == "date"] <- daten
+    names(tbl) <- nombres
+
+    return(tbl)
+  }
+}
+
+
+
+get_pos <- function(arg, names){
+  if(is.character(arg)){
+    arg <- match(arg, names)
+  }
+  arg
+}
+
+
+make_month <- function(tbl, month){
+  if(is.character(tbl[, month])){
+    tbl[, month] <- stringr::str_remove_all(tbl[, month], stringr::regex("[^a-zA-Z]"))
+    tbl[, month] <- stringr::str_trim(tbl[, month])
+    tbl[, month] <- stringr::str_to_title(stringr::str_sub(tbl[, month], 1, 3))
+    tbl[, month][tbl[, month] == "Ene"] <- "Jan"
+    tbl[, month][tbl[, month] == "Abr"] <- "Apr"
+    tbl[, month][tbl[, month] == "Ago"] <- "Aug"
+    tbl[, month][tbl[, month] == "Dic"] <- "Dec"
+
+    tbl[, month] <- match(tbl[, month], month.abb)
+  }
   tbl
 }
 
-mdate <- function(tbl) {
-  if (is.numeric(tbl$month)) {
-    tbl <- dplyr::mutate(tbl, date = paste(year, month, "01", sep = "-"))
-  } else {
-    if (!requireNamespace("tsibble", quietly = TRUE)) {
-      stop("Package \"tsibble\" needed for yearmonth format work. Please install it.", call. = FALSE)
-    }
-    tbl <- dplyr::mutate(
-      tbl,
-      date = paste(year, month),
-      date = tsibble::yearmonth(date)
-    )
-  }
-  dplyr::mutate(tbl,
-    date = as.Date(date),
-    date = lubridate::ceiling_date(date, unit = "month"),
-    date = lubridate::add_with_rollback(date, lubridate::days(-1))
+
+make_quarter <- function(tbl, quarter){
+  . <- NULL
+  qq <- c("1" = 1, "2" = 2, "3" = 3, "4" = 4,
+          "1" = "I", "2" = "II", "3" = "III", "4" = "IV",
+          "1" = "Q1", "2" = "Q2", "3" = "Q3", "4" = "Q4",
+          "1" = "T1", "2" = "T2", "3" = "T3", "4" = "T4",
+          "1" = "em", "2" = "aj", "3" = "js", "4" = "od",
+          "2" = "ej", "3" = "es", "4" = "ed",
+          "1" = "jm", "2" = "aj", "3" = "js", "4" = "od",
+          "2" = "jj", "4" = "jd"
   )
-}
 
-abb_months <- function(tbl) {
-  dplyr::mutate(tbl,
-    month = stringr::str_trim(month),
-    month = stringr::str_sub(month, 1, 3),
-    month = stringr::str_to_title(month),
-    month = dplyr::case_when(
-      month == "Ene" ~ "Jan",
-      month == "Abr" ~ "Apr",
-      month == "Ago" ~ "Aug",
-      month == "Dic" ~ "Dec",
-      TRUE ~ month
-    )
-  )
-}
+  qncharmean <- mean(nchar(tbl[, quarter]))
 
-
-ddate <- function(tbl) {
-  if (!is.numeric(tbl[["month"]])) {
-    tbl <- dplyr::mutate(tbl, month = match(month, month.abb))
+  if(qncharmean>2){
+    stringr::str_split(tbl[, quarter], "[^[:alnum:]]+", simplify = T, n = 2) %>%
+      as.data.frame() %>%
+      dplyr::mutate(dplyr::across(dplyr::everything(), ~stringr::str_sub(.x, 1, 1))) %>%
+      {paste0(.[["V1"]], .[["V2"]])} %>%
+      tolower() -> tbl[, quarter]
   }
-  tbl %>%
-    dplyr::mutate(
-      date = paste(year, month, day, sep = "-"),
-      date = as.Date(date)
-    )
+
+  tbl[, quarter] <- as.numeric(names(qq)[match(tbl[, quarter], qq)])*3
+
+  tbl
 }
 
 
-
-clean_date <- function(tbl) {
+# Reformular
+clean_date <- function(tbl, date_format, origin) {
   tbl <- tbl %>%
     dplyr::mutate(
       date = dplyr::case_when(
@@ -212,31 +230,4 @@ clean_date <- function(tbl) {
   }
   tbl %>%
     dplyr::mutate(date = as.Date(as.numeric(date), origin = origin))
-}
-
-
-
-
-
-
-qdate <- function(tbl) {
-  tbl %>%
-    dplyr::mutate(
-      quarter = dplyr::case_when(
-        stringr::str_detect(quarter, "[eEjJ].*?-.*?[mM].*?") ~ "Q1",
-        stringr::str_detect(quarter, "[aAeEjJ].*?-.*?[jJ].*?") ~ "Q2",
-        stringr::str_detect(quarter, "[jJeE].*?-.*?[sS].*?") ~ "Q3",
-        stringr::str_detect(quarter, "[oOjJeE].*?-.*?[dD].*?") ~ "Q4",
-        TRUE ~ quarter
-      ),
-      quarter = stringr::str_replace(quarter, "IV", "Q4"),
-      quarter = stringr::str_replace(quarter, "III", "Q3"),
-      quarter = stringr::str_replace(quarter, "II", "Q2"),
-      quarter = stringr::str_replace(quarter, "I", "Q1"),
-      date = tsibble::yearquarter(paste(year, quarter)),
-      date = as.Date(date),
-      date = lubridate::ceiling_date(date, unit = "quarter"),
-      date = lubridate::add_with_rollback(date, lubridate::days(-1))
-    ) %>%
-    dplyr::relocate(date)
 }
