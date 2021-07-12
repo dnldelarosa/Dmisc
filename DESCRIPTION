@@ -1,6 +1,6 @@
 Package: Dmisc
 Title: Daniel miscellaneous functions
-Version: 0.6.0
+Version: 0.6.1
 Authors@R: 
     person(given = "Daniel E.",
            family = "de la Rosa",
@@ -24,7 +24,8 @@ Imports:
     dplyr,
     magrittr,
     tibble,
-    lubridate
+    lubridate,
+    tidyr
 Suggests: 
     testthat,
     covr,

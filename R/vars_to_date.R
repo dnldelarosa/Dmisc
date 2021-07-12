@@ -74,7 +74,7 @@ vars_to_date <- function(tbl, year = NULL, quarter = NULL, month = NULL, day = N
       stop("Falta mes")
     }
 
-    tbl$date <- as.Date(paste0(tbl[,yearn], '-', tbl[, monthn], '-', tbl[, dayn]))
+    tbl$date <- as.Date(paste0(tbl[[yearn]], '-', tbl[[monthn]], '-', tbl[[dayn]]))
     tbl <- tbl %>%
       dplyr::relocate(date)
 
@@ -89,8 +89,7 @@ vars_to_date <- function(tbl, year = NULL, quarter = NULL, month = NULL, day = N
     if(!year){
       stop("Falta ano")
     }
-
-    tbl$date <- as.Date(paste0(tbl[,yearn], '-', tbl[, monthn], '-', '01'))
+    tbl$date <- as.Date(paste0(tbl[[yearn]], '-', tbl[[monthn]], '-', '01'))
     tbl$date <- lubridate::ceiling_date(tbl$date, unit = "month")
     tbl$date <- lubridate::add_with_rollback(tbl$date, lubridate::days(-1))
 
@@ -137,15 +136,15 @@ get_pos <- function(arg, names){
 
 make_month <- function(tbl, month){
   if(is.character(tbl[, month])){
-    tbl[, month] <- stringr::str_remove_all(tbl[, month], stringr::regex("[^a-zA-Z]"))
-    tbl[, month] <- stringr::str_trim(tbl[, month])
-    tbl[, month] <- stringr::str_to_title(stringr::str_sub(tbl[, month], 1, 3))
-    tbl[, month][tbl[, month] == "Ene"] <- "Jan"
-    tbl[, month][tbl[, month] == "Abr"] <- "Apr"
-    tbl[, month][tbl[, month] == "Ago"] <- "Aug"
-    tbl[, month][tbl[, month] == "Dic"] <- "Dec"
+    tbl[, month] <- stringr::str_remove_all(tbl[[month]], stringr::regex("[^a-zA-Z]"))
+    tbl[, month] <- stringr::str_trim(tbl[[month]])
+    tbl[, month] <- stringr::str_to_title(stringr::str_sub(tbl[[month]], 1, 3))
+    tbl[, month][tbl[[month]] == "Ene"] <- "Jan"
+    tbl[, month][tbl[[month]] == "Abr"] <- "Apr"
+    tbl[, month][tbl[[month]] == "Ago"] <- "Aug"
+    tbl[, month][tbl[[month]] == "Dic"] <- "Dec"
 
-    tbl[, month] <- match(tbl[, month], month.abb)
+    tbl[, month] <- match(tbl[[month]], month.abb)
   }
   tbl
 }
@@ -163,17 +162,15 @@ make_quarter <- function(tbl, quarter){
           "2" = "jj", "4" = "jd"
   )
 
-  qncharmean <- mean(nchar(tbl[, quarter]))
+  qncharmean <- mean(nchar(tbl[[quarter]]))
 
   if(qncharmean>2){
-    stringr::str_split(tbl[, quarter], "[^[:alnum:]]+", simplify = T, n = 2) %>%
-      as.data.frame() %>%
+    tidyr::separate(tbl, col = quarter, into = c("V1", "V2")) %>%
       dplyr::mutate(dplyr::across(dplyr::everything(), ~stringr::str_sub(.x, 1, 1))) %>%
       {paste0(.[["V1"]], .[["V2"]])} %>%
       tolower() -> tbl[, quarter]
   }
-
-  tbl[, quarter] <- as.numeric(names(qq)[match(tbl[, quarter], qq)])*3
+  tbl[[quarter]] <- as.numeric(names(qq)[match(tbl[[quarter]], qq)])*3
 
   tbl
 }
