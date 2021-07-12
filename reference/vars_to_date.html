@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Dmisc</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.3</span>
       </span>
     </div>
 
@@ -213,8 +213,20 @@
 #&gt; 10 2021    10   1   654
 #&gt; 11 2021    11   1   872
 #&gt; 12 2021    12   1   568</div><div class='input'>
-<span class='fu'>vars_to_date</span><span class='op'>(</span><span class='va'>tbl</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error: </span></div></pre>
+<span class='fu'>vars_to_date</span><span class='op'>(</span><span class='va'>tbl</span>, year <span class='op'>=</span> <span class='fl'>1</span>, month <span class='op'>=</span> <span class='fl'>2</span>, day <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;          date value
+#&gt; 1  2021-01-01   866
+#&gt; 2  2021-02-03   635
+#&gt; 3  2021-03-03   946
+#&gt; 4  2021-04-01   176
+#&gt; 5  2021-05-02   997
+#&gt; 6  2021-06-03   545
+#&gt; 7  2021-07-03   666
+#&gt; 8  2021-08-03   526
+#&gt; 9  2021-09-02   161
+#&gt; 10 2021-10-01   654
+#&gt; 11 2021-11-01   872
+#&gt; 12 2021-12-01   568</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
