@@ -82,7 +82,9 @@ vars_to_date <- function(tbl, year = NULL, quarter = NULL, month = NULL, day = N
     tbl[, monthn] <- NULL
     tbl[, dayn] <- NULL
 
-    return(tbl)
+    year <- FALSE
+    month <- FALSE
+    day <- FALSE
   }
 
   if(month){
@@ -96,7 +98,9 @@ vars_to_date <- function(tbl, year = NULL, quarter = NULL, month = NULL, day = N
     tbl[, yearn] <- NULL
     tbl[, monthn] <- NULL
 
-    return(tbl)
+    year <- FALSE
+    month <- FALSE
+    quarter <- FALSE
   }
 
   if(quarter){
@@ -109,7 +113,8 @@ vars_to_date <- function(tbl, year = NULL, quarter = NULL, month = NULL, day = N
     tbl[, yearn] <- NULL
     tbl[, quartern] <- NULL
 
-    return(tbl)
+    year <- FALSE
+    quarter <- FALSE
   }
 
   if(date){
@@ -120,8 +125,10 @@ vars_to_date <- function(tbl, year = NULL, quarter = NULL, month = NULL, day = N
     nombres[nombres == "date"] <- daten
     names(tbl) <- nombres
 
-    return(tbl)
   }
+
+  tbl %>%
+    dplyr::relocate(date)
 }
 
 

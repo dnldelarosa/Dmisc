@@ -1,4 +1,4 @@
-# multiplication works
+# ts_dummy
 
     Code
       ts_dummy(dates = 2005, start = 2000, end = 2021)
@@ -41,8 +41,7 @@
 ---
 
     Code
-      ts_dummy(dates = data.frame(c(2005, 2006), c(8, 11)), start = 2000, end = c(
-        2021, 12), frequency = 12)
+      ts_dummy(dates = data.frame(c(2005, 2006), c(8, 11)), start = 2000, end = c(2021, 12), frequency = 12)
     Output
            Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec
       2000   0   0   0   0   0   0   0   0   0   0   0   0
