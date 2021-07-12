@@ -48,5 +48,5 @@ tbl <- data.frame(
 
 tbl
 
-vars_to_date(tbl)
+vars_to_date(tbl, year = 1, month = 2, day = 3)
 }

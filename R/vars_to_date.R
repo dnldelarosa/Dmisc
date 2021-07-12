@@ -25,7 +25,7 @@
 #'
 #' tbl
 #'
-#' vars_to_date(tbl)
+#' vars_to_date(tbl, year = 1, month = 2, day = 3)
 vars_to_date <- function(tbl, year = NULL, quarter = NULL, month = NULL, day = NULL,
                          date = NULL, date_format = "%d-%m-%y", origin = "1900-01-01") {
 
