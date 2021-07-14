@@ -18,7 +18,7 @@
 #' @examples
 #' tbl <- data.frame(
 #'   year = rep("2021", 12),
-#'   month = 1:12,
+#'   month = month.name,
 #'   day = sample(1:3, 12, TRUE),
 #'   value = sample(100:1000, 12, TRUE)
 #' )
@@ -32,6 +32,11 @@ vars_to_date <- function(tbl, year = NULL, quarter = NULL, month = NULL, day = N
   if(!is.null(day)){
     day <- get_pos(day, names(tbl))
     dayn <- names(tbl)[day]
+
+    if(sum(is.na(tbl[[dayn]])) > 0){
+      stop(paste0("Do not pass NAs in the variable '", dayn, "'"))
+    }
+
   } else {
     day <- FALSE
   }
@@ -39,6 +44,11 @@ vars_to_date <- function(tbl, year = NULL, quarter = NULL, month = NULL, day = N
   if(!is.null(month)){
     month <- get_pos(month, names(tbl))
     monthn <- names(tbl)[month]
+
+    if(sum(is.na(tbl[[monthn]])) > 0){
+      stop(paste0("Do not pass NAs in the variable '", monthn, "'"))
+    }
+
     tbl <- make_month(tbl, monthn)
   } else {
     month <- FALSE
@@ -47,6 +57,11 @@ vars_to_date <- function(tbl, year = NULL, quarter = NULL, month = NULL, day = N
   if(!is.null(quarter)){
     quarter <- get_pos(quarter, names(tbl))
     quartern <- names(tbl)[quarter]
+
+    if(sum(is.na(tbl[[quartern]])) > 0){
+      stop(paste0("Do not pass NAs in the variable '", quartern, "'"))
+    }
+
     tbl <- make_quarter(tbl, quartern)
   } else {
     quarter <- FALSE
@@ -55,6 +70,11 @@ vars_to_date <- function(tbl, year = NULL, quarter = NULL, month = NULL, day = N
   if(!is.null(year)){
     year <- get_pos(year, names(tbl))
     yearn <- names(tbl)[year]
+
+    if(sum(is.na(tbl[[yearn]])) > 0){
+      stop(paste0("Do not pass NAs in the variable '", yearn, "'"))
+    }
+
   } else {
     year <- FALSE
   }
@@ -62,16 +82,21 @@ vars_to_date <- function(tbl, year = NULL, quarter = NULL, month = NULL, day = N
   if(!is.null(date)){
     date <- get_pos(date, names(tbl))
     daten <- names(tbl)[date]
+
+    if(sum(is.na(tbl[[daten]])) > 0){
+      stop(paste0("Do not pass NAs in the variable '", daten, "'"))
+    }
+
   } else {
     date <- FALSE
   }
 
   if(day){
     if(is.null(year)){
-      stop("Falta ano")
+      stop("You need to indicate the variable 'year'")
     }
     if(is.null(month)){
-      stop("Falta mes")
+      stop("You need to indicate the variable 'month'")
     }
 
     tbl$date <- as.Date(paste0(tbl[[yearn]], '-', tbl[[monthn]], '-', tbl[[dayn]]))
@@ -89,7 +114,7 @@ vars_to_date <- function(tbl, year = NULL, quarter = NULL, month = NULL, day = N
 
   if(month){
     if(!year){
-      stop("Falta ano")
+      stop("You need to indicate the variable 'year'")
     }
     tbl$date <- as.Date(paste0(tbl[[yearn]], '-', tbl[[monthn]], '-', '01'))
     tbl$date <- lubridate::ceiling_date(tbl$date, unit = "month")
@@ -105,7 +130,7 @@ vars_to_date <- function(tbl, year = NULL, quarter = NULL, month = NULL, day = N
 
   if(quarter){
     if(!year){
-      stop("Falta ano")
+      stop("You need to indicate the variable 'year'")
     }
 
     tbl <- vars_to_date(tbl, year = year, month = quarter)
@@ -160,6 +185,7 @@ make_month <- function(tbl, month){
 make_quarter <- function(tbl, quarter){
   . <- NULL
   qq <- c("1" = 1, "2" = 2, "3" = 3, "4" = 4,
+          "1" = "01", "2" = "02", "3" = "03", "4" = "04",
           "1" = "I", "2" = "II", "3" = "III", "4" = "IV",
           "1" = "Q1", "2" = "Q2", "3" = "Q3", "4" = "Q4",
           "1" = "T1", "2" = "T2", "3" = "T3", "4" = "T4",

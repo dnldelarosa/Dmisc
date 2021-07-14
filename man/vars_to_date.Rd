@@ -41,7 +41,7 @@ tbl a new data.frame with the compute variable
 \examples{
 tbl <- data.frame(
   year = rep("2021", 12),
-  month = 1:12,
+  month = month.name,
   day = sample(1:3, 12, TRUE),
   value = sample(100:1000, 12, TRUE)
 )
