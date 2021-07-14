@@ -142,16 +142,16 @@ get_pos <- function(arg, names){
 
 
 make_month <- function(tbl, month){
-  if(is.character(tbl[, month])){
-    tbl[, month] <- stringr::str_remove_all(tbl[[month]], stringr::regex("[^a-zA-Z]"))
-    tbl[, month] <- stringr::str_trim(tbl[[month]])
-    tbl[, month] <- stringr::str_to_title(stringr::str_sub(tbl[[month]], 1, 3))
-    tbl[, month][tbl[[month]] == "Ene"] <- "Jan"
-    tbl[, month][tbl[[month]] == "Abr"] <- "Apr"
-    tbl[, month][tbl[[month]] == "Ago"] <- "Aug"
-    tbl[, month][tbl[[month]] == "Dic"] <- "Dec"
+  if(is.character(tbl[[month]])){
+    tbl[[month]] <- stringr::str_remove_all(tbl[[month]], stringr::regex("[^a-zA-Z]"))
+    tbl[[month]] <- stringr::str_trim(tbl[[month]])
+    tbl[[month]] <- stringr::str_to_title(stringr::str_sub(tbl[[month]], 1, 3))
+    tbl[[month]][tbl[[month]] == "Ene"] <- "Jan"
+    tbl[[month]][tbl[[month]] == "Abr"] <- "Apr"
+    tbl[[month]][tbl[[month]] == "Ago"] <- "Aug"
+    tbl[[month]][tbl[[month]] == "Dic"] <- "Dec"
 
-    tbl[, month] <- match(tbl[[month]], month.abb)
+    tbl[[month]] <- match(tbl[[month]], month.abb)
   }
   tbl
 }
