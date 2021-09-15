@@ -35,7 +35,7 @@ describe <- function(data, digits = 4, t = TRUE, flextable = FALSE, ft_args = li
       res <- res %>%
         tibble::column_to_rownames("var")
     }
-    res <- utils::type.convert(res)
+    res <- utils::type.convert(res, as.is = TRUE)
     if(flextable){
       if (!requireNamespace("flextable", quietly = TRUE)) {
         stop("Package \"flextable\" needed for this function to work. Please install it.", call. = FALSE)

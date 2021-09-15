@@ -8,6 +8,7 @@
 #' @param month month variable position or name
 #' @param day day variable position or name
 #' @param date a variable name or position containing a like date format
+#' @param clean_names indicates if names should be cleaned
 #' @param date_format actual date format of variable in \code{date} argument
 #' @param origin base date for variable convertion to date
 #'
@@ -27,25 +28,31 @@
 #'
 #' vars_to_date(tbl, year = 1, month = 2, day = 3)
 vars_to_date <- function(tbl, year = NULL, quarter = NULL, month = NULL, day = NULL,
-                         date = NULL, date_format = "%d-%m-%y", origin = "1900-01-01") {
+                         date = NULL, clean_names = FALSE, date_format = "%d-%m-%y", origin = "1900-01-01") {
+  if (clean_names) {
+    names(tbl) <- janitor::make_clean_names(names(tbl))
+  }
 
-  if(!is.null(day)){
+  if (length(names(tbl)) != length(unique(names(tbl)))) {
+    stop("Not unique names. Make clean names or set `clean_names = TRUE`.")
+  }
+
+  if (!is.null(day)) {
     day <- get_pos(day, names(tbl))
     dayn <- names(tbl)[day]
 
-    if(sum(is.na(tbl[[dayn]])) > 0){
+    if (sum(is.na(tbl[[dayn]])) > 0) {
       stop(paste0("Do not pass NAs in the variable '", dayn, "'"))
     }
-
   } else {
     day <- FALSE
   }
 
-  if(!is.null(month)){
+  if (!is.null(month)) {
     month <- get_pos(month, names(tbl))
     monthn <- names(tbl)[month]
 
-    if(sum(is.na(tbl[[monthn]])) > 0){
+    if (sum(is.na(tbl[[monthn]])) > 0) {
       stop(paste0("Do not pass NAs in the variable '", monthn, "'"))
     }
 
@@ -54,11 +61,11 @@ vars_to_date <- function(tbl, year = NULL, quarter = NULL, month = NULL, day = N
     month <- FALSE
   }
 
-  if(!is.null(quarter)){
+  if (!is.null(quarter)) {
     quarter <- get_pos(quarter, names(tbl))
     quartern <- names(tbl)[quarter]
 
-    if(sum(is.na(tbl[[quartern]])) > 0){
+    if (sum(is.na(tbl[[quartern]])) > 0) {
       stop(paste0("Do not pass NAs in the variable '", quartern, "'"))
     }
 
@@ -67,39 +74,37 @@ vars_to_date <- function(tbl, year = NULL, quarter = NULL, month = NULL, day = N
     quarter <- FALSE
   }
 
-  if(!is.null(year)){
+  if (!is.null(year)) {
     year <- get_pos(year, names(tbl))
     yearn <- names(tbl)[year]
 
-    if(sum(is.na(tbl[[yearn]])) > 0){
+    if (sum(is.na(tbl[[yearn]])) > 0) {
       stop(paste0("Do not pass NAs in the variable '", yearn, "'"))
     }
-
   } else {
     year <- FALSE
   }
 
-  if(!is.null(date)){
+  if (!is.null(date)) {
     date <- get_pos(date, names(tbl))
     daten <- names(tbl)[date]
 
-    if(sum(is.na(tbl[[daten]])) > 0){
+    if (sum(is.na(tbl[[daten]])) > 0) {
       stop(paste0("Do not pass NAs in the variable '", daten, "'"))
     }
-
   } else {
     date <- FALSE
   }
 
-  if(day){
-    if(is.null(year)){
+  if (day) {
+    if (is.null(year)) {
       stop("You need to indicate the variable 'year'")
     }
-    if(is.null(month)){
+    if (is.null(month)) {
       stop("You need to indicate the variable 'month'")
     }
 
-    tbl$date <- as.Date(paste0(tbl[[yearn]], '-', tbl[[monthn]], '-', tbl[[dayn]]))
+    tbl$date <- as.Date(paste0(tbl[[yearn]], "-", tbl[[monthn]], "-", tbl[[dayn]]))
     tbl <- tbl %>%
       dplyr::relocate(date)
 
@@ -112,11 +117,12 @@ vars_to_date <- function(tbl, year = NULL, quarter = NULL, month = NULL, day = N
     day <- FALSE
   }
 
-  if(month){
-    if(!year){
+  if (month) {
+    if (!year) {
       stop("You need to indicate the variable 'year'")
     }
-    tbl$date <- as.Date(paste0(tbl[[yearn]], '-', tbl[[monthn]], '-', '01'))
+    tbl$date <- paste0(tbl[[yearn]], "-", tbl[[monthn]], "-", "01")
+    tbl$date <- as.Date(tbl$date)
     tbl$date <- lubridate::ceiling_date(tbl$date, unit = "month")
     tbl$date <- lubridate::add_with_rollback(tbl$date, lubridate::days(-1))
 
@@ -128,8 +134,8 @@ vars_to_date <- function(tbl, year = NULL, quarter = NULL, month = NULL, day = N
     quarter <- FALSE
   }
 
-  if(quarter){
-    if(!year){
+  if (quarter) {
+    if (!year) {
       stop("You need to indicate the variable 'year'")
     }
 
@@ -142,14 +148,13 @@ vars_to_date <- function(tbl, year = NULL, quarter = NULL, month = NULL, day = N
     quarter <- FALSE
   }
 
-  if(date){
+  if (date) {
     nombres <- names(tbl)
     nombres[nombres == daten] <- "date"
     names(tbl) <- nombres
     tbl <- clean_date(tbl, date_format, origin)
     nombres[nombres == "date"] <- daten
     names(tbl) <- nombres
-
   }
 
   tbl %>%
@@ -158,16 +163,16 @@ vars_to_date <- function(tbl, year = NULL, quarter = NULL, month = NULL, day = N
 
 
 
-get_pos <- function(arg, names){
-  if(is.character(arg)){
+get_pos <- function(arg, names) {
+  if (is.character(arg)) {
     arg <- match(arg, names)
   }
   arg
 }
 
 
-make_month <- function(tbl, month){
-  if(is.character(tbl[[month]])){
+make_month <- function(tbl, month) {
+  if (is.character(type.convert(tbl[[month]], as.is = TRUE))) {
     tbl[[month]] <- stringr::str_remove_all(tbl[[month]], stringr::regex("[^a-zA-Z]"))
     tbl[[month]] <- stringr::str_trim(tbl[[month]])
     tbl[[month]] <- stringr::str_to_title(stringr::str_sub(tbl[[month]], 1, 3))
@@ -182,28 +187,31 @@ make_month <- function(tbl, month){
 }
 
 
-make_quarter <- function(tbl, quarter){
+make_quarter <- function(tbl, quarter) {
   . <- NULL
-  qq <- c("1" = 1, "2" = 2, "3" = 3, "4" = 4,
-          "1" = "01", "2" = "02", "3" = "03", "4" = "04",
-          "1" = "I", "2" = "II", "3" = "III", "4" = "IV",
-          "1" = "Q1", "2" = "Q2", "3" = "Q3", "4" = "Q4",
-          "1" = "T1", "2" = "T2", "3" = "T3", "4" = "T4",
-          "1" = "em", "2" = "aj", "3" = "js", "4" = "od",
-          "2" = "ej", "3" = "es", "4" = "ed",
-          "1" = "jm", "2" = "aj", "3" = "js", "4" = "od",
-          "2" = "jj", "4" = "jd"
+  qq <- c(
+    "1" = 1, "2" = 2, "3" = 3, "4" = 4,
+    "1" = "01", "2" = "02", "3" = "03", "4" = "04",
+    "1" = "I", "2" = "II", "3" = "III", "4" = "IV",
+    "1" = "Q1", "2" = "Q2", "3" = "Q3", "4" = "Q4",
+    "1" = "T1", "2" = "T2", "3" = "T3", "4" = "T4",
+    "1" = "em", "2" = "aj", "3" = "js", "4" = "od",
+    "2" = "ej", "3" = "es", "4" = "ed",
+    "1" = "jm", "2" = "aj", "3" = "js", "4" = "od",
+    "2" = "jj", "4" = "jd"
   )
 
   qncharmean <- mean(nchar(tbl[[quarter]]))
 
-  if(qncharmean>2){
+  if (qncharmean > 2) {
     tidyr::separate(tbl, col = quarter, into = c("V1", "V2")) %>%
-      dplyr::mutate(dplyr::across(dplyr::everything(), ~stringr::str_sub(.x, 1, 1))) %>%
-      {paste0(.[["V1"]], .[["V2"]])} %>%
+      dplyr::mutate(dplyr::across(dplyr::everything(), ~ stringr::str_sub(.x, 1, 1))) %>%
+      {
+        paste0(.[["V1"]], .[["V2"]])
+      } %>%
       tolower() -> tbl[, quarter]
   }
-  tbl[[quarter]] <- as.numeric(names(qq)[match(tbl[[quarter]], qq)])*3
+  tbl[[quarter]] <- as.numeric(names(qq)[match(tbl[[quarter]], qq)]) * 3
 
   tbl
 }

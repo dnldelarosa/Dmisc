@@ -11,6 +11,7 @@ vars_to_date(
   month = NULL,
   day = NULL,
   date = NULL,
+  clean_names = FALSE,
   date_format = "\%d-\%m-\%y",
   origin = "1900-01-01"
 )
@@ -27,6 +28,8 @@ vars_to_date(
 \item{day}{day variable position or name}
 
 \item{date}{a variable name or position containing a like date format}
+
+\item{clean_names}{indicates if names should be cleaned}
 
 \item{date_format}{actual date format of variable in \code{date} argument}
 
