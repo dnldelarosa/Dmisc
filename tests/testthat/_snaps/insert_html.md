@@ -93,15 +93,7 @@
 ---
 
     Code
-      insertHTML(file = test_path("insertHtml.html"))
-    Warning <lifecycle_warning_deprecated>
-      `insertHTML()` was deprecated in Dmisc 0.2.3.
-      Please use `insert_html()` instead.
-      This warning is displayed once every 8 hours.
-      Call `lifecycle::last_warnings()` to see where this warning was generated.
-    Warning <simpleWarning>
-      no non-missing arguments to max; returning -Inf
-      NAs introduced by coercion to integer range
+      suppressWarnings(insertHTML(file = test_path("insertHtml.html")))
     Output
       <body> <style scoped type="text/css">
         code{white-space: pre-wrap;}
