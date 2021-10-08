@@ -40,14 +40,51 @@
 
     Code
       describe(mtcars, digits = 2, t = F, flextable = T)
+    Output
+      a flextable object.
+      col_keys: ` `, `Min.`, `1st Qu.`, `Median`, `Mean`, `3rd Qu.`, `Max.` 
+      header has 1 row(s) 
+      body has 11 row(s) 
+      original dataset sample: 
+             Min. 1st Qu. Median  Mean 3rd Qu.  Max.
+      1  mpg 10.0    15.0   19.0  20.0    23.0  34.0
+      2  cyl  4.0     4.0    6.0   6.2     8.0   8.0
+      3 disp 71.0   120.0  200.0 230.0   330.0 470.0
+      4   hp 52.0    96.0  120.0 150.0   180.0 340.0
+      5 drat  2.8     3.1    3.7   3.6     3.9   4.9
 
 ---
 
     Code
       describe(mtcars, digits = 2, t = F, flextable = T, ft_args = list(cwidth = 2))
+    Output
+      a flextable object.
+      col_keys: ` `, `Min.`, `1st Qu.`, `Median`, `Mean`, `3rd Qu.`, `Max.` 
+      header has 1 row(s) 
+      body has 11 row(s) 
+      original dataset sample: 
+             Min. 1st Qu. Median  Mean 3rd Qu.  Max.
+      1  mpg 10.0    15.0   19.0  20.0    23.0  34.0
+      2  cyl  4.0     4.0    6.0   6.2     8.0   8.0
+      3 disp 71.0   120.0  200.0 230.0   330.0 470.0
+      4   hp 52.0    96.0  120.0 150.0   180.0 340.0
+      5 drat  2.8     3.1    3.7   3.6     3.9   4.9
 
 ---
 
     Code
-      describe(mtcars, digits = 2, t = F, flextable = T, ft_args = list(cwidth = 2), maxsum = 2)
+      describe(mtcars, digits = 2, t = F, flextable = T, ft_args = list(cwidth = 2),
+      maxsum = 2)
+    Output
+      a flextable object.
+      col_keys: ` `, `Min.`, `1st Qu.`, `Median`, `Mean`, `3rd Qu.`, `Max.` 
+      header has 1 row(s) 
+      body has 11 row(s) 
+      original dataset sample: 
+             Min. 1st Qu. Median  Mean 3rd Qu.  Max.
+      1  mpg 10.0    15.0   19.0  20.0    23.0  34.0
+      2  cyl  4.0     4.0    6.0   6.2     8.0   8.0
+      3 disp 71.0   120.0  200.0 230.0   330.0 470.0
+      4   hp 52.0    96.0  120.0 150.0   180.0 340.0
+      5 drat  2.8     3.1    3.7   3.6     3.9   4.9
 

@@ -69,7 +69,8 @@
 ---
 
     Code
-      cut3(tbl, var_name = "age", breaks = quantile, bf_args = list(x = tbl$age), include.lowest = T)
+      cut3(tbl, var_name = "age", breaks = quantile, bf_args = list(x = tbl$age),
+      include.lowest = T)
     Output
                 age freq
       1    [1,3.25]    5
@@ -120,7 +121,8 @@
 ---
 
     Code
-      cut3(tbl, var_name = "age", breaks = 2, labels = c("Menor o igual que 5", "Mayor a 5"))
+      cut3(tbl, var_name = "age", breaks = 2, labels = c("Menor o igual que 5",
+        "Mayor a 5"))
     Output
                          age freq
       1  Menor o igual que 5    5
