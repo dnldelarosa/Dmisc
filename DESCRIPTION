@@ -1,6 +1,6 @@
 Package: Dmisc
 Title: Daniel miscellaneous functions
-Version: 0.8.0
+Version: 0.8.1
 Authors@R: 
     person(given = "Daniel E.",
            family = "de la Rosa",
@@ -12,7 +12,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 URL: https://drdsdaniel.github.io/Dmisc/, https://github.com/drdsdaniel/Dmisc
 BugReports: https://github.com/drdsdaniel/Dmisc/issues
 Imports: 
@@ -25,7 +25,8 @@ Imports:
     magrittr,
     tibble,
     lubridate,
-    tidyr
+    tidyr,
+    janitor
 Suggests: 
     testthat,
     covr,
