@@ -97,8 +97,8 @@
     Warning <lifecycle_warning_deprecated>
       `insertHTML()` was deprecated in Dmisc 0.2.3.
       Please use `insert_html()` instead.
-      [90mThis warning is displayed once every 8 hours.[39m
-      [90mCall `lifecycle::last_warnings()` to see where this warning was generated.[39m
+      This warning is displayed once every 8 hours.
+      Call `lifecycle::last_warnings()` to see where this warning was generated.
     Warning <simpleWarning>
       no non-missing arguments to max; returning -Inf
       NAs introduced by coercion to integer range
