@@ -1,6 +1,6 @@
 Package: Dmisc
 Title: Daniel miscellaneous functions
-Version: 0.8.1
+Version: 0.8.2
 Authors@R: 
     person(given = "Daniel E.",
            family = "de la Rosa",

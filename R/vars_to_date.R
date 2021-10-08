@@ -172,7 +172,7 @@ get_pos <- function(arg, names) {
 
 
 make_month <- function(tbl, month) {
-  if (is.character(type.convert(tbl[[month]], as.is = TRUE))) {
+  if (is.character(utils::type.convert(tbl[[month]], as.is = TRUE))) {
     tbl[[month]] <- stringr::str_remove_all(tbl[[month]], stringr::regex("[^a-zA-Z]"))
     tbl[[month]] <- stringr::str_trim(tbl[[month]])
     tbl[[month]] <- stringr::str_to_title(stringr::str_sub(tbl[[month]], 1, 3))
