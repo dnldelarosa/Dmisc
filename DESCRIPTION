@@ -1,6 +1,6 @@
 Package: Dmisc
 Title: Daniel miscellaneous functions
-Version: 0.9.3
+Version: 0.10.0
 Authors@R: 
     person(given = "Daniel E.",
            family = "de la Rosa",
@@ -36,7 +36,8 @@ Suggests:
     keyring,
     withr,
     flextable,
-    tsibble
+    tsibble,
+    renv
 Language: en-US
 RdMacros: lifecycle
 VignetteBuilder: knitr
