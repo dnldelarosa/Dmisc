@@ -4,10 +4,12 @@
 \alias{use_renv}
 \title{Initialize renv}
 \usage{
-use_renv(envs_path = "~/.renv/library", ...)
+use_renv(project = getwd(), lib_path = "~/.renv/library", ...)
 }
 \arguments{
-\item{envs_path}{path where you want to save the libraries.
+\item{project}{project path. The working directory is used by detafult.}
+
+\item{lib_path}{path where you want to save the libraries.
 The default value is relative to R's home directory.}
 
 \item{...}{other arguments passed to \code{renv::\link[renv:init]{init}}}
