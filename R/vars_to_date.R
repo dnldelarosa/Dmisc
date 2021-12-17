@@ -1,6 +1,5 @@
 #' Multiple variables to unique date variable
-#'
-#'   `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("experimental")`
 #'
 #' @param tbl data.frame or tbl connection
 #' @param year  year variable position or name
@@ -8,7 +7,8 @@
 #' @param month month variable position or name
 #' @param day day variable position or name
 #' @param date a variable name or position containing a like date format
-#' @param clean_names indicates if names should be cleaned
+#' @param drop_vars indicates if variables should be dropped
+#' @param clean_names indicates if all variable names should be cleaned
 #' @param date_format actual date format of variable in \code{date} argument
 #' @param origin base date for variable convertion to date
 #'
@@ -27,8 +27,11 @@
 #' tbl
 #'
 #' vars_to_date(tbl, year = 1, month = 2, day = 3)
-vars_to_date <- function(tbl, year = NULL, quarter = NULL, month = NULL, day = NULL,
-                         date = NULL, clean_names = FALSE, date_format = "%d-%m-%y", origin = "1900-01-01") {
+vars_to_date <- function(
+  tbl, year = NULL, quarter = NULL, month = NULL, day = NULL,
+  date = NULL, drop_vars = TRUE, clean_names = FALSE, date_format = "%d-%m-%y",
+  origin = "1900-01-01"
+) {
   if (clean_names) {
     names(tbl) <- janitor::make_clean_names(names(tbl))
   }
@@ -97,10 +100,10 @@ vars_to_date <- function(tbl, year = NULL, quarter = NULL, month = NULL, day = N
   }
 
   if (day) {
-    if (is.null(year)) {
+    if (any(is.null(year), !year)) {
       stop("You need to indicate the variable 'year'")
     }
-    if (is.null(month)) {
+    if (any(is.null(month), !month)) {
       stop("You need to indicate the variable 'month'")
     }
 
@@ -108,9 +111,11 @@ vars_to_date <- function(tbl, year = NULL, quarter = NULL, month = NULL, day = N
     tbl <- tbl %>%
       dplyr::relocate(date)
 
-    tbl[, yearn] <- NULL
-    tbl[, monthn] <- NULL
-    tbl[, dayn] <- NULL
+    if (drop_vars) {
+      tbl[, yearn] <- NULL
+      tbl[, monthn] <- NULL
+      tbl[, dayn] <- NULL
+    }
 
     year <- FALSE
     month <- FALSE
@@ -126,9 +131,10 @@ vars_to_date <- function(tbl, year = NULL, quarter = NULL, month = NULL, day = N
     tbl$date <- lubridate::ceiling_date(tbl$date, unit = "month")
     tbl$date <- lubridate::add_with_rollback(tbl$date, lubridate::days(-1))
 
-    tbl[, yearn] <- NULL
-    tbl[, monthn] <- NULL
-
+    if (drop_vars) {
+      tbl[, yearn] <- NULL
+      tbl[, monthn] <- NULL
+    }
     year <- FALSE
     month <- FALSE
     quarter <- FALSE
@@ -141,9 +147,10 @@ vars_to_date <- function(tbl, year = NULL, quarter = NULL, month = NULL, day = N
 
     tbl <- vars_to_date(tbl, year = year, month = quarter)
 
-    tbl[, yearn] <- NULL
-    tbl[, quartern] <- NULL
-
+    if (drop_vars) {
+      tbl[, yearn] <- NULL
+      tbl[, quartern] <- NULL
+    }
     year <- FALSE
     quarter <- FALSE
   }

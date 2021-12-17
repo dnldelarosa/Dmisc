@@ -1,6 +1,5 @@
 #' Apply One-Hot-Encoding to factor variables
-#'
-#'  `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("experimental")`
 #'
 #' @param tbl [data.frame]: dataset with the variables
 #' @param variables variables to apply one-hot-encoding. If [NULL] all factor
@@ -17,7 +16,7 @@
 #'   warpbreaks
 #'   one_hot_encoding(warpbreaks)
 #' }
-one_hot_encoding <- function(tbl, variables = NULL, drop_one = TRUE, ...) {
+one_hot_encoding <- function(tbl, variables = NULL, drop_one = FALSE, ...) {
   if(is.null(variables)){
     variables <- names(dplyr::select_if(tbl, is.factor))
   }
@@ -39,7 +38,7 @@ one_hot_encoding <- function(tbl, variables = NULL, drop_one = TRUE, ...) {
     id_cols <- old_names[old_names != variables[pos]]
     vals_dup <- length(all_vals[all_vals %in% unique(tbl[[variables[pos]]])]) > length(unique(tbl[[variables[pos]]]))
     tbl <- tidyr::pivot_wider(tbl,
-      id_cols,
+      dplyr::all_of(id_cols),
       names_from = variables[pos],
       values_from = variables[pos],
       names_prefix = dplyr::if_else(vals_dup, paste0(variables[pos], "_"), ""),

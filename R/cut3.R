@@ -1,6 +1,5 @@
 #' Convert numeric to factor weighted and by group
-#'
-#'   `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("experimental")`
 #'
 #' @param tbl [data.frame]: Database connection or data.frame
 #' @param var_name [character]: variable name

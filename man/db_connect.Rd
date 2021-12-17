@@ -2,7 +2,8 @@
 % Please edit documentation in R/db_connect.R
 \name{db_connect}
 \alias{db_connect}
-\title{Conexión a bases de datos}
+\title{Conexión a bases de datos
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}}
 \usage{
 db_connect(
   db_user = NULL,
@@ -34,9 +35,6 @@ para almacenar sus credenciales.}
 conexión a base de datos. Vea \code{DBI::\link[DBI:dbConnect]{dbConnect}}
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
-}
-\details{
 Crea una conexión con un sistema de base de datos.
 }
 \examples{

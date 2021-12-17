@@ -2,7 +2,8 @@
 % Please edit documentation in R/use_renv.R
 \name{use_renv}
 \alias{use_renv}
-\title{Initialize renv}
+\title{Initialize renv
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}}
 \usage{
 use_renv(project = getwd(), lib_path = "~/.renv/library", ...)
 }
@@ -18,9 +19,6 @@ The default value is relative to R's home directory.}
 \link{NULL}
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
-}
-\details{
 This function does the same as \code{renv::\link[renv:init]{init}} but forces renv
 to use an external (customizable) library location.
 }

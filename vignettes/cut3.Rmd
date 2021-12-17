@@ -15,6 +15,7 @@ knitr::opts_chunk$set(
 )
 ```
 
+
 ```{r setup}
 library(Dmisc)
 ```
@@ -134,7 +135,7 @@ cut3(tbl, var_name = "age", breaks = c(0, quantile), bf_args = list(x = tbl$age)
 ```
 
 
-# Labels
+## Labels
 
 As you may have already noticed in the previous examples, the data labels of the resulting variable are constructed using the corresponding interval notation. However, this behavior can be overridden by supplying the `labels = F` argument. In this case, a simple autoincrementing number will be used to name the intervals.
 ```{r}
@@ -163,7 +164,7 @@ cut3(tbl, var_name = "age", breaks = 2, labels = c("Menor o igual que 5", "Mayor
 ```
 
 
-# Groups
+## Groups
 
 Another addition to `cut3 ()` consists of being able to define different cuts for different groups. This is especially useful when breaks are specified with functions.
 ```{r}

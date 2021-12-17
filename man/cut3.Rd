@@ -2,7 +2,8 @@
 % Please edit documentation in R/cut3.R
 \name{cut3}
 \alias{cut3}
-\title{Convert numeric to factor weighted and by group}
+\title{Convert numeric to factor weighted and by group
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}}
 \usage{
 cut3(tbl, var_name, breaks, groups = NULL, bf_args = list(), ...)
 }
@@ -23,6 +24,7 @@ cut3(tbl, var_name, breaks, groups = NULL, bf_args = list(), ...)
 same as \code{tbl} input with \code{var_name} converted to factor
 }
 \description{
+Convert numeric to factor weighted and by group
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
 \examples{

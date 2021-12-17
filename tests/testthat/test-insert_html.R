@@ -1,6 +1,6 @@
 test_that("insert_html", {
   local_edition(3)
-  expect_warning(insert_html(path = "", name = "insertHtml2.html"))
+  expect_snapshot(suppressWarnings(insert_html(path = "", name = "insertHtml2.html")))
   expect_snapshot(insert_html(file = test_path("insertHtml.html")))
   expect_snapshot(suppressWarnings(insertHTML(file = test_path("insertHtml.html"))))
   expect_snapshot(insert_html(file = test_path("insertHtml_sc.html")))

@@ -1,3 +1,32 @@
 template:
+  bootstrap: 5
   params:
     ganalytics: G-0P0CB458ZK
+
+
+reference:
+- title: Data manipulation
+  contents:
+    -  cut3
+    -  describe
+    -  one_hot_encoding
+    -  ts_dummy
+    -  vars_to_date
+    -  train_test_split
+    -  train_split
+    -  test_split
+    -  valid_split
+- title: HTML tools
+  contents:
+    -  progress_bar
+    -  big_button
+    -  insert_html
+    -  insertHTML
+- title:  Utilities
+  desc: Functions for working with the system and extra tools
+  contents:
+    -  use_renv
+    -  db_connect
+    -  dbConnect
+    -  Sys_Date_locale
+    -  octave_path

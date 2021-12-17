@@ -2,7 +2,8 @@
 % Please edit documentation in R/describe.R
 \name{describe}
 \alias{describe}
-\title{Create a table of summaries for an entery dataframe}
+\title{Create a table of summaries for an entery dataframe
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}}
 \usage{
 describe(data, digits = 4, t = TRUE, flextable = FALSE, ft_args = list(), ...)
 }
@@ -24,7 +25,8 @@ See \code{flextable::\link[flextable:flextable]{flextable}}}
 a table containing the summary of every variable in the provided dataframe
 }
 \description{
-\lifecycle{stable}
+Create a table of summaries for an entery dataframe
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
 \examples{
 \dontrun{

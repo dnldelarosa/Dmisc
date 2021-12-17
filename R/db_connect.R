@@ -1,6 +1,5 @@
 #' Conexión a bases de datos
-#'
-#'   `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("experimental")`
 #'
 #'   Crea una conexión con un sistema de base de datos.
 #'
@@ -32,8 +31,7 @@ db_connect <- function(db_user = NULL,
                        db_host = "localhost",
                        db_port = 5432,
                        k_service_id = "postgre") {
-
-  if(db_name %in% c("enft1", "enft2")){
+  if (db_name %in% c("enft1", "enft2")) {
     warning(paste0("Usa db_name = 'enft' en lugar de db_name = '", db_name, "'."))
   }
 

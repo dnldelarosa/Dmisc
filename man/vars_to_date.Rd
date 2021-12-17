@@ -2,7 +2,8 @@
 % Please edit documentation in R/vars_to_date.R
 \name{vars_to_date}
 \alias{vars_to_date}
-\title{Multiple variables to unique date variable}
+\title{Multiple variables to unique date variable
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}}
 \usage{
 vars_to_date(
   tbl,
@@ -11,6 +12,7 @@ vars_to_date(
   month = NULL,
   day = NULL,
   date = NULL,
+  drop_vars = TRUE,
   clean_names = FALSE,
   date_format = "\%d-\%m-\%y",
   origin = "1900-01-01"
@@ -29,7 +31,9 @@ vars_to_date(
 
 \item{date}{a variable name or position containing a like date format}
 
-\item{clean_names}{indicates if names should be cleaned}
+\item{drop_vars}{indicates if variables should be dropped}
+
+\item{clean_names}{indicates if all variable names should be cleaned}
 
 \item{date_format}{actual date format of variable in \code{date} argument}
 
@@ -39,6 +43,7 @@ vars_to_date(
 tbl a new data.frame with the compute variable
 }
 \description{
+Multiple variables to unique date variable
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
 \examples{

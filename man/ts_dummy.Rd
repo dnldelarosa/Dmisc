@@ -2,7 +2,8 @@
 % Please edit documentation in R/ts_dummy.R
 \name{ts_dummy}
 \alias{ts_dummy}
-\title{Time Series Dummy Variable}
+\title{Time Series Dummy Variable
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}}
 \usage{
 ts_dummy(dates, start, end, frequency = 1, ...)
 }
@@ -22,6 +23,7 @@ a time series dummy variable
 }
 \description{
 Time Series Dummy Variable
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
 \examples{
 

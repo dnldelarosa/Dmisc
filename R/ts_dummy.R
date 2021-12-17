@@ -1,4 +1,5 @@
 #' Time Series Dummy Variable
+#' `r lifecycle::badge("experimental")`
 #'
 #' @param dates dates to set ones
 #' @param start time series start date

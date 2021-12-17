@@ -1,8 +1,7 @@
 # Daily date tests
 
     Code
-      vars_to_date(data.frame(year = rep("2021", 12), month = 1:12, day = 1:12,
-      value = 100:111), year = 1, month = 2, day = 3)
+      vars_to_date(datos, year = 1, month = 2, day = 3)
     Output
                date value
       1  2021-01-01   100
@@ -144,8 +143,7 @@
 # Monthly date tests
 
     Code
-      vars_to_date(data.frame(year = rep("2021", 12), month = 1:12, value = 100:111),
-      year = 1, month = 2)
+      vars_to_date(datos, year = 1, month = 2)
     Output
                date value
       1  2021-01-31   100
@@ -286,8 +284,7 @@
 # Quarter date tests
 
     Code
-      vars_to_date(data.frame(year = rep("2021", 4), quarter = c(1, 2, 3, 4), value = 100:
-        103), year = 1, quarter = 2)
+      vars_to_date(datos, year = 1, quarter = 2)
     Output
               date value
       1 2021-03-31   100
@@ -441,4 +438,15 @@
       96 2021-12-31   195
       97 2021-12-31   196
       98 2021-12-31   197
+
+# Other tests
+
+    Code
+      vars_to_date(datos, year = 1, quarter = 2, clean_names = TRUE)
+    Output
+              date quarter_2 day   month value
+      1 2021-03-31        Q1   1   Enero   100
+      2 2021-06-30        Q2   2 Febrero   101
+      3 2021-09-30        Q3   3   Marzo   102
+      4 2021-12-31        Q4   4   Abril   103
 

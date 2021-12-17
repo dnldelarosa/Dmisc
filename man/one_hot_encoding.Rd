@@ -2,9 +2,10 @@
 % Please edit documentation in R/one_hot_encoding.R
 \name{one_hot_encoding}
 \alias{one_hot_encoding}
-\title{Apply One-Hot-Encoding to factor variables}
+\title{Apply One-Hot-Encoding to factor variables
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}}
 \usage{
-one_hot_encoding(tbl, variables = NULL, drop_one = TRUE, ...)
+one_hot_encoding(tbl, variables = NULL, drop_one = FALSE, ...)
 }
 \arguments{
 \item{tbl}{\link{data.frame}: dataset with the variables}
@@ -20,6 +21,7 @@ variables are processed.}
 a dataset with new binary variables
 }
 \description{
+Apply One-Hot-Encoding to factor variables
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
 \examples{

@@ -2,7 +2,8 @@
 % Please edit documentation in R/Sys_Date_locale.R
 \name{Sys_Date_locale}
 \alias{Sys_Date_locale}
-\title{System date with specific format and locale}
+\title{System date with specific format and locale
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}}
 \usage{
 Sys_Date_locale(locale = "es_DO.utf8", format = "\%B \%d, \%Y")
 }
@@ -15,9 +16,6 @@ Sys_Date_locale(locale = "es_DO.utf8", format = "\%B \%d, \%Y")
 a date with specified locale and format
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
-}
-\details{
 You need to have installed the specified locale.
 }
 \examples{

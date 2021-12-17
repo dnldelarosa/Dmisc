@@ -2,9 +2,19 @@
 % Please edit documentation in R/insert_html.R
 \name{insert_html}
 \alias{insert_html}
-\title{Insert HTML file into another}
+\alias{insertHTML}
+\title{Insert HTML file into another
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}}
 \usage{
 insert_html(
+  path = deprecated(),
+  name = deprecated(),
+  file = paste0(path, name),
+  source_code = NULL,
+  keep_styles = TRUE
+)
+
+insertHTML(
   path = deprecated(),
   name = deprecated(),
   file = paste0(path, name),
@@ -29,6 +39,7 @@ included are preserved. They only apply to their own content.}
 character an HTML character string
 }
 \description{
+Insert HTML file into another
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
 \details{

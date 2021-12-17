@@ -1,6 +1,5 @@
 #' Retrieve octave path
-#'
-#'   `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("experimental")`
 #'
 #'   It is intended to be used in R Markdown files that use Octave.
 #'   The advantage of using this function instead of specifying the path

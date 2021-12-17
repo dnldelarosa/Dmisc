@@ -2,7 +2,8 @@
 % Please edit documentation in R/octave_path.R
 \name{octave_path}
 \alias{octave_path}
-\title{Retrieve octave path}
+\title{Retrieve octave path
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}}
 \usage{
 octave_path(drive = "C", version = "5.2.0", ...)
 }
@@ -18,9 +19,6 @@ A character string with the location of the program based on the inputs
 arguments
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
-}
-\details{
 It is intended to be used in R Markdown files that use Octave.
 The advantage of using this function instead of specifying the path
 directly is that it allows you to move an Rmd between one operating system

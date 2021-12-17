@@ -1,6 +1,5 @@
 #' Create a table of summaries for an entery dataframe
-#'
-#'   \lifecycle{stable}
+#' `r lifecycle::badge("experimental")`
 #'
 #' @param data [data.frame]: a dataframe with the data
 #' @param digits [numeric]: number of digits for the numbers

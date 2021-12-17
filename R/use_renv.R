@@ -1,6 +1,5 @@
 #' Initialize renv
-#'
-#'   `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("experimental")`
 #'
 #' This function does the same as \code{renv::\link[renv:init]{init}} but forces renv
 #' to use an external (customizable) library location.
