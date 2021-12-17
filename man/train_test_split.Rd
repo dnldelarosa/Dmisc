@@ -12,9 +12,9 @@ train_test_split(tbl, test_size = 0.2, valid_split = FALSE, ts = FALSE)
 
 \item{test_size}{\link{numeric}: proportion of the dataset to use as test set}
 
-\item{valid_split}{\link{boolean}: if TRUE, the test set will be splitted into validation and test set}
+\item{valid_split}{\link{logical}: if TRUE, the test set will be splitted into validation and test set}
 
-\item{ts}{\link{boolean}: if TRUE, indicates that the dataset is time series}
+\item{ts}{\link{logical}: if TRUE, indicates that the dataset is time series}
 }
 \value{
 \link{list}: a list with the data and the indices for the splits
