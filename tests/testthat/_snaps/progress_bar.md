@@ -1,31 +1,20 @@
 # progress_bar
 
     Code
-      progress_bar(77, 100)
+      progress_bar(77)
     Output
-      <div style="display:inline-block;
-                       vertical-align:baseline;
-                       width:100%;
-                       height:20px;
-                       margin-bottom:20px;
-                       overflow:hidden;
-                       background-color:#f5f5f5;
-                       border-radius:4px;
-                       -webkit-box-shadow:inset 0 1px 2px rgba(0,0,0,.1);
-                       box-shadow:inset 0 1px 2px rgba(0,0,0,.1);">
       
-          <div style="float: left;
-          height: 100%;
-          font-size: 16px;
-          line-height: 20px;
-          color: #fff;
-          text-align: center;
-          box-shadow: inset 0 -1px 0 rgb(0 0 0 / 15%);
-          transition: width .6s ease;
-          background-color: #5cb85c;  width: 77%;">
-      
-            77%
-      
-          </div>
-            </div>
+        <svg width="50%" height="25" xmlns="http://www.w3.org/2000/svg">
+        <linearGradient id="a" x2="0" y2="100%">
+          <stop offset="0" stop-color="#bbb" stop-opacity="0.2"/>
+        <stop offset="1" stop-opacity="0.1"/>
+          </linearGradient>
+          <rect rx="4" x="0" width="50%" height="25" fill="#555"/>
+          <rect rx="4" x="0" width="38%" height="25" fill="#5cb85c"/>
+          <rect rx="4" width="50%" height="25" fill="url(#a)"/>
+          <g fill="#fff" text-anchor="middle" font-family=DejaVu Sans,Verdana,Geneva,sans-serif font-size="14">
+          <text x="19%" y="17.5">77%</text>
+          </g>
+          </svg>
+          
 

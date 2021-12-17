@@ -2,11 +2,17 @@
 % Please edit documentation in R/big_button.R
 \name{big_button}
 \alias{big_button}
-\title{Insert a HTML big button}
+\title{Insert a SVG/HTML big button
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}}
 \usage{
 big_button(
-  text = "Get started",
-  href = "./articles/Dmisc.html",
+  text,
+  href,
+  suffix = "",
+  width = "50\%",
+  height = 30,
+  font_size = 18,
+  font_family = NULL,
   bg_color = "#00a65a"
 )
 }
@@ -15,16 +21,27 @@ big_button(
 
 \item{href}{\link{character}: HTML a tag href}
 
-\item{bg_color}{\link{character}: HEX code for the button color}
+\item{suffix}{\link{character}: suffix to display after the text}
+
+\item{width}{width of the button}
+
+\item{height}{height of the button}
+
+\item{font_size}{font size of the text}
+
+\item{font_family}{font family of the text}
+
+\item{bg_color}{background color of the button}
 }
 \value{
-a HTML element button
+a SVG/HTML element button
 }
 \description{
-Insert a HTML big button
+Insert a SVG/HTML big button
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
 \examples{
 \dontrun{
-  big_button(text = "Get started", href = "./articles/Dmisc.html", bg_color = "#00a65a")
+big_button(text = "Get started", href = "./articles/Dmisc.html")
 }
 }

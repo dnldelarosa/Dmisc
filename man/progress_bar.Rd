@@ -2,23 +2,49 @@
 % Please edit documentation in R/progress_bar.R
 \name{progress_bar}
 \alias{progress_bar}
-\title{Html progress bar}
+\title{Html progress bar
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}}
 \usage{
-progress_bar(complete, total)
+progress_bar(
+  progress,
+  suffix = "\%",
+  width = "50\%",
+  height = 25,
+  font_size = 14,
+  font_family = "DejaVu Sans,Verdana,Geneva,sans-serif",
+  bg_color = NULL
+)
 }
 \arguments{
-\item{complete}{\link{numeric}: number of items completed}
+\item{progress}{\link{numeric} The progress value.}
 
-\item{total}{\link{numeric}: number of total items}
+\item{suffix}{The suffix of the progress text.}
+
+\item{width}{The width of the progress bar.}
+
+\item{height}{The height of the progress bar.}
+
+\item{font_size}{The font size of the progress bar.}
+
+\item{font_family}{The font family of the progress text.}
+
+\item{bg_color}{The background color of the progress bar.}
 }
 \value{
-a html object representing a progress bar
+a html object representing a svg progress bar
 }
 \description{
-Add a html 4 colors progress bar.
+Add a svg/html progress bar with 4 states:
+\itemize{
+\item{0-25\%}
+\item{25-50\%}
+\item{50-75\%}
+\item{75-100\%}
+}
+You can use the \code{bg_color} parameter to change the color of the bar.
 }
 \examples{
 \dontrun{
-  progress_bar(77, 102)
+progress_bar(77)
 }
 }
