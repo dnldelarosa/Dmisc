@@ -12,7 +12,8 @@ progress_bar(
   height = 25,
   font_size = 14,
   font_family = "DejaVu Sans,Verdana,Geneva,sans-serif",
-  bg_color = NULL
+  bg_color = NULL,
+  styles = "display: block; margin: auto;"
 )
 }
 \arguments{
@@ -29,6 +30,8 @@ progress_bar(
 \item{font_family}{The font family of the progress text.}
 
 \item{bg_color}{The background color of the progress bar.}
+
+\item{styles}{The styles of the SVG element.}
 }
 \value{
 a html object representing a svg progress bar

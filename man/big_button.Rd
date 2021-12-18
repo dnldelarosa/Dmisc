@@ -13,7 +13,8 @@ big_button(
   height = 30,
   font_size = 18,
   font_family = NULL,
-  bg_color = "#00a65a"
+  bg_color = "#00a65a",
+  styles = "display: block; margin: auto;"
 )
 }
 \arguments{
@@ -32,6 +33,8 @@ big_button(
 \item{font_family}{font family of the text}
 
 \item{bg_color}{background color of the button}
+
+\item{styles}{styles of the SVG element}
 }
 \value{
 a SVG/HTML element button

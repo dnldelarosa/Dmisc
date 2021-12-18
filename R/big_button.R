@@ -9,6 +9,7 @@
 #' @param font_size font size of the text
 #' @param font_family font family of the text
 #' @param bg_color background color of the button
+#' @param styles styles of the SVG element
 #'
 #' @return a SVG/HTML element button
 #'
@@ -26,7 +27,8 @@ big_button <- function(
   height = 30,
   font_size = 18,
   font_family = NULL,
-  bg_color = "#00a65a"
+  bg_color = "#00a65a",
+  styles = "display: block; margin: auto;"
   ) {
   htmltools::HTML(
     paste0(
@@ -41,7 +43,8 @@ big_button <- function(
         height,
         font_size,
         font_family,
-        bg_color
+        bg_color,
+        styles
       ),
       "</a>"
     )

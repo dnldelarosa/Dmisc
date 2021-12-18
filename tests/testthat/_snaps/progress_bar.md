@@ -4,7 +4,7 @@
       progress_bar(77)
     Output
       
-        <svg width="50%" height="25" xmlns="http://www.w3.org/2000/svg">
+        <svg width="50%" height="25" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: auto;">
         <linearGradient id="a" x2="0" y2="100%">
           <stop offset="0" stop-color="#bbb" stop-opacity="0.2"/>
         <stop offset="1" stop-opacity="0.1"/>

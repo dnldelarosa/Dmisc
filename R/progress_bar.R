@@ -17,6 +17,7 @@
 #' @param font_family The font family of the progress text.
 #' @param bg_color The background color of the progress bar.
 #' @param font_size The font size of the progress bar.
+#' @param styles The styles of the SVG element.
 #'
 #' @return a html object representing a svg progress bar
 #' @export
@@ -31,7 +32,8 @@ progress_bar <- function(progress,
                          height = 25,
                          font_size = 14,
                          font_family = "DejaVu Sans,Verdana,Geneva,sans-serif",
-                         bg_color = NULL
+                         bg_color = NULL,
+                         styles = "display: block; margin: auto;"
                         ) {
   if (!is.null(bg_color)) {
     status <- bg_color
@@ -50,7 +52,7 @@ progress_bar <- function(progress,
   htmltools::HTML(
     paste0(
       "
-  <svg width=\"", width, "\" height=\"", height, "\" xmlns=\"http://www.w3.org/2000/svg\">
+  <svg width=\"", width, "\" height=\"", height, "\" xmlns=\"http://www.w3.org/2000/svg\" style=\"",styles,"\">
   <linearGradient id=\"a\" x2=\"0\" y2=\"100%\">
     <stop offset=\"0\" stop-color=\"#bbb\" stop-opacity=\"0.2\"/>
   <stop offset=\"1\" stop-opacity=\"0.1\"/>
