@@ -59,7 +59,7 @@ vars_to_date <- function(
       stop(paste0("Do not pass NAs in the variable '", monthn, "'"))
     }
 
-    tbl <- make_month(tbl, monthn)
+    tbl <- numeric_month(tbl, monthn)
   } else {
     month <- FALSE
   }
@@ -72,7 +72,7 @@ vars_to_date <- function(
       stop(paste0("Do not pass NAs in the variable '", quartern, "'"))
     }
 
-    tbl <- make_quarter(tbl, quartern)
+    tbl <- numeric_quarter(tbl, quartern)
   } else {
     quarter <- FALSE
   }
@@ -178,7 +178,19 @@ get_pos <- function(arg, names) {
 }
 
 
-make_month <- function(tbl, month) {
+#' Convert a month variable to a numeric format
+#'
+#' @param tbl a data.frame with the month variable
+#' @param month the name or position of the month variable
+#'
+#' @return tbl a new data.frame with the month variable in numeric format
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'   numeric_month(tbl, "month")
+#' }
+numeric_month <- function(tbl, month) {
   if (is.character(utils::type.convert(tbl[[month]], as.is = TRUE))) {
     tbl[[month]] <- stringr::str_remove_all(tbl[[month]], stringr::regex("[^a-zA-Z]"))
     tbl[[month]] <- stringr::str_trim(tbl[[month]])
@@ -194,7 +206,19 @@ make_month <- function(tbl, month) {
 }
 
 
-make_quarter <- function(tbl, quarter) {
+#' Convert a quarter variable to a numeric format
+#'
+#' @param tbl a data.frame with the quarter variable
+#' @param quarter the name or position of the quarter variable
+#'
+#' @return tbl a new data.frame with the quarter variable in numeric format
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'  numeric_quarter(tbl, "quarter")
+#' }
+numeric_quarter <- function(tbl, quarter) {
   . <- NULL
   qq <- c(
     "1" = 1, "2" = 2, "3" = 3, "4" = 4,
