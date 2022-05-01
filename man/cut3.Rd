@@ -5,7 +5,7 @@
 \title{Convert numeric to factor weighted and by group
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}}
 \usage{
-cut3(tbl, var_name, breaks, groups = NULL, bf_args = list(), ...)
+cut3(tbl, var_name, breaks, groups = NULL, bf_args = list(), .inf = FALSE, ...)
 }
 \arguments{
 \item{tbl}{\link{data.frame}: Database connection or data.frame}
@@ -18,7 +18,9 @@ cut3(tbl, var_name, breaks, groups = NULL, bf_args = list(), ...)
 
 \item{bf_args}{\link{list}: arguments to be passed to break function}
 
-\item{...}{argument passed to cut}
+\item{.inf}{\link{logical}: indicates if the breaks need to be extended by -Inf and Inf}
+
+\item{...}{argument passed to \code{base::\link[base:cut]{cut}}}
 }
 \value{
 same as \code{tbl} input with \code{var_name} converted to factor

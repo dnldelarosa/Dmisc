@@ -6,7 +6,8 @@
 #' @param breaks [numeric]: break points. See \code{base::\link[base:cut]{cut}}
 #' @param groups [character]: name of a groups variable
 #' @param bf_args [list]: arguments to be passed to break function
-#' @param ... argument passed to cut
+#' @param .inf [logical]: indicates if the breaks need to be extended by -Inf and Inf
+#' @param ... argument passed to \code{base::\link[base:cut]{cut}}
 #'
 #' @seealso
 #'   \code{vignette("cut3", package = "Dmisc")}
@@ -18,16 +19,24 @@
 #' @examples
 #' datos <- data.frame(edad = seq(1:100))
 #' cut3(datos, "edad", 5)
-cut3  <- function(tbl, var_name, breaks, groups = NULL, bf_args = list(), ...) {
+cut3  <- function(tbl, var_name, breaks, groups = NULL, bf_args = list(), .inf = FALSE, ...) {
   if (is.function(breaks)) {
-    breaks <- do.call(breaks, bf_args)
+    kargs <- list(tbl[[var_name]])
+    if(length(bf_args) > 0){
+      kargs <- append(kargs, bf_args)
+    }
+    breaks <- do.call(breaks, kargs)
   } else if(length(breaks) > 1){
     newb <- numeric()
     for (b in breaks) {
       if(is.numeric(b)){
         newb <- append(newb, b)
       } else if(is.function(b)){
-        res <- do.call(b, bf_args)
+        kargs <- list(tbl[[var_name]])
+        if(length(bf_args) > 0){
+          kargs <- append(kargs, bf_args)
+        }
+        res <- do.call(b, kargs)
         if(is.numeric(res)){
           newb <- append(newb, res)
         } else {
@@ -41,6 +50,9 @@ cut3  <- function(tbl, var_name, breaks, groups = NULL, bf_args = list(), ...) {
   } else if(!is.numeric(breaks)){
     stop("Only numbers or functions that generate numbers can be included.")
   }
+  if(.inf){
+    breaks <- c(-Inf, breaks, Inf)
+  }
   if(!is.null(groups)){
     tbl[[var_name]] <- as.character(tbl[[var_name]])
     for (group in unique(tbl[[groups]])) { # use split-apply-combine strategy
@@ -51,4 +63,25 @@ cut3  <- function(tbl, var_name, breaks, groups = NULL, bf_args = list(), ...) {
     tbl[[var_name]] <- cut(tbl[[var_name]], breaks, ...)
   }
   tbl
+}
+
+
+
+#' Cut3 by quantile
+#'
+#' @param tbl [data.frame]: Database connection or data.frame
+#' @param var_name [character]: variable name
+#' @param .labels [list]: labels for the breaks
+#' @param .groups [character]: name of a groups variable
+#' @param .inf [logical]: indicates if the breaks need to be extended by -Inf and Inf
+#' @param ... argument passed to quantile
+#'
+#' @return same as \code{tbl} input with \code{var_name} converted to factor by quantiles
+#' @export
+#'
+#' @examples
+#' datos <- data.frame(edad = seq(1:100))
+#' cut3_quantile(datos, "edad")
+cut3_quantile <- function(tbl, var_name, .labels = NULL, .groups = NULL, .inf = TRUE, ...){
+  Dmisc::cut3(tbl, var_name, stats::quantile, .groups, list(...), .inf, labels = .labels)
 }

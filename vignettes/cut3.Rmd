@@ -8,7 +8,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 ```
 
 
-```{r setup}
+```{r }
 library(Dmisc)
 ```
 
@@ -49,8 +49,6 @@ tbl <- data.frame(
   freq = c(5,5,5,4,3,3,5,3,4,5)
 )
 
-tbl
-
 cut3(tbl, var_name = "age", breaks = 2)
 ```
 
@@ -77,48 +75,31 @@ tbl <- data.frame(
   freq = c(5,5,5,4,3,3,5,3,4,5)
 )
 
-tbl
-
 cut3(tbl, var_name = "age", breaks = c(0, 5, 10))
 ```
 
 It is important to note that this vector of values must contain an initial value that is less than the minimum of the variable and a last value greater than or equal to the maximum of the variable. This is so due to the way in which the intervals are constructed.
 
-Note in the label of the created variable `(0,5]` that the lower limit of the interval is open `(`, which means that only values `greater than 0` are included. You can change this behavior, and do the first range closed using the argument `include.lowest`. While the upper bound is closed`] `, which means that only` values less than or equal to 5` are included.
+Note in the label of the created variable `(0,5]` that the lower limit of the interval is open `(`, which means that only values `greater than 0` are included. You can change this behavior, and do the first range closed using the argument `include.lowest`. While the upper bound is closed`] `, which means that values `less than or equal to 5` are included.
 
-If the vector of values does not meet the criteria described above, the values that do not fit in any interval will be marked as `NA` in the resulting variable.
+If the vector of values does not meet the criteria described above, the values that do not fit in any interval will be marked as `NA` in the resulting variable. However, this is not the case for the `cut3` function. Due to the `.inf` argument, the supplied cut-off points will be extended by `-Inf` and `Inf`. This way any value is included in the resulting variable.
 
 ```{r}
 tbl <- data.frame(
   age = 1:10,
   freq = c(5,5,5,4,3,3,5,3,4,5)
 )
-
-tbl
 
 cut3(tbl, var_name = "age", breaks = c(1, 5, 10))
 cut3(tbl, var_name = "age", breaks = c(1, 5, 10), include.lowest = T)
-```
-
-If for some reason the minimum and maximum values of the variable are not known a priori, the `-Inf` and` Inf` values can be used for these purposes. Although this should be avoided as it decrease information from the label of the resulting variable.
-```{r}
-tbl <- data.frame(
-  age = 1:10,
-  freq = c(5,5,5,4,3,3,5,3,4,5)
-)
-
-tbl
-
-cut3(tbl, var_name = "age", breaks = c(-Inf, 5, Inf))
+cut3(tbl, var_name = "age", breaks = c(1, 5, 10), .inf = F)
 ```
 
 Additionally, it is essential that the values of said vector be unique.
 
 ## Functions
 
-One of the main novelties of `cut3 ()` compared to `cut ()` is that the vector of `breaks` can be a function that generates the numerical vector of the cuts, or preferably, a vector that includes the minimum values and maximum, and said function.
-
-The most common use case for this functionality is perhaps if you want to use quantiles to divide the variable. 
+One of the main novelties of `cut3()` compared to `cut()` is that the vector of `breaks` can be a function that generates the numerical vector of the cuts. The most common use case for this functionality is perhaps if you want to use quantiles to divide the variable. 
 
 For these purposes, the `bf_args` argument must be used in which additional arguments are specified, which must be passed to the function used to construct the breakpoints.
 ```{r}
@@ -127,11 +108,7 @@ tbl <- data.frame(
   freq = c(5,5,5,4,3,3,5,3,4,5)
 )
 
-tbl
-
-cut3(tbl, var_name = "age", breaks = quantile, bf_args = list(x = tbl$age))
-cut3(tbl, var_name = "age", breaks = quantile, bf_args = list(x = tbl$age), include.lowest = T)
-cut3(tbl, var_name = "age", breaks = c(0, quantile), bf_args = list(x = tbl$age))
+cut3(tbl, var_name = "age", breaks = quantile)
 ```
 
 
@@ -144,8 +121,6 @@ tbl <- data.frame(
   freq = c(5,5,5,4,3,3,5,3,4,5)
 )
 
-tbl
-
 cut3(tbl, var_name = "age", breaks = 2)
 cut3(tbl, var_name = "age", breaks = 2, labels = F)
 ```
@@ -156,8 +131,6 @@ tbl <- data.frame(
   age = 1:10,
   freq = c(5,5,5,4,3,3,5,3,4,5)
 )
-
-tbl
 
 cut3(tbl, var_name = "age", breaks = 2)
 cut3(tbl, var_name = "age", breaks = 2, labels = c("Menor o igual que 5", "Mayor a 5"))
@@ -174,9 +147,7 @@ tbl <- data.frame(
   freq = c(5,5,5,4,3,3,5,3,4,5)
 )
 
-tbl
-
-cut3(tbl, var_name = "age", breaks = 2)
-cut3(tbl, var_name = "age", breaks = 2, groups = "sex")
+cut3(tbl, var_name = "age", breaks = 2, .inf = F)
+cut3(tbl, var_name = "age", breaks = 2, .inf = F, groups = "sex")
 ```
 

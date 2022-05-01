@@ -5,17 +5,16 @@ test_that("cut3", {
     freq = c(5,5,5,4,3,3,5,3,4,5)
   )
   f1 <- function(x){
-    "2"
+    "a2"
   }
   expect_snapshot(cut3(tbl, var_name = "age", breaks = 2))
   expect_snapshot(cut3(tbl, var_name = "age", breaks = c(0, 5, 10)))
   expect_snapshot(cut3(tbl, var_name = "age", breaks = c(2, 5, 8)))
-  expect_snapshot(cut3(tbl, var_name = "age", breaks = quantile, bf_args = list(x = tbl$age)))
-  expect_snapshot(cut3(tbl, var_name = "age", breaks = quantile, bf_args = list(x = tbl$age), include.lowest = T))
-  expect_snapshot(cut3(tbl, var_name = "age", breaks = c(0, quantile), bf_args = list(x = tbl$age)))
+  expect_snapshot(cut3(tbl, var_name = "age", breaks = quantile))
+  expect_snapshot(cut3(tbl, var_name = "age", breaks = quantile, include.lowest = T))
+  expect_snapshot(cut3(tbl, var_name = "age", breaks = c(0, quantile)))
   expect_snapshot(cut3(tbl, var_name = "age", breaks = 2, labels = F))
   expect_error(cut3(tbl, var_name = "age", breaks = "2"))
-  expect_error(cut3(tbl, var_name = "age", breaks = f1))
   expect_snapshot(cut3(tbl, var_name = "age", breaks = 2, labels = c("Menor o igual que 5", "Mayor a 5")))
   expect_snapshot(cut3(tbl, var_name = "age", breaks = 2, groups = "sex"))
 })
