@@ -37,6 +37,9 @@
     <loc>/reference/cut3.html</loc>
   </url>
   <url>
+    <loc>/reference/cut3_quantile.html</loc>
+  </url>
+  <url>
     <loc>/reference/dbConnect.html</loc>
   </url>
   <url>
@@ -46,10 +49,19 @@
     <loc>/reference/describe.html</loc>
   </url>
   <url>
+    <loc>/reference/dyn-dots.html</loc>
+  </url>
+  <url>
     <loc>/reference/index.html</loc>
   </url>
   <url>
     <loc>/reference/insert_html.html</loc>
+  </url>
+  <url>
+    <loc>/reference/numeric_month.html</loc>
+  </url>
+  <url>
+    <loc>/reference/numeric_quarter.html</loc>
   </url>
   <url>
     <loc>/reference/octave_path.html</loc>
@@ -62,6 +74,9 @@
   </url>
   <url>
     <loc>/reference/progress_bar.html</loc>
+  </url>
+  <url>
+    <loc>/reference/real_prices_indexer.html</loc>
   </url>
   <url>
     <loc>/reference/test_split.html</loc>

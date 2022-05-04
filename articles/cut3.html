@@ -32,14 +32,14 @@
     
     <a class="navbar-brand me-2" href="../index.html">Dmisc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.11.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.12.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div id="navbar" class="collapse navbar-collapse ms-2">
+    <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
@@ -68,6 +68,9 @@
     
   </div>
 </nav><div class="container template-article">
+
+
+
 <script src="cut3_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <main id="main"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Cut Cut Cut</h1>
@@ -83,13 +86,13 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://drdsdaniel.github.io/Dmisc/" class="external-link">Dmisc</a></span><span class="op">)</span></code></pre></div>
 <p>Sometimes it is interesting to convert a numeric variable into a categorical one. For these purposes, there are several functions in R. Here we present some of them and how they compare to <code>cut3</code>.</p>
-<div class="section level1">
-<h1 id="breaks">Breaks<a class="anchor" aria-label="anchor" href="#breaks"></a>
-</h1>
-<p>The first and most important argument of these functions is <code>breaks</code>, which consists of an indicative of how are constructed the intervals in which the desired variable is to be cut.</p>
 <div class="section level2">
-<h2 id="a-single-number">A single number<a class="anchor" aria-label="anchor" href="#a-single-number"></a>
+<h2 id="breaks">Breaks<a class="anchor" aria-label="anchor" href="#breaks"></a>
 </h2>
+<p>The first and most important argument of these functions is <code>breaks</code>, which consists of an indicative of how are constructed the intervals in which the desired variable is to be cut.</p>
+<div class="section level3">
+<h3 id="a-single-number">A single number<a class="anchor" aria-label="anchor" href="#a-single-number"></a>
+</h3>
 <p>If the <code>breaks</code> argument consists of a single number, this is interpreted as the number of breaks to be applied to the variable of interest.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
@@ -130,19 +133,6 @@
   freq <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">4</span>,<span class="fl">3</span>,<span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span>
 <span class="op">)</span>
 
-<span class="va">tbl</span>
-<span class="co">#&gt;    age freq</span>
-<span class="co">#&gt; 1    1    5</span>
-<span class="co">#&gt; 2    2    5</span>
-<span class="co">#&gt; 3    3    5</span>
-<span class="co">#&gt; 4    4    4</span>
-<span class="co">#&gt; 5    5    3</span>
-<span class="co">#&gt; 6    6    3</span>
-<span class="co">#&gt; 7    7    5</span>
-<span class="co">#&gt; 8    8    3</span>
-<span class="co">#&gt; 9    9    4</span>
-<span class="co">#&gt; 10  10    5</span>
-
 <span class="fu"><a href="../reference/cut3.html">cut3</a></span><span class="op">(</span><span class="va">tbl</span>, var_name <span class="op">=</span> <span class="st">"age"</span>, breaks <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 <span class="co">#&gt;            age freq</span>
 <span class="co">#&gt; 1  (0.991,5.5]    5</span>
@@ -156,9 +146,9 @@
 <span class="co">#&gt; 9     (5.5,10]    4</span>
 <span class="co">#&gt; 10    (5.5,10]    5</span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="a-numeric-vector">A numeric vector<a class="anchor" aria-label="anchor" href="#a-numeric-vector"></a>
-</h2>
+<div class="section level3">
+<h3 id="a-numeric-vector">A numeric vector<a class="anchor" aria-label="anchor" href="#a-numeric-vector"></a>
+</h3>
 <p>Another option available in both functions is to supply a numeric vector. In this case, the values contained in said vector will be treated as the cut-off points for the construction of the intervals in which the variable in question has to be cut.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
@@ -199,19 +189,6 @@
   freq <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">4</span>,<span class="fl">3</span>,<span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span>
 <span class="op">)</span>
 
-<span class="va">tbl</span>
-<span class="co">#&gt;    age freq</span>
-<span class="co">#&gt; 1    1    5</span>
-<span class="co">#&gt; 2    2    5</span>
-<span class="co">#&gt; 3    3    5</span>
-<span class="co">#&gt; 4    4    4</span>
-<span class="co">#&gt; 5    5    3</span>
-<span class="co">#&gt; 6    6    3</span>
-<span class="co">#&gt; 7    7    5</span>
-<span class="co">#&gt; 8    8    3</span>
-<span class="co">#&gt; 9    9    4</span>
-<span class="co">#&gt; 10  10    5</span>
-
 <span class="fu"><a href="../reference/cut3.html">cut3</a></span><span class="op">(</span><span class="va">tbl</span>, var_name <span class="op">=</span> <span class="st">"age"</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;       age freq</span>
 <span class="co">#&gt; 1   (0,5]    5</span>
@@ -225,26 +202,13 @@
 <span class="co">#&gt; 9  (5,10]    4</span>
 <span class="co">#&gt; 10 (5,10]    5</span></code></pre></div>
 <p>It is important to note that this vector of values must contain an initial value that is less than the minimum of the variable and a last value greater than or equal to the maximum of the variable. This is so due to the way in which the intervals are constructed.</p>
-<p>Note in the label of the created variable <code>(0,5]</code> that the lower limit of the interval is open <code>(</code>, which means that only values <code>greater than 0</code> are included. You can change this behavior, and do the first range closed using the argument <code>include.lowest</code>. While the upper bound is closed<code>]</code>, which means that only<code>values less than or equal to 5</code> are included.</p>
-<p>If the vector of values does not meet the criteria described above, the values that do not fit in any interval will be marked as <code>NA</code> in the resulting variable.</p>
+<p>Note in the label of the created variable <code>(0,5]</code> that the lower limit of the interval is open <code>(</code>, which means that only values <code>greater than 0</code> are included. You can change this behavior, and do the first range closed using the argument <code>include.lowest</code>. While the upper bound is closed<code>]</code>, which means that values <code>less than or equal to 5</code> are included.</p>
+<p>If the vector of values does not meet the criteria described above, the values that do not fit in any interval will be marked as <code>NA</code> in the resulting variable. However, this is not the case for the <code>cut3</code> function. Due to the <code>.inf</code> argument, the supplied cut-off points will be extended by <code>-Inf</code> and <code>Inf</code>. This way any value is included in the resulting variable.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
   age <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,
   freq <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">4</span>,<span class="fl">3</span>,<span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span>
 <span class="op">)</span>
-
-<span class="va">tbl</span>
-<span class="co">#&gt;    age freq</span>
-<span class="co">#&gt; 1    1    5</span>
-<span class="co">#&gt; 2    2    5</span>
-<span class="co">#&gt; 3    3    5</span>
-<span class="co">#&gt; 4    4    4</span>
-<span class="co">#&gt; 5    5    3</span>
-<span class="co">#&gt; 6    6    3</span>
-<span class="co">#&gt; 7    7    5</span>
-<span class="co">#&gt; 8    8    3</span>
-<span class="co">#&gt; 9    9    4</span>
-<span class="co">#&gt; 10  10    5</span>
 
 <span class="fu"><a href="../reference/cut3.html">cut3</a></span><span class="op">(</span><span class="va">tbl</span>, var_name <span class="op">=</span> <span class="st">"age"</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;       age freq</span>
@@ -269,67 +233,33 @@
 <span class="co">#&gt; 7  (5,10]    5</span>
 <span class="co">#&gt; 8  (5,10]    3</span>
 <span class="co">#&gt; 9  (5,10]    4</span>
+<span class="co">#&gt; 10 (5,10]    5</span>
+<span class="fu"><a href="../reference/cut3.html">cut3</a></span><span class="op">(</span><span class="va">tbl</span>, var_name <span class="op">=</span> <span class="st">"age"</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span>, .inf <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
+<span class="co">#&gt;       age freq</span>
+<span class="co">#&gt; 1    &lt;NA&gt;    5</span>
+<span class="co">#&gt; 2   (1,5]    5</span>
+<span class="co">#&gt; 3   (1,5]    5</span>
+<span class="co">#&gt; 4   (1,5]    4</span>
+<span class="co">#&gt; 5   (1,5]    3</span>
+<span class="co">#&gt; 6  (5,10]    3</span>
+<span class="co">#&gt; 7  (5,10]    5</span>
+<span class="co">#&gt; 8  (5,10]    3</span>
+<span class="co">#&gt; 9  (5,10]    4</span>
 <span class="co">#&gt; 10 (5,10]    5</span></code></pre></div>
-<p>If for some reason the minimum and maximum values of the variable are not known a priori, the <code>-Inf</code> and<code>Inf</code> values can be used for these purposes. Although this should be avoided as it decrease information from the label of the resulting variable.</p>
+<p>Additionally, it is essential that the values of said vector be unique.</p>
+</div>
+<div class="section level3">
+<h3 id="functions">Functions<a class="anchor" aria-label="anchor" href="#functions"></a>
+</h3>
+<p>One of the main novelties of <code><a href="../reference/cut3.html">cut3()</a></code> compared to <code><a href="https://rdrr.io/r/base/cut.html" class="external-link">cut()</a></code> is that the vector of <code>breaks</code> can be a function that generates the numerical vector of the cuts. The most common use case for this functionality is perhaps if you want to use quantiles to divide the variable.</p>
+<p>For these purposes, the <code>bf_args</code> argument must be used in which additional arguments are specified, which must be passed to the function used to construct the breakpoints.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
   age <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,
   freq <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">4</span>,<span class="fl">3</span>,<span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span>
 <span class="op">)</span>
 
-<span class="va">tbl</span>
-<span class="co">#&gt;    age freq</span>
-<span class="co">#&gt; 1    1    5</span>
-<span class="co">#&gt; 2    2    5</span>
-<span class="co">#&gt; 3    3    5</span>
-<span class="co">#&gt; 4    4    4</span>
-<span class="co">#&gt; 5    5    3</span>
-<span class="co">#&gt; 6    6    3</span>
-<span class="co">#&gt; 7    7    5</span>
-<span class="co">#&gt; 8    8    3</span>
-<span class="co">#&gt; 9    9    4</span>
-<span class="co">#&gt; 10  10    5</span>
-
-<span class="fu"><a href="../reference/cut3.html">cut3</a></span><span class="op">(</span><span class="va">tbl</span>, var_name <span class="op">=</span> <span class="st">"age"</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span>, <span class="fl">5</span>, <span class="cn">Inf</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt;         age freq</span>
-<span class="co">#&gt; 1  (-Inf,5]    5</span>
-<span class="co">#&gt; 2  (-Inf,5]    5</span>
-<span class="co">#&gt; 3  (-Inf,5]    5</span>
-<span class="co">#&gt; 4  (-Inf,5]    4</span>
-<span class="co">#&gt; 5  (-Inf,5]    3</span>
-<span class="co">#&gt; 6  (5, Inf]    3</span>
-<span class="co">#&gt; 7  (5, Inf]    5</span>
-<span class="co">#&gt; 8  (5, Inf]    3</span>
-<span class="co">#&gt; 9  (5, Inf]    4</span>
-<span class="co">#&gt; 10 (5, Inf]    5</span></code></pre></div>
-<p>Additionally, it is essential that the values of said vector be unique.</p>
-</div>
-<div class="section level2">
-<h2 id="functions">Functions<a class="anchor" aria-label="anchor" href="#functions"></a>
-</h2>
-<p>One of the main novelties of <code><a href="../reference/cut3.html">cut3 ()</a></code> compared to <code><a href="https://rdrr.io/r/base/cut.html" class="external-link">cut ()</a></code> is that the vector of <code>breaks</code> can be a function that generates the numerical vector of the cuts, or preferably, a vector that includes the minimum values and maximum, and said function.</p>
-<p>The most common use case for this functionality is perhaps if you want to use quantiles to divide the variable.</p>
-<p>For these purposes, the <code>bf_args</code> argument must be used in which additional arguments are specified, which must be passed to the function used to construct the breakpoints.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
-  age <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,
-  freq <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">4</span>,<span class="fl">3</span>,<span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span>
-<span class="op">)</span>
-
-<span class="va">tbl</span>
-<span class="co">#&gt;    age freq</span>
-<span class="co">#&gt; 1    1    5</span>
-<span class="co">#&gt; 2    2    5</span>
-<span class="co">#&gt; 3    3    5</span>
-<span class="co">#&gt; 4    4    4</span>
-<span class="co">#&gt; 5    5    3</span>
-<span class="co">#&gt; 6    6    3</span>
-<span class="co">#&gt; 7    7    5</span>
-<span class="co">#&gt; 8    8    3</span>
-<span class="co">#&gt; 9    9    4</span>
-<span class="co">#&gt; 10  10    5</span>
-
-<span class="fu"><a href="../reference/cut3.html">cut3</a></span><span class="op">(</span><span class="va">tbl</span>, var_name <span class="op">=</span> <span class="st">"age"</span>, breaks <span class="op">=</span> <span class="va">quantile</span>, bf_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">tbl</span><span class="op">$</span><span class="va">age</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="../reference/cut3.html">cut3</a></span><span class="op">(</span><span class="va">tbl</span>, var_name <span class="op">=</span> <span class="st">"age"</span>, breaks <span class="op">=</span> <span class="va">quantile</span><span class="op">)</span>
 <span class="co">#&gt;           age freq</span>
 <span class="co">#&gt; 1        &lt;NA&gt;    5</span>
 <span class="co">#&gt; 2    (1,3.25]    5</span>
@@ -340,54 +270,17 @@
 <span class="co">#&gt; 7  (5.5,7.75]    5</span>
 <span class="co">#&gt; 8   (7.75,10]    3</span>
 <span class="co">#&gt; 9   (7.75,10]    4</span>
-<span class="co">#&gt; 10  (7.75,10]    5</span>
-<span class="fu"><a href="../reference/cut3.html">cut3</a></span><span class="op">(</span><span class="va">tbl</span>, var_name <span class="op">=</span> <span class="st">"age"</span>, breaks <span class="op">=</span> <span class="va">quantile</span>, bf_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">tbl</span><span class="op">$</span><span class="va">age</span><span class="op">)</span>, include.lowest <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
-<span class="co">#&gt;           age freq</span>
-<span class="co">#&gt; 1    [1,3.25]    5</span>
-<span class="co">#&gt; 2    [1,3.25]    5</span>
-<span class="co">#&gt; 3    [1,3.25]    5</span>
-<span class="co">#&gt; 4  (3.25,5.5]    4</span>
-<span class="co">#&gt; 5  (3.25,5.5]    3</span>
-<span class="co">#&gt; 6  (5.5,7.75]    3</span>
-<span class="co">#&gt; 7  (5.5,7.75]    5</span>
-<span class="co">#&gt; 8   (7.75,10]    3</span>
-<span class="co">#&gt; 9   (7.75,10]    4</span>
-<span class="co">#&gt; 10  (7.75,10]    5</span>
-<span class="fu"><a href="../reference/cut3.html">cut3</a></span><span class="op">(</span><span class="va">tbl</span>, var_name <span class="op">=</span> <span class="st">"age"</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">quantile</span><span class="op">)</span>, bf_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">tbl</span><span class="op">$</span><span class="va">age</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt;           age freq</span>
-<span class="co">#&gt; 1       (0,1]    5</span>
-<span class="co">#&gt; 2    (1,3.25]    5</span>
-<span class="co">#&gt; 3    (1,3.25]    5</span>
-<span class="co">#&gt; 4  (3.25,5.5]    4</span>
-<span class="co">#&gt; 5  (3.25,5.5]    3</span>
-<span class="co">#&gt; 6  (5.5,7.75]    3</span>
-<span class="co">#&gt; 7  (5.5,7.75]    5</span>
-<span class="co">#&gt; 8   (7.75,10]    3</span>
-<span class="co">#&gt; 9   (7.75,10]    4</span>
 <span class="co">#&gt; 10  (7.75,10]    5</span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="labels">Labels<a class="anchor" aria-label="anchor" href="#labels"></a>
-</h2>
+<div class="section level3">
+<h3 id="labels">Labels<a class="anchor" aria-label="anchor" href="#labels"></a>
+</h3>
 <p>As you may have already noticed in the previous examples, the data labels of the resulting variable are constructed using the corresponding interval notation. However, this behavior can be overridden by supplying the <code>labels = F</code> argument. In this case, a simple autoincrementing number will be used to name the intervals.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
   age <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,
   freq <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">4</span>,<span class="fl">3</span>,<span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span>
 <span class="op">)</span>
-
-<span class="va">tbl</span>
-<span class="co">#&gt;    age freq</span>
-<span class="co">#&gt; 1    1    5</span>
-<span class="co">#&gt; 2    2    5</span>
-<span class="co">#&gt; 3    3    5</span>
-<span class="co">#&gt; 4    4    4</span>
-<span class="co">#&gt; 5    5    3</span>
-<span class="co">#&gt; 6    6    3</span>
-<span class="co">#&gt; 7    7    5</span>
-<span class="co">#&gt; 8    8    3</span>
-<span class="co">#&gt; 9    9    4</span>
-<span class="co">#&gt; 10  10    5</span>
 
 <span class="fu"><a href="../reference/cut3.html">cut3</a></span><span class="op">(</span><span class="va">tbl</span>, var_name <span class="op">=</span> <span class="st">"age"</span>, breaks <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 <span class="co">#&gt;            age freq</span>
@@ -414,24 +307,11 @@
 <span class="co">#&gt; 9    2    4</span>
 <span class="co">#&gt; 10   2    5</span></code></pre></div>
 <p>Additionally, you can supply a vector specifying the labels you want to use in the construction of the variable. Labels will be assigned in the order they are specified. Also, the number of labels must be exactly equal to the number of resulting bins.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
   age <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,
   freq <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">4</span>,<span class="fl">3</span>,<span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span>
 <span class="op">)</span>
-
-<span class="va">tbl</span>
-<span class="co">#&gt;    age freq</span>
-<span class="co">#&gt; 1    1    5</span>
-<span class="co">#&gt; 2    2    5</span>
-<span class="co">#&gt; 3    3    5</span>
-<span class="co">#&gt; 4    4    4</span>
-<span class="co">#&gt; 5    5    3</span>
-<span class="co">#&gt; 6    6    3</span>
-<span class="co">#&gt; 7    7    5</span>
-<span class="co">#&gt; 8    8    3</span>
-<span class="co">#&gt; 9    9    4</span>
-<span class="co">#&gt; 10  10    5</span>
 
 <span class="fu"><a href="../reference/cut3.html">cut3</a></span><span class="op">(</span><span class="va">tbl</span>, var_name <span class="op">=</span> <span class="st">"age"</span>, breaks <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 <span class="co">#&gt;            age freq</span>
@@ -458,31 +338,18 @@
 <span class="co">#&gt; 9            Mayor a 5    4</span>
 <span class="co">#&gt; 10           Mayor a 5    5</span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="groups">Groups<a class="anchor" aria-label="anchor" href="#groups"></a>
-</h2>
+<div class="section level3">
+<h3 id="groups">Groups<a class="anchor" aria-label="anchor" href="#groups"></a>
+</h3>
 <p>Another addition to <code><a href="../reference/cut3.html">cut3 ()</a></code> consists of being able to define different cuts for different groups. This is especially useful when breaks are specified with functions.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
   sex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"M"</span>, <span class="fl">5</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"F"</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span>,
   age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">6</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>,
   freq <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">4</span>,<span class="fl">3</span>,<span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span>
 <span class="op">)</span>
 
-<span class="va">tbl</span>
-<span class="co">#&gt;    sex age freq</span>
-<span class="co">#&gt; 1    M   1    5</span>
-<span class="co">#&gt; 2    M   2    5</span>
-<span class="co">#&gt; 3    M   3    5</span>
-<span class="co">#&gt; 4    M   4    4</span>
-<span class="co">#&gt; 5    M   5    3</span>
-<span class="co">#&gt; 6    F   6    3</span>
-<span class="co">#&gt; 7    F   7    5</span>
-<span class="co">#&gt; 8    F   8    3</span>
-<span class="co">#&gt; 9    F   9    4</span>
-<span class="co">#&gt; 10   F  10    5</span>
-
-<span class="fu"><a href="../reference/cut3.html">cut3</a></span><span class="op">(</span><span class="va">tbl</span>, var_name <span class="op">=</span> <span class="st">"age"</span>, breaks <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+<span class="fu"><a href="../reference/cut3.html">cut3</a></span><span class="op">(</span><span class="va">tbl</span>, var_name <span class="op">=</span> <span class="st">"age"</span>, breaks <span class="op">=</span> <span class="fl">2</span>, .inf <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
 <span class="co">#&gt;    sex         age freq</span>
 <span class="co">#&gt; 1    M (0.991,5.5]    5</span>
 <span class="co">#&gt; 2    M (0.991,5.5]    5</span>
@@ -494,7 +361,7 @@
 <span class="co">#&gt; 8    F    (5.5,10]    3</span>
 <span class="co">#&gt; 9    F    (5.5,10]    4</span>
 <span class="co">#&gt; 10   F    (5.5,10]    5</span>
-<span class="fu"><a href="../reference/cut3.html">cut3</a></span><span class="op">(</span><span class="va">tbl</span>, var_name <span class="op">=</span> <span class="st">"age"</span>, breaks <span class="op">=</span> <span class="fl">2</span>, groups <span class="op">=</span> <span class="st">"sex"</span><span class="op">)</span>
+<span class="fu"><a href="../reference/cut3.html">cut3</a></span><span class="op">(</span><span class="va">tbl</span>, var_name <span class="op">=</span> <span class="st">"age"</span>, breaks <span class="op">=</span> <span class="fl">2</span>, .inf <span class="op">=</span> <span class="cn">F</span>, groups <span class="op">=</span> <span class="st">"sex"</span><span class="op">)</span>
 <span class="co">#&gt;    sex       age freq</span>
 <span class="co">#&gt; 1    M (0.996,3]    5</span>
 <span class="co">#&gt; 2    M (0.996,3]    5</span>
@@ -521,7 +388,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
     </footer>
