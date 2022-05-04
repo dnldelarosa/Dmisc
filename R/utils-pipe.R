@@ -9,3 +9,14 @@
 #' @importFrom magrittr %>%
 #' @usage lhs \%>\% rhs
 NULL
+
+
+#' := assigment
+#'
+#'
+#' @name :=
+#' @rdname dyn-dots
+#' @keywords internal
+#' @export
+#' @importFrom rlang :=
+NULL

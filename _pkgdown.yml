@@ -8,14 +8,18 @@ reference:
 - title: Data manipulation
   contents:
     -  cut3
+    -  cut3_quantile
     -  describe
+    -  numeric_month
+    -  numeric_quarter
     -  one_hot_encoding
+    -  real_prices_indexer
     -  ts_dummy
-    -  vars_to_date
     -  train_test_split
     -  train_split
     -  test_split
     -  valid_split
+    -  vars_to_date
 - title: HTML tools
   contents:
     -  progress_bar
@@ -23,7 +27,7 @@ reference:
     -  insert_html
     -  insertHTML
 - title:  Utilities
-  desc: Functions for working with the system and extra tools
+  desc: Working with the system and extra tools
   contents:
     -  use_renv
     -  db_connect
