@@ -83,5 +83,11 @@ cut3  <- function(tbl, var_name, breaks, groups = NULL, bf_args = list(), .inf =
 #' datos <- data.frame(edad = seq(1:100))
 #' cut3_quantile(datos, "edad")
 cut3_quantile <- function(tbl, var_name, .labels = NULL, .groups = NULL, .inf = TRUE, ...){
-  Dmisc::cut3(tbl, var_name, stats::quantile, .groups, list(...), .inf, labels = .labels)
+  .probs <- list(...)[["probs"]]
+  if(is.null(.probs)){
+    .probs <- seq(0.25, 0.75, 0.25)
+  }
+  .args <- list(...)
+  .args <- append(.args, list(probs = .probs))
+  Dmisc::cut3(tbl, var_name, stats::quantile, .groups, .args, .inf, labels = .labels)
 }
