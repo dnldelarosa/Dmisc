@@ -3,48 +3,45 @@
 \name{big_button}
 \alias{big_button}
 \title{Insert a SVG/HTML big button
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}}
+r lifecycle::badge("experimental")}
 \usage{
-big_button(
-  text,
-  href,
-  suffix = "",
-  width = "50\%",
-  height = 30,
-  font_size = 18,
-  font_family = NULL,
-  bg_color = "#00a65a",
-  styles = "display: block; margin: auto;"
-)
+big_button(text, href, ...)
 }
 \arguments{
-\item{text}{\link{character}: text to display in the button}
+\item{text}{\link{character}: Required text to display in the button}
 
-\item{href}{\link{character}: HTML a tag href}
+\item{href}{\link{character}: Required HTML a tag href attribute}
 
-\item{suffix}{\link{character}: suffix to display after the text}
-
-\item{width}{width of the button}
-
-\item{height}{height of the button}
-
-\item{font_size}{font size of the text}
-
-\item{font_family}{font family of the text}
-
-\item{bg_color}{background color of the button}
-
-\item{styles}{styles of the SVG element}
+\item{...}{\link{character}: Optional arguments to pass to progress_bar}
 }
 \value{
-a SVG/HTML element button
+a big button in the form of an SVG/HTML element.
 }
 \description{
 Insert a SVG/HTML big button
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+r lifecycle::badge("experimental")
+}
+\details{
+The function creates a big button with the specified text, link, and
+styles. The button is wrapped in an HTML 'a' tag and its appearance can be
+customized using the optional arguments. The text style can be customized with
+font size and font family. The button background color can also be customized.
+}
+\note{
+This function is experimental and should be used with caution.
 }
 \examples{
 \dontrun{
 big_button(text = "Get started", href = "./articles/Dmisc.html")
+big_button("Get started", "./articles/Dmisc.html", bg_color = "#4CAF50")
 }
+
+Customize button appearance by passing optional arguments to progress_bar:
+\dontrun{
+big_button("Get started", "./articles/Dmisc.html",
+width = "75\%", height = 40, font_size = 22, bg_color = "#00a65a")
+}
+}
+\seealso{
+\code{\link{progress_bar}} for the code used to generate the button itself.
 }
