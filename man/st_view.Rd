@@ -19,7 +19,6 @@ the geospatial component.
 }
 \examples{
 \dontrun{
-library(sf)
 
 # Create an sf object
 sf_obj <- sf::st_as_sf(mtcars, coords = c("wt", "mpg"), crs = 4326)
