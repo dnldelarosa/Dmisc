@@ -2,52 +2,38 @@
 % Please edit documentation in R/progress_bar.R
 \name{progress_bar}
 \alias{progress_bar}
-\title{Html progress bar
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}}
+\title{Html Progress Bar
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}`}
 \usage{
-progress_bar(
-  progress,
-  suffix = "\%",
-  width = "50\%",
-  height = 25,
-  font_size = 14,
-  font_family = "DejaVu Sans,Verdana,Geneva,sans-serif",
-  bg_color = NULL,
-  styles = "display: block; margin: auto;"
-)
+progress_bar(progress, ...)
 }
 \arguments{
-\item{progress}{\link{numeric} The progress value.}
+\item{progress}{\link{numeric} The progress value in percentage (0-100).}
 
-\item{suffix}{The suffix of the progress text.}
+\item{width}{\link{numeric} The width of the progress bar.}
 
-\item{width}{The width of the progress bar.}
+\item{height}{\link{numeric} The height of the progress bar.}
 
-\item{height}{The height of the progress bar.}
+\item{suffix}{\link{character} The text to display after the progress value (e.g. "\%").}
 
-\item{font_size}{The font size of the progress bar.}
+\item{font_family}{\link{character} The font family to use for the text.}
 
-\item{font_family}{The font family of the progress text.}
+\item{font_size}{\link{numeric} The font size of the text, in pixels.}
 
-\item{bg_color}{The background color of the progress bar.}
-
-\item{styles}{The styles of the SVG element.}
+\item{styles}{\link{character} A string with inline styles to apply to the SVG element.}
 }
 \value{
-a html object representing a svg progress bar
+an html object that displays a progress bar
 }
 \description{
-Add a svg/html progress bar with 4 states:
+Create a html progress bar that displays the progress value in 4 different states, depending on its percentage:
 \itemize{
 \item{0-25\%}
 \item{25-50\%}
 \item{50-75\%}
 \item{75-100\%}
 }
-You can use the \code{bg_color} parameter to change the color of the bar.
 }
 \examples{
-\dontrun{
 progress_bar(77)
-}
 }
