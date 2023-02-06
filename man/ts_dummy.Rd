@@ -5,7 +5,7 @@
 \title{Time Series Dummy Variable
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}}
 \usage{
-ts_dummy(dates, start, end, frequency = 1, ...)
+ts_dummy(dates, start = NULL, end = NULL, frequency = NULL, ts = NULL, ...)
 }
 \arguments{
 \item{dates}{dates to set ones}
@@ -27,21 +27,27 @@ Time Series Dummy Variable
 }
 \examples{
 
-  tsd1 <- ts_dummy(dates = 2005,
-                   start = 2000,
-                   end = 2021)
-  tsd1
+tsd1 <- ts_dummy(
+  dates = 2005,
+  start = 2000,
+  end = 2021
+)
+tsd1
 
-  tsd2 <- ts_dummy(dates = c(2005, 3),
-                   start = 2000,
-                   end = c(2021, 4),
-                   frequency = 4)
-  tsd2
+tsd2 <- ts_dummy(
+  dates = c(2005, 3),
+  start = 2000,
+  end = c(2021, 4),
+  frequency = 4
+)
+tsd2
 
-  tsd3 <- ts_dummy(dates = data.frame(c(2005, 2006), c(8, 11)),
-                   start = 2000,
-                   end = c(2021, 12),
-                   frequency = 12)
-  tsd3
+tsd3 <- ts_dummy(
+  dates = data.frame(c(2005, 2006), c(8, 11)),
+  start = 2000,
+  end = c(2021, 12),
+  frequency = 12
+)
+tsd3
 
 }
