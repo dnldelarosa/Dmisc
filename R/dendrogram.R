@@ -1,4 +1,27 @@
-
+#' Convert a Dendrogram Object to a List
+#' `r lifecycle::badge("experimental")`
+#'
+#' This function takes as input a dendrogram object, and returns a nested list,
+#' where each node in the dendrogram is represented as a list in the returned list.
+#' If a node is a leaf node, it is represented as a character vector of length one,
+#' containing the label of the leaf node.
+#'
+#' @param dend a dendrogram object
+#'
+#' @return a nested list, where each node in the dendrogram is represented as a
+#' list in the returned list. If a node is a leaf node, it is represented as a
+#' character vector of length one, containing the label of the leaf node.
+#'
+#' @examples
+#' \dontrun{
+#' # Create a dendrogram object
+#' dend <- as.dendrogram(hclust(dist(USArrests), "ave"))
+#'
+#' # Convert the dendrogram to a list
+#' dend_to_list(dend)
+#' }
+#'
+#' @export
 dend_to_list <- function(dend){
   res <- list()
   for (br in seq_along(dend)) {
@@ -12,6 +35,29 @@ dend_to_list <- function(dend){
   res
 }
 
+
+#' dend_to_df: Transform a dendrogram into a data frame
+#' `r lifecycle::badge("experimental")`
+#'
+#' This function takes a dendrogram object and converts it into a data frame.
+#' The resulting data frame has columns representing each level of the dendrogram
+#' and the values representing the label for each leaf.
+#'
+#' @param dend A dendrogram object.
+#'
+#' @return A data frame with one row for each leaf in the dendrogram, and columns
+#' representing each level of the dendrogram with values representing the label
+#' for each leaf.
+#'
+#' @examples
+#' # create example dendrogram
+#' library(ggdendro)
+#' dend <- as.dendrogram(hclust(dist(mtcars)))
+#'
+#' # use the function
+#' df <- dend_to_df(dend)
+#'
+#' @export
 dend_to_df <- function(dend){
   N1 <- NULL
   name <- NULL
@@ -26,6 +72,29 @@ dend_to_df <- function(dend){
     dplyr::mutate(dplyr::across(dplyr::starts_with("N"), ~replace_na(.x, 0)))
 }
 
+
+#' Find Label Node
+#' `r lifecycle::badge("experimental")`
+#'
+#' This function takes a dendrogram data frame dend_df, a label .label, and a
+#' node number node_num, and returns the node number corresponding to the provided
+#' label. If node_num is provided, the function returns only the specified node
+#' number. If node_num is not provided, the function returns all node numbers
+#' corresponding to the provided label.
+#'
+#' @param dend_df A data frame that represents a dendrogram.
+#' @param .label The label for which to find the node number(s).
+#' @param node_num The node number to return (optional).
+#'
+#' @return A numeric value or a vector of numeric values, depending on whether
+#' node_num is provided.
+#'
+#' @export
+#'
+#' @examples
+#' # Example usage
+#' find_label_node(dend_df, "label1")
+#' find_label_node(dend_df, "label1", node_num = 1)
 find_label_node <- function(dend_df, .label, node_num = NULL){
   label <- NULL
   dend_df %>%
@@ -40,6 +109,19 @@ find_label_node <- function(dend_df, .label, node_num = NULL){
   }
 }
 
+
+#' Find Labels Path
+#' `r lifecycle::badge("experimental")`
+#'
+#' @param dend_df A data frame representing the dendrogram
+#' @param .label The labels of the nodes to be found
+#' @param .sep The separator for the path elements
+#' @param .pre The number of characters to remove from the end of the path elements
+#'
+#' @return A character vector of the paths to the nodes with the specified labels
+#' @export
+#'
+#' @examples
 find_labels_path <- function(dend_df, .label, .sep = "", .pre = 1){
   label <- NULL
   path <- NULL
