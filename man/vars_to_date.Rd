@@ -15,7 +15,8 @@ vars_to_date(
   drop_vars = TRUE,
   clean_names = FALSE,
   date_format = "\%d-\%m-\%y",
-  origin = "1900-01-01"
+  origin = "1900-01-01",
+  .round = c("end", "middle", "start")
 )
 }
 \arguments{

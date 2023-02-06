@@ -27,11 +27,13 @@
 #' tbl
 #'
 #' vars_to_date(tbl, year = 1, month = 2, day = 3)
-vars_to_date <- function(
-  tbl, year = NULL, quarter = NULL, month = NULL, day = NULL,
-  date = NULL, drop_vars = TRUE, clean_names = FALSE, date_format = "%d-%m-%y",
-  origin = "1900-01-01"
-) {
+vars_to_date <- function(tbl, year = NULL, quarter = NULL, month = NULL, day = NULL,
+                         date = NULL, drop_vars = TRUE, clean_names = FALSE, date_format = "%d-%m-%y",
+                         origin = "1900-01-01", .round = c("end", "middle", "start")) {
+  .round_step <- 1
+  if (length(.round) > 1) {
+    .round <- .round[[1]]
+  }
   if (clean_names) {
     names(tbl) <- janitor::make_clean_names(names(tbl))
   }
@@ -73,6 +75,7 @@ vars_to_date <- function(
     }
 
     tbl <- numeric_quarter(tbl, quartern)
+    tbl[[quartern]] <- tbl[[quartern]] * 3 - 2
   } else {
     quarter <- FALSE
   }
@@ -120,6 +123,7 @@ vars_to_date <- function(
     year <- FALSE
     month <- FALSE
     day <- FALSE
+    .round_step <- NULL
   }
 
   if (month) {
@@ -128,8 +132,8 @@ vars_to_date <- function(
     }
     tbl$date <- paste0(tbl[[yearn]], "-", tbl[[monthn]], "-", "01")
     tbl$date <- as.Date(tbl$date)
-    tbl$date <- lubridate::ceiling_date(tbl$date, unit = "month")
-    tbl$date <- lubridate::add_with_rollback(tbl$date, lubridate::days(-1))
+    # tbl$date <- lubridate::ceiling_date(tbl$date, unit = "month")
+    # tbl$date <- lubridate::add_with_rollback(tbl$date, lubridate::days(-1))
 
     if (drop_vars) {
       tbl[, yearn] <- NULL
@@ -145,7 +149,8 @@ vars_to_date <- function(
       stop("You need to indicate the variable 'year'")
     }
 
-    tbl <- vars_to_date(tbl, year = year, month = quarter)
+    tbl <- vars_to_date(tbl, year = year, month = quarter, drop_vars = drop_vars, .round = NULL)
+    tbl[[quartern]] <- lubridate::quarter(tbl$date)
 
     if (drop_vars) {
       tbl[, yearn] <- NULL
@@ -153,6 +158,7 @@ vars_to_date <- function(
     }
     year <- FALSE
     quarter <- FALSE
+    .round_step <- 3
   }
 
   if (date) {
@@ -162,6 +168,25 @@ vars_to_date <- function(
     tbl <- clean_date(tbl, date_format, origin)
     nombres[nombres == "date"] <- daten
     names(tbl) <- nombres
+    .round_step <- NULL
+  }
+
+  if (!is.null(.round)) {
+    if (!is.null(.round_step)) {
+      tbl <- tbl %>%
+        dplyr::mutate(
+          date_end = lubridate::add_with_rollback(date, months(.round_step)),
+          date_end = lubridate::add_with_rollback(date_end, lubridate::days(-1))
+          )
+      if(.round == "end") {
+        tbl$date <- tbl$date_end
+      } else if(.round == "middle"){
+        tbl <- tbl %>%
+          dplyr::mutate(date = date + (date_end - date)/2)
+        lubridate::day(tbl$date) <- 15
+      }
+      tbl$date_end <- NULL
+    }
   }
 
   tbl %>%
@@ -188,7 +213,7 @@ get_pos <- function(arg, names) {
 #'
 #' @examples
 #' \dontrun{
-#'   numeric_month(tbl, "month")
+#' numeric_month(tbl, "month")
 #' }
 numeric_month <- function(tbl, month) {
   if (is.character(utils::type.convert(tbl[[month]], as.is = TRUE))) {
@@ -216,7 +241,7 @@ numeric_month <- function(tbl, month) {
 #'
 #' @examples
 #' \dontrun{
-#'  numeric_quarter(tbl, "quarter")
+#' numeric_quarter(tbl, "quarter")
 #' }
 numeric_quarter <- function(tbl, quarter) {
   . <- NULL
@@ -242,7 +267,7 @@ numeric_quarter <- function(tbl, quarter) {
       } %>%
       tolower() -> tbl[, quarter]
   }
-  tbl[[quarter]] <- as.numeric(names(qq)[match(tbl[[quarter]], qq)]) * 3
+  tbl[[quarter]] <- as.numeric(names(qq)[match(tbl[[quarter]], qq)])
 
   tbl
 }

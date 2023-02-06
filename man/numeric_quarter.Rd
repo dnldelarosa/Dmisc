@@ -19,6 +19,6 @@ Convert a quarter variable to a numeric format
 }
 \examples{
 \dontrun{
- numeric_quarter(tbl, "quarter")
+numeric_quarter(tbl, "quarter")
 }
 }

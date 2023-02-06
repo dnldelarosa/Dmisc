@@ -19,6 +19,6 @@ Convert a month variable to a numeric format
 }
 \examples{
 \dontrun{
-  numeric_month(tbl, "month")
+numeric_month(tbl, "month")
 }
 }
