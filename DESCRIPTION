@@ -1,6 +1,6 @@
 Package: Dmisc
 Title: Daniel miscellaneous functions
-Version: 0.12.2
+Version: 0.12.5
 Authors@R: 
     person(given = "Daniel E.",
            family = "de la Rosa",
@@ -27,18 +27,20 @@ Imports:
     lubridate,
     tidyr,
     janitor,
-    rlang
+    rlang,
+    dittodb
 Suggests: 
-    testthat,
     covr,
-    rmarkdown,
     DBI,
-    RPostgres,
-    keyring,
-    withr,
+    dittodb,
     flextable,
+    keyring,
+    renv,
+    rmarkdown,
+    RPostgres,
+    testthat,
     tsibble,
-    renv
+    withr
 Language: en-US
 RdMacros: lifecycle
 VignetteBuilder: knitr

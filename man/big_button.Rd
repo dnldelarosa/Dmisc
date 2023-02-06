@@ -2,46 +2,35 @@
 % Please edit documentation in R/big_button.R
 \name{big_button}
 \alias{big_button}
-\title{Insert a SVG/HTML big button
-r lifecycle::badge("experimental")}
+\title{Insert a HTML big button}
 \usage{
 big_button(text, href, ...)
 }
 \arguments{
-\item{text}{\link{character}: Required text to display in the button}
+\item{text}{\link{character}: Required text to display in the button.}
 
-\item{href}{\link{character}: Required HTML a tag href attribute}
+\item{href}{\link{character}: Required link for the button.}
 
-\item{...}{\link{character}: Optional arguments to pass to progress_bar}
+\item{...}{\link{character}: Optional arguments to customize the button appearance.}
 }
 \value{
 a big button in the form of an SVG/HTML element.
 }
 \description{
-Insert a SVG/HTML big button
-r lifecycle::badge("experimental")
+Insert a HTML big button
 }
 \details{
-The function creates a big button with the specified text, link, and
-styles. The button is wrapped in an HTML 'a' tag and its appearance can be
-customized using the optional arguments. The text style can be customized with
-font size and font family. The button background color can also be customized.
+The function creates a big button with the specified text, link, and styles. The button is wrapped in an HTML 'a' tag and its appearance can be customized using optional arguments such as font size, font family, background color, and styles.
 }
 \note{
 This function is experimental and should be used with caution.
 }
 \examples{
-\dontrun{
 big_button(text = "Get started", href = "./articles/Dmisc.html")
 big_button("Get started", "./articles/Dmisc.html", bg_color = "#4CAF50")
-}
 
-Customize button appearance by passing optional arguments to progress_bar:
-\dontrun{
+# Customize button appearance by passing optional arguments
 big_button("Get started", "./articles/Dmisc.html",
 width = "75\%", height = 40, font_size = 22, bg_color = "#00a65a")
-}
-}
-\seealso{
-\code{\link{progress_bar}} for the code used to generate the button itself.
+
 }
