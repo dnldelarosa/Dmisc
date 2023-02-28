@@ -31,7 +31,7 @@ Convert numeric to factor weighted and by group
 }
 \examples{
 datos <- data.frame(edad = seq(1:100))
-cut3(datos, "edad", 5)
+dplyr::count(cut3(datos, "edad", 5), edad)
 }
 \seealso{
 \code{vignette("cut3", package = "Dmisc")}
