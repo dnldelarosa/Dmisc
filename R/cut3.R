@@ -19,9 +19,29 @@
 #' @examples
 #' datos <- data.frame(edad = seq(1:100))
 #' cut3(datos, "edad", 5)
-cut3  <- function(tbl, var_name, breaks, groups = NULL, bf_args = list(), .inf = FALSE, ...) {
+cut3 <- function(tbl, var_name, breaks, groups = NULL, bf_args = list(), .inf = FALSE , ...) {
+  breaks <- breaker(tbl[[var_name]], breaks, bf_args)
+  if (.inf){
+    breaks <- c(-Inf, breaks, Inf)
+  }
+  if (!is.null(groups)) {
+    tbl[[var_name]] <- as.character(tbl[[var_name]])
+    tbl <- dplyr::group_by(tbl, !!rlang::sym(groups))
+    tbl <- dplyr::mutate(tbl, !!rlang::sym(var_name) := as.character(cut(as.numeric(!!rlang::sym(var_name)), breaks, ...)))
+    tbl[[var_name]] <- as.factor(tbl[[var_name]])
+    tbl <- dplyr::ungroup(tbl)
+  } else {
+    tbl[[var_name]] <- as.factor(cut(tbl[[var_name]], breaks, ...))
+  }
+  tbl
+}
+
+
+
+
+breaker  <- function(.data, breaks, bf_args) {
   if (is.function(breaks)) {
-    kargs <- list(tbl[[var_name]])
+    kargs <- list(.data)
     if(length(bf_args) > 0){
       kargs <- append(kargs, bf_args)
     }
@@ -32,7 +52,7 @@ cut3  <- function(tbl, var_name, breaks, groups = NULL, bf_args = list(), .inf =
       if(is.numeric(b)){
         newb <- append(newb, b)
       } else if(is.function(b)){
-        kargs <- list(tbl[[var_name]])
+        kargs <- list(.data)
         if(length(bf_args) > 0){
           kargs <- append(kargs, bf_args)
         }
@@ -50,19 +70,8 @@ cut3  <- function(tbl, var_name, breaks, groups = NULL, bf_args = list(), .inf =
   } else if(!is.numeric(breaks)){
     stop("Only numbers or functions that generate numbers can be included.")
   }
-  if(.inf){
-    breaks <- c(-Inf, breaks, Inf)
-  }
-  if(!is.null(groups)){
-    tbl[[var_name]] <- as.character(tbl[[var_name]])
-    for (group in unique(tbl[[groups]])) { # use split-apply-combine strategy
-      tbl[tbl[[groups]] == group, var_name] <- as.character(cut(as.numeric(tbl[tbl[[groups]] == group, var_name]), breaks, ...))
-    }
-    tbl[[var_name]] <- as.factor(tbl[[var_name]])
-  } else {
-    tbl[[var_name]] <- cut(tbl[[var_name]], breaks, ...)
-  }
-  tbl
+  breaks <- unique(breaks)
+  breaks
 }
 
 
