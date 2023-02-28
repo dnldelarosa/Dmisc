@@ -1,4 +1,5 @@
 #' Time series transformation
+#' `r lifecycle::badge("experimental")`
 #'
 #' This function applies a transformation function to the values of a time series object and returns
 #' a new time series object with the transformed values.

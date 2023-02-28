@@ -2,7 +2,8 @@
 % Please edit documentation in R/ts_zero.R
 \name{ts_zero}
 \alias{ts_zero}
-\title{Create a time series object filled with zeros}
+\title{Create a time series object filled with zeros
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}}
 \usage{
 ts_zero(x, resize = NULL)
 }

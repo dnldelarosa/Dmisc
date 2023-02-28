@@ -1,4 +1,5 @@
 #' Create a time series object filled with zeros
+#' `r lifecycle::badge("experimental")`
 #'
 #' This function creates a time series object filled with zeros of the same length and frequency as the input
 #' time series object. If a 'resize' object is provided, the resulting time series object will be resized to

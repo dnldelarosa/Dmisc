@@ -1,4 +1,5 @@
 #' Split data into train and test sets
+#' `r lifecycle::badge("experimental")`
 #'
 #' This function splits a dataset into train and test sets. The function can handle both time series and regular data frames. For time series data, the function splits the data based on time, while for regular data frames, it uses the rsample package to split the data randomly.
 #'

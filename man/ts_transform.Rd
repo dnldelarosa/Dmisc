@@ -2,7 +2,8 @@
 % Please edit documentation in R/ts_transform.R
 \name{ts_transform}
 \alias{ts_transform}
-\title{Time series transformation}
+\title{Time series transformation
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}}
 \usage{
 ts_transform(.ts, .t, .subset = NULL)
 }

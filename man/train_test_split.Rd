@@ -2,7 +2,8 @@
 % Please edit documentation in R/train_test_split.R
 \name{train_test_split}
 \alias{train_test_split}
-\title{Split data into train and test sets}
+\title{Split data into train and test sets
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}}
 \usage{
 train_test_split(data, prop = 3/4, val_split = FALSE, ...)
 }
