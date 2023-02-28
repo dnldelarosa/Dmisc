@@ -1,22 +1,23 @@
-#' Create a table of summaries for an entery dataframe
+#' Create a summary table for a data frame
 #' `r lifecycle::badge("experimental")`
 #'
-#' @param data [data.frame]: a dataframe with the data
-#' @param digits [numeric]: number of digits for the numbers
-#' @param t [logical]: indicates if the resulting table is transposed
-#' @param flextable [logical]: indicates if the table is converted to a simple flextable.
-#'    See \code{flextable::\link[flextable:flextable]{flextable}}
-#' @param ft_args [list]: other arguments passed to \code{flextable::\link[flextable:flextable]{flextable}} function
-#' @param ... other arguments passed to summary function
+#' This function generates a summary table for a data frame, containing summary statistics for each variable in the data frame.
 #'
-#' @return a table containing the summary of every variable in the provided dataframe
+#' @param data A data frame containing the data to be summarized
+#' @param digits The number of digits to display in the summary table (default is 4)
+#' @param t If TRUE, the table will be transposed (default is TRUE)
+#' @param flextable If TRUE, the table will be converted to a simple flextable (default is FALSE)
+#' @param ft_args A list of additional arguments to pass to the \code{flextable} function if \code{flextable = TRUE} (default is an empty list)
+#' @param ... Other arguments to pass to the \code{summary} function
+#'
+#' @return A table containing summary statistics for each variable in the data frame
 #'
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' describe(cars, flextable = T)
-#' describe(cars, flextable = T, ft_args = list(cwidth = 1))
+#' describe(cars, flextable = TRUE)
+#' describe(cars, flextable = TRUE, ft_args = list(cwidth = 1))
 #' }
 describe <- function(data, digits = 4, t = TRUE, flextable = FALSE, ft_args = list(), ...){
   data <- as.data.frame(data)

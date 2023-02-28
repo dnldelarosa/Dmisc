@@ -2,35 +2,33 @@
 % Please edit documentation in R/describe.R
 \name{describe}
 \alias{describe}
-\title{Create a table of summaries for an entery dataframe
+\title{Create a summary table for a data frame
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}}
 \usage{
 describe(data, digits = 4, t = TRUE, flextable = FALSE, ft_args = list(), ...)
 }
 \arguments{
-\item{data}{\link{data.frame}: a dataframe with the data}
+\item{data}{A data frame containing the data to be summarized}
 
-\item{digits}{\link{numeric}: number of digits for the numbers}
+\item{digits}{The number of digits to display in the summary table (default is 4)}
 
-\item{t}{\link{logical}: indicates if the resulting table is transposed}
+\item{t}{If TRUE, the table will be transposed (default is TRUE)}
 
-\item{flextable}{\link{logical}: indicates if the table is converted to a simple flextable.
-See \code{flextable::\link[flextable:flextable]{flextable}}}
+\item{flextable}{If TRUE, the table will be converted to a simple flextable (default is FALSE)}
 
-\item{ft_args}{\link{list}: other arguments passed to \code{flextable::\link[flextable:flextable]{flextable}} function}
+\item{ft_args}{A list of additional arguments to pass to the \code{flextable} function if \code{flextable = TRUE} (default is an empty list)}
 
-\item{...}{other arguments passed to summary function}
+\item{...}{Other arguments to pass to the \code{summary} function}
 }
 \value{
-a table containing the summary of every variable in the provided dataframe
+A table containing summary statistics for each variable in the data frame
 }
 \description{
-Create a table of summaries for an entery dataframe
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+This function generates a summary table for a data frame, containing summary statistics for each variable in the data frame.
 }
 \examples{
 \dontrun{
-describe(cars, flextable = T)
-describe(cars, flextable = T, ft_args = list(cwidth = 1))
+describe(cars, flextable = TRUE)
+describe(cars, flextable = TRUE, ft_args = list(cwidth = 1))
 }
 }
