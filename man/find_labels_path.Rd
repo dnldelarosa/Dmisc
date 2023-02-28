@@ -23,3 +23,19 @@ A character vector of the paths to the nodes with the specified labels
 Find Labels Path
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
+\examples{
+\dontrun{
+dend <- as.dendrogram(hclust(dist(USArrests), "ave"))
+
+# Convertir dendrograma a data frame
+dend_df <- dend_to_df(dend)
+
+# Encontrar el camino hacia el nodo que tiene la etiqueta "Volvo 142E"
+find_labels_path(dend_df, "Volvo 142E", .sep = ".", .pre = 1)
+#> [1] "3.3.8"
+
+# Encontrar el camino hacia los nodos que tienen las etiquetas "Volvo 142E" y "Honda Civic"
+find_labels_path(dend_df, c("Volvo 142E", "Honda Civic"), .sep = ".", .pre = 1)
+#> [1] "3.3.8" "2.6.11"
+}
+}

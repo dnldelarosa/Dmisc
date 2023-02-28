@@ -21,7 +21,7 @@
 #' dend_to_list(dend)
 #' }
 #'
-#' @export
+# @export
 dend_to_list <- function(dend){
   res <- list()
   for (br in seq_along(dend)) {
@@ -29,11 +29,17 @@ dend_to_list <- function(dend){
     if(len > 1){
       res[[as.character(br)]] <- dend_to_list(dend[[br]])
     } else {
-      res[[as.character(br)]] <- labels(dend[[br]])
+      lab <- labels(dend[[br]])
+      if(is.null(lab)){
+        res[[as.character(br)]] <- dend_to_list(dend[[br]])
+      } else {
+        res[[as.character(br)]] <- lab
+      }
     }
   }
   res
 }
+
 
 
 #' dend_to_df: Transform a dendrogram into a data frame
@@ -50,18 +56,19 @@ dend_to_list <- function(dend){
 #' for each leaf.
 #'
 #' @examples
+#' \dontrun{
 #' # create example dendrogram
-#' library(ggdendro)
-#' dend <- as.dendrogram(hclust(dist(mtcars)))
+#' dend <- as.dendrogram(hclust(dist(USArrests), "ave"))
 #'
 #' # use the function
 #' df <- dend_to_df(dend)
-#'
-#' @export
+#'}
+# @export
 dend_to_df <- function(dend){
   N1 <- NULL
   name <- NULL
-  dend_to_list(dend) %>%
+  dend |>
+    dend_to_list() %>%
     as.data.frame() %>%
     tidyr::pivot_longer(dplyr::everything(), values_to = "label") -> res
   mpoints <- max(stringr::str_count(res[["name"]], "[\\.]"))
@@ -69,7 +76,7 @@ dend_to_df <- function(dend){
     tidyr::separate(name, into = paste0("N", 1:(mpoints+1)), sep = "\\.", fill = "right") %>%
     dplyr::mutate(N1 = stringr::str_remove(N1, "X")) %>%
     dplyr::mutate(dplyr::across(dplyr::starts_with("N"), as.numeric)) %>%
-    dplyr::mutate(dplyr::across(dplyr::starts_with("N"), ~replace_na(.x, 0)))
+    dplyr::mutate(dplyr::across(dplyr::starts_with("N"), ~tidyr::replace_na(.x, 0)))
 }
 
 
@@ -89,12 +96,25 @@ dend_to_df <- function(dend){
 #' @return A numeric value or a vector of numeric values, depending on whether
 #' node_num is provided.
 #'
-#' @export
+# @export
 #'
 #' @examples
+#' \dontrun{
+#' dend_df <- dend_to_df(as.dendrogram(hclust(dist(mtcars))))
+#'
 #' # Example usage
 #' find_label_node(dend_df, "label1")
 #' find_label_node(dend_df, "label1", node_num = 1)
+#'
+#' find_label_node(dend_df, "Mazda RX4")
+#' # returns [1] 5 5 5 5 5
+#'
+#' find_label_node(dend_df, "Datsun 710")
+#' # returns [1] 2 2 2 2 2
+#'
+#' find_label_node(dend_df, "Mazda RX4 Wag", node_num = 1)
+#' # returns 6
+#' }
 find_label_node <- function(dend_df, .label, node_num = NULL){
   label <- NULL
   dend_df %>%
@@ -119,9 +139,23 @@ find_label_node <- function(dend_df, .label, node_num = NULL){
 #' @param .pre The number of characters to remove from the end of the path elements
 #'
 #' @return A character vector of the paths to the nodes with the specified labels
-#' @export
+# @export
 #'
 #' @examples
+#' \dontrun{
+#' dend <- as.dendrogram(hclust(dist(USArrests), "ave"))
+#'
+#' # Convertir dendrograma a data frame
+#' dend_df <- dend_to_df(dend)
+#'
+#' # Encontrar el camino hacia el nodo que tiene la etiqueta "Volvo 142E"
+#' find_labels_path(dend_df, "Volvo 142E", .sep = ".", .pre = 1)
+#' #> [1] "3.3.8"
+#'
+#' # Encontrar el camino hacia los nodos que tienen las etiquetas "Volvo 142E" y "Honda Civic"
+#' find_labels_path(dend_df, c("Volvo 142E", "Honda Civic"), .sep = ".", .pre = 1)
+#' #> [1] "3.3.8" "2.6.11"
+#' }
 find_labels_path <- function(dend_df, .label, .sep = "", .pre = 1){
   label <- NULL
   path <- NULL

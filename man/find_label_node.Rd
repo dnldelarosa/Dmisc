@@ -26,7 +26,20 @@ number. If node_num is not provided, the function returns all node numbers
 corresponding to the provided label.
 }
 \examples{
+\dontrun{
+dend_df <- dend_to_df(as.dendrogram(hclust(dist(mtcars))))
+
 # Example usage
 find_label_node(dend_df, "label1")
 find_label_node(dend_df, "label1", node_num = 1)
+
+find_label_node(dend_df, "Mazda RX4")
+# returns [1] 5 5 5 5 5
+
+find_label_node(dend_df, "Datsun 710")
+# returns [1] 2 2 2 2 2
+
+find_label_node(dend_df, "Mazda RX4 Wag", node_num = 1)
+# returns 6
+}
 }

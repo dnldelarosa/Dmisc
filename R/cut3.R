@@ -18,7 +18,7 @@
 #'
 #' @examples
 #' datos <- data.frame(edad = seq(1:100))
-#' cut3(datos, "edad", 5)
+#' dplyr::count(cut3(datos, "edad", 5), edad)
 cut3 <- function(tbl, var_name, breaks, groups = NULL, bf_args = list(), .inf = FALSE , ...) {
   breaks <- breaker(tbl[[var_name]], breaks, bf_args)
   if (.inf){

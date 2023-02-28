@@ -21,11 +21,11 @@ The resulting data frame has columns representing each level of the dendrogram
 and the values representing the label for each leaf.
 }
 \examples{
+\dontrun{
 # create example dendrogram
-library(ggdendro)
-dend <- as.dendrogram(hclust(dist(mtcars)))
+dend <- as.dendrogram(hclust(dist(USArrests), "ave"))
 
 # use the function
 df <- dend_to_df(dend)
-
+}
 }
