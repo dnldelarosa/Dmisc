@@ -1,4 +1,7 @@
 #' str_c2: Concatenate Strings with Custom Last Delimiter
+#' `r lifecycle::badge("deprecated")`
+#'
+#'  This function has been deprecated in favor of stringr::str_flatten() function.
 #'
 #' This function concatenates multiple strings into a single string using a specified delimiter and provides the option to change the delimiter for the last pair of strings.
 #'
@@ -13,7 +16,8 @@
 #' @examples
 #' str_c2("A", "B", "C", "D", sep = ", ")
 #' str_c2("A", "B", "C", "D", sep = ", ", last_coll = " and ")
-str_c2 <- function(..., sep = "", collapse = NULL, last_coll = " y ") {
+str_c2 <- function(..., sep = "", collapse = "", last_coll = " y ") {
+  deprecate_warn("0.20.0", "Dmisc::str_c2()", "stringr::str_flatten()")
   string <- stringr::str_c(..., sep = sep, collapse = collapse)
   stringr::str_locate_all(string, collapse) %>%
     `[[`(1) %>%
