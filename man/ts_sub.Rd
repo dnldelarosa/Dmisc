@@ -2,7 +2,8 @@
 % Please edit documentation in R/ts_sub.R
 \name{ts_sub}
 \alias{ts_sub}
-\title{ts_sub: Subtract two time series}
+\title{ts_sub: Subtract two time series
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}}
 \usage{
 ts_sub(ts1, ts2)
 }
@@ -17,6 +18,7 @@ The time frame starts from the end of ts2.
 }
 \description{
 ts_sub: Subtract two time series
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
 \examples{
 ts1 <- ts(rnorm(100), start = c(2010, 1), frequency = 12)

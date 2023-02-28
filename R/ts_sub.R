@@ -1,4 +1,5 @@
 #' ts_sub: Subtract two time series
+#' `r lifecycle::badge("experimental")`
 #'
 #' @param ts1 A time series object.
 #' @param ts2 A time series object.
