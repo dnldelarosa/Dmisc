@@ -1,32 +1,36 @@
-#' Apply One-Hot-Encoding to factor variables
-#' `r lifecycle::badge("experimental")`
-#'
-#' @param tbl [data.frame]: dataset with the variables
-#' @param variables variables to apply one-hot-encoding. If [NULL] all factor
-#'   variables are processed.
-#' @param drop_one [logical]: especify if one of categories is drop in final dataset
-#' @param ... other arguments passed to \link[tidyr]{pivot_wider}
-#'
-#' @return a dataset with new binary variables
-#'
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#'   warpbreaks
-#'   one_hot_encoding(warpbreaks)
-#' }
+# Apply One-Hot-Encoding to factor variables
+# `r lifecycle::badge("experimental")`
+#
+# @param tbl [data.frame]: dataset with the variables
+# @param variables variables to apply one-hot-encoding. If [NULL] all factor
+#   variables are processed.
+# @param drop_one [logical]: especify if one of categories is drop in final dataset
+# @param ... other arguments passed to \link[tidyr]{pivot_wider}
+#
+# @return a dataset with new binary variables
+#
+# 
+#
+# @examples
+# \dontrun{
+# warpbreaks
+# one_hot_encoding(warpbreaks)
+# }
 one_hot_encoding <- function(tbl, variables = NULL, drop_one = FALSE, ...) {
-  if(is.null(variables)){
+  if (!requireNamespace("tibble", quietly = TRUE)) {
+    stop("The tibble package is required to use this function. 
+    Please install it using install.packages(\"tibble\")")
+  }
+  if (is.null(variables)) {
     variables <- names(dplyr::select_if(tbl, is.factor))
   }
 
-  tbl[["xyz1rn"]] <- 1:nrow(tbl)
+  tbl[["xyz1rn"]] <- seq_len(nrow(tbl))
   tbl <- tibble::rownames_to_column(tbl)
 
   all_vals <- vector("character")
   for (var in variables) {
-    if(is.factor(tbl[[var]])){
+    if (is.factor(tbl[[var]])) {
       all_vals <- append(all_vals, unique(levels(tbl[[var]])))
     } else {
       all_vals <- append(all_vals, unique(tbl[[var]]))
@@ -36,9 +40,13 @@ one_hot_encoding <- function(tbl, variables = NULL, drop_one = FALSE, ...) {
   for (pos in seq_along(variables)) {
     old_names <- names(tbl)
     id_cols <- old_names[old_names != variables[pos]]
-    vals_dup <- length(all_vals[all_vals %in% unique(tbl[[variables[pos]]])]) > length(unique(tbl[[variables[pos]]]))
+    vals_dup <- length(
+      all_vals[all_vals %in% unique(tbl[[variables[pos]]])]
+    ) > length(
+      unique(tbl[[variables[pos]]])
+    )
     tbl <- tidyr::pivot_wider(tbl,
-      dplyr::all_of(id_cols),
+      id_cols = dplyr::all_of(id_cols),
       names_from = variables[pos],
       values_from = variables[pos],
       names_prefix = dplyr::if_else(vals_dup, paste0(variables[pos], "_"), ""),

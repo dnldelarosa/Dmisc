@@ -1,30 +1,31 @@
-#' Convert time series to data frame
-#' `r lifecycle::badge("experimental")`
-#'
-#' This function takes a time series and converts it to a data frame with a date column and a value column.
-#'
-#' @param ts A time series object.
-#' @param as_date A boolean indicating whether the output should have a date column. Default is TRUE.
-#' @param .name A character string specifying the name of the value column. If not specified, the column name will be taken from the name attribute of the time series object.
-#' @param ... Additional arguments passed to functions.
-#'
-#' @return A data frame with columns date and .name.
-#'
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#' data(AirPassengers)
-#' ts_to_df(AirPassengers)
-#' ts_to_df(AirPassengers, .name = "air_passengers")
-#' }
+# Convert time series to data frame
+# `r lifecycle::badge("experimental")`
+#
+# This function takes a time series and converts it to a data frame with a date column and a value column.
+#
+# @param ts A time series object.
+# @param as_date A boolean indicating whether the output should have a date column. Default is TRUE.
+# @param .name A character string specifying the name of the value column. If not specified, the column name will be taken from the name attribute of the time series object.
+# @param ... Additional arguments passed to functions.
+#
+# @return A data frame with columns date and .name.
+#
+#
+# @examples
+# \dontrun{
+# data(AirPassengers)
+# ts_to_df(AirPassengers)
+# ts_to_df(AirPassengers, .name = "air_passengers")
+# }
 ts_to_df <- function(ts, as_date = TRUE, .name = NULL, ...){
-
-  months <- .ts_months(frequency(ts))
+  year <- NULL
+  month <- NULL
+  x <- NULL
+  months <- .ts_months(stats::frequency(ts))
   res <- ts |>
-    time() |>
+    stats::time() |>
     as.data.frame() |>
-    setNames(c("x")) |>
+    stats::setNames(c("x")) |>
     dplyr::mutate(x = format(x, nsmall = 4)) |>
     tidyr::separate(col = x, into = c("year", "month"), sep = "\\.") |>
     dplyr::mutate(year = as.numeric(year), month = months[month]) |>
@@ -35,11 +36,11 @@ ts_to_df <- function(ts, as_date = TRUE, .name = NULL, ...){
     vars_to_date(year = "year", month = "month")
   }
   if(!is.null(.name)){
-    res <- setNames(res, c("date", .name))
+    res <- stats::setNames(res, c("date", .name))
   } else {
     if(!'mts' %in% class(ts)){
-      if(!is.null(attr(ts, 'name'))){
-        res <- setNames(res, c("date", attr(ts, 'name')))
+      if(!is.null(attr(ts, '.name'))){
+        res <- stats::setNames(res, c("date", attr(ts, '.name')))
       }
     }
   }

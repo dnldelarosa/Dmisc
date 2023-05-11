@@ -2,7 +2,8 @@
 % Please edit documentation in R/cut3.R
 \name{cut3_quantile}
 \alias{cut3_quantile}
-\title{Cut3 by quantile}
+\title{Cut3 by quantile
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}}
 \usage{
 cut3_quantile(tbl, var_name, .labels = NULL, .groups = NULL, .inf = TRUE, ...)
 }
@@ -15,17 +16,22 @@ cut3_quantile(tbl, var_name, .labels = NULL, .groups = NULL, .inf = TRUE, ...)
 
 \item{.groups}{\link{character}: name of a groups variable}
 
-\item{.inf}{\link{logical}: indicates if the breaks need to be extended by -Inf and Inf}
+\item{.inf}{\link{logical}: indicates if the breaks need to be extended by
+-Inf and Inf}
 
 \item{...}{argument passed to quantile}
 }
 \value{
-same as \code{tbl} input with \code{var_name} converted to factor by quantiles
+same as \code{tbl} input with \code{var_name} converted to factor by
+quantiles
 }
 \description{
 Cut3 by quantile
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
 \examples{
+\dontrun{
 datos <- data.frame(edad = seq(1:100))
 cut3_quantile(datos, "edad")
+}
 }

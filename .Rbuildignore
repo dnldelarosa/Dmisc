@@ -9,3 +9,5 @@
 ^codecov\.yml$
 ^\.travis\.yml$
 ^CODE_OF_CONDUCT\.md$
+test.Rmd
+^temp$

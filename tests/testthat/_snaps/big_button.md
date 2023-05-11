@@ -1,9 +1,9 @@
 # big_button
 
     Code
-      big_button("Get started", "")
+      big_button("Get started")
     Output
-      <a href="" style="width:50%; height:30px; font-size:18px; font-family:; background-color:#00a65a;display: inline-block; padding: 0.5em 1em; margin: auto; text-align: center; color: white; font-size: 20px; font-weight: bold;">Get started</a>
+      <a href="#" style="width:50%; height:30px; font-size:18px; font-family:; background-color:#00a65a;display: inline-block; padding: 0.5em 1em; margin: auto; text-align: center; color: white; font-size: 20px; font-weight: bold;">Get started</a>
 
 ---
 

@@ -1,26 +1,36 @@
-#' Convert a dataframe to a time series object
-#' `r lifecycle::badge("experimental")`
-#'
-#' @param data [data.frame]: a dataframe with the data
-#' @param .freq [numeric]: the frequency of the time series. If not specified, it is automatically determined by the data
-#' @param .date [character]: the name of the date column in the dataframe
-#' @param end [character]: the last observation of the time series. If not specified, it is automatically determined by the data
-#'
-#' @return a time series object
-#'
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#' data(fdeaths)
-#' ts_data <- data.frame(time = time(fdeaths), y = fdeaths)
-#' ts <- df_to_ts(ts_data, .freq = 12, .date = "time")
-#' }
+# Convert a dataframe to a time series object
+# `r lifecycle::badge("experimental")`
+#
+# @param data [data.frame]: a dataframe with the data
+# @param .freq [numeric]: the frequency of the time series. If not specified, it is automatically determined by the data
+# @param .date [character]: the name of the date column in the dataframe
+# @param end [character]: the last observation of the time series. If not specified, it is automatically determined by the data
+#
+# @return a time series object
+#
+# 
+#
+# @examples
+# \dontrun{
+# data(fdeaths)
+# ts_data <- data.frame(time = time(fdeaths), y = fdeaths)
+# ts <- df_to_ts(ts_data, .freq = 12, .date = "time")
+# }
 df_to_ts <- function(data, .freq = NULL, .date = 'date', end = NULL){
-  if(!class(data[[.date]]) %in% c("Date", "POSIXct")) {
+  if(!any(class(data[[.date]]) %in% c("Date", "POSIXct"))) {
   stop(".date column is not in date format.")
 }
-  if(any(diff(data[[.date]]) != difftime(tail(data[[.date]], -1), head(data[[.date]], -1), units = .freq))) {
+  if(
+    any(
+      diff(
+        data[[.date]]
+        ) != difftime(
+          utils::tail(data[[.date]], -1), 
+          utils::head(data[[.date]], -1), 
+          units = .freq
+          )
+      )
+    ) {
     stop("Jumps in date column.")
   }
   if(is.null(.freq)){
@@ -50,9 +60,11 @@ df_to_ts <- function(data, .freq = NULL, .date = 'date', end = NULL){
       end <- end
     }
   }
-  .ts <- ts(data[,names(data) != .date], start = .start, end = end, frequency = .freq)
+  .ts <- stats::ts(
+    data[,names(data) != .date], start = .start, end = end, frequency = .freq
+    )
   if(!'mts' %in% class(.ts)){
-    attr(.ts, 'name') <- names(data)[names(data) != .date]
+    attr(.ts, '.name') <- names(data)[names(data) != .date]
   }
   .ts
 }
@@ -66,7 +78,7 @@ ts_guest_freq <- function(data, .date){
   # Guess the frequency
   dates = as.Date(data[[.date]])
   delta = diff(dates)
-  mode_delta = as.numeric(names(sort(table(delta), decreasing = T)))[1]
+  mode_delta = as.numeric(names(sort(table(delta), decreasing = TRUE)))[1]
   if(mode_delta < 28){
     .freq = 365.25
   } else if(mode_delta <= 85) {
@@ -96,5 +108,5 @@ df_to_ts_old <- function(data, .freq = NULL, .date = 'date'){
   } else {
     .start <- .start
   }
-  ts(data[,names(data) != .date], start = .start, frequency = .freq)
+  stats::ts(data[,names(data) != .date], start = .start, frequency = .freq)
 }

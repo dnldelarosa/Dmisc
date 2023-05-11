@@ -1,24 +1,24 @@
-#' Create a summary table for a data frame
-#' `r lifecycle::badge("experimental")`
-#'
-#' This function generates a summary table for a data frame, containing summary statistics for each variable in the data frame.
-#'
-#' @param data A data frame containing the data to be summarized
-#' @param digits The number of digits to display in the summary table (default is 4)
-#' @param t If TRUE, the table will be transposed (default is TRUE)
-#' @param flextable If TRUE, the table will be converted to a simple flextable (default is FALSE)
-#' @param ft_args A list of additional arguments to pass to the \code{flextable} function if \code{flextable = TRUE} (default is an empty list)
-#' @param ... Other arguments to pass to the \code{summary} function
-#'
-#' @return A table containing summary statistics for each variable in the data frame
-#'
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#' describe(cars, flextable = TRUE)
-#' describe(cars, flextable = TRUE, ft_args = list(cwidth = 1))
-#' }
+# Create a summary table for a data frame
+# `r lifecycle::badge("experimental")`
+#
+# This function generates a summary table for a data frame, containing summary statistics for each variable in the data frame.
+#
+# @param data A data frame containing the data to be summarized
+# @param digits The number of digits to display in the summary table (default is 4)
+# @param t If TRUE, the table will be transposed (default is TRUE)
+# @param flextable If TRUE, the table will be converted to a simple flextable (default is FALSE)
+# @param ft_args A list of additional arguments to pass to the \code{flextable} function if \code{flextable = TRUE} (default is an empty list)
+# @param ... Other arguments to pass to the \code{summary} function
+#
+# @return A table containing summary statistics for each variable in the data frame
+#
+# 
+#
+# @examples
+# \dontrun{
+# describe(cars, flextable = TRUE)
+# describe(cars, flextable = TRUE, ft_args = list(cwidth = 1))
+# }
 describe <- function(data, digits = 4, t = TRUE, flextable = FALSE, ft_args = list(), ...){
   data <- as.data.frame(data)
   res <- list()
@@ -38,7 +38,10 @@ describe <- function(data, digits = 4, t = TRUE, flextable = FALSE, ft_args = li
     res <- utils::type.convert(res, as.is = TRUE)
     if(flextable){
       if (!requireNamespace("flextable", quietly = TRUE)) {
-        stop("Package \"flextable\" needed for this function to work. Please install it.", call. = FALSE)
+        stop("Package \"flextable\" needed for this argument to work. Please install it.", call. = FALSE)
+      }
+      if (!requireNamespace("tibble", quietly = TRUE)) {
+        stop("Package \"tibble\" needed for this argument to work. Please install it.", call. = FALSE)
       }
       if(length(ft_args) > 0){
         res <- res %>%

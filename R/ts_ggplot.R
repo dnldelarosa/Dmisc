@@ -1,26 +1,25 @@
-#' ts_ggplot: Time Series Visualization with ggplot2
-#' `r lifecycle::badge("experimental")`
-#'
-#' This function creates a ggplot object for time series data.
-#'
-#' @param ts A time series object
-#' @param .facet a logical value. When TRUE (default), the plot will have a facet for each series.
-#' @param .hline a numeric value to add a horizontal line to the plot.
-#' @param .ncol the number of columns to use in the facet.
-#' @param .select a character vector indicating which columns to select.
-#'
-#' @return A ggplot object representing the time series.
-#'
-#' @examples
-#' \dontrun{
-#' # Load the 'nottem' dataset
-#' data(nottem)
-#'
-#' # Create a time series plot
-#' ts_ggplot(nottem, .facet = TRUE, .hline = 50)
-#' }
-#'
-#' @export
+# ts_ggplot: Time Series Visualization with ggplot2
+# `r lifecycle::badge("experimental")`
+#
+# This function creates a ggplot object for time series data.
+#
+# @param ts A time series object
+# @param .facet a logical value. When TRUE (default), the plot will have a facet for each series.
+# @param .hline a numeric value to add a horizontal line to the plot.
+# @param .ncol the number of columns to use in the facet.
+# @param .select a character vector indicating which columns to select.
+#
+# @return A ggplot object representing the time series.
+#
+# @examples
+# \dontrun{
+# # Load the 'nottem' dataset
+# data(nottem)
+#
+# # Create a time series plot
+# ts_ggplot(nottem, .facet = TRUE, .hline = 50)
+# }
+#
 ts_ggplot <- function(ts, .facet = TRUE, .hline = NULL, .ncol = 1, .select = NULL) {
   name <- NULL
   value <- NULL

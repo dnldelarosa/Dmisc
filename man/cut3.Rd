@@ -18,7 +18,8 @@ cut3(tbl, var_name, breaks, groups = NULL, bf_args = list(), .inf = FALSE, ...)
 
 \item{bf_args}{\link{list}: arguments to be passed to break function}
 
-\item{.inf}{\link{logical}: indicates if the breaks need to be extended by -Inf and Inf}
+\item{.inf}{\link{logical}: indicates if the breaks need to be extended by
+-Inf and Inf}
 
 \item{...}{argument passed to \code{base::\link[base:cut]{cut}}}
 }
@@ -30,8 +31,10 @@ Convert numeric to factor weighted and by group
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
 \examples{
+\dontrun{
 datos <- data.frame(edad = seq(1:100))
 dplyr::count(cut3(datos, "edad", 5), edad)
+}
 }
 \seealso{
 \code{vignette("cut3", package = "Dmisc")}

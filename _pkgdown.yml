@@ -1,36 +1,4 @@
+url: ~
 template:
   bootstrap: 5
-  params:
-    ganalytics: G-0P0CB458ZK
 
-
-reference:
-- title: Data manipulation
-  contents:
-    -  cut3
-    -  cut3_quantile
-    -  describe
-    -  numeric_month
-    -  numeric_quarter
-    -  one_hot_encoding
-    -  real_prices_indexer
-    -  ts_dummy
-    -  train_test_split
-    -  train_split
-    -  test_split
-    -  valid_split
-    -  vars_to_date
-- title: HTML tools
-  contents:
-    -  progress_bar
-    -  big_button
-    -  insert_html
-    -  insertHTML
-- title:  Utilities
-  desc: Working with the system and extra tools
-  contents:
-    -  use_renv
-    -  db_connect
-    -  dbConnect
-    -  Sys_Date_locale
-    -  octave_path

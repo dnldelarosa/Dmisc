@@ -2,11 +2,25 @@
 % Please edit documentation in R/utils-pipe.R
 \name{\%T>\%}
 \alias{\%T>\%}
-\title{T-Pipe operator}
+\title{The T-pipe operator is similar to the pipe operator, but it returns the value
+of the left-hand side expression instead of the result of the right-hand side
+function. It is useful for side effects, such as printing or plotting.
+See \code{\link[magrittr]{\%T>\%}} for details.}
 \usage{
 lhs \%T>\% rhs
 }
+\arguments{
+\item{lhs}{A value or the magrittr placeholder.}
+
+\item{rhs}{A function call using the magrittr semantics.}
+}
+\value{
+The value of \code{lhs}.
+}
 \description{
-See \code{magrittr::\link[magrittr:tpipe]{\%T>\%}} for details.
+The T-pipe operator is similar to the pipe operator, but it returns the value
+of the left-hand side expression instead of the result of the right-hand side
+function. It is useful for side effects, such as printing or plotting.
+See \code{\link[magrittr]{\%T>\%}} for details.
 }
 \keyword{internal}

@@ -4,3 +4,4 @@
 docs
 inst/doc
 tests/testthat/.Renviron
+test.Rmd

@@ -1,35 +1,43 @@
-#' Multiple variables to unique date variable
-#' `r lifecycle::badge("experimental")`
-#'
-#' @param tbl data.frame or tbl connection
-#' @param year  year variable position or name
-#' @param quarter quarter variable position or name
-#' @param month month variable position or name
-#' @param day day variable position or name
-#' @param date a variable name or position containing a like date format
-#' @param drop_vars indicates if variables should be dropped
-#' @param clean_names indicates if all variable names should be cleaned
-#' @param date_format actual date format of variable in \code{date} argument
-#' @param origin base date for variable convertion to date
-#'
-#' @return tbl a new data.frame with the compute variable
-#'
-#' @export
-#'
-#' @examples
-#' tbl <- data.frame(
-#'   year = rep("2021", 12),
-#'   month = month.name,
-#'   day = sample(1:3, 12, TRUE),
-#'   value = sample(100:1000, 12, TRUE)
-#' )
-#'
-#' tbl
-#'
-#' vars_to_date(tbl, year = 1, month = 2, day = 3)
-vars_to_date <- function(tbl, year = NULL, quarter = NULL, month = NULL, day = NULL,
-                         date = NULL, drop_vars = TRUE, clean_names = FALSE, date_format = "%d-%m-%y",
-                         origin = "1900-01-01", .round = c("end", "middle", "start")) {
+# Multiple variables to unique date variable
+# `r lifecycle::badge("experimental")`
+#
+# @param tbl data.frame or tbl connection
+# @param year  year variable position or name
+# @param quarter quarter variable position or name
+# @param month month variable position or name
+# @param day day variable position or name
+# @param date a variable name or position containing a like date format
+# @param drop_vars indicates if variables should be dropped
+# @param clean_names indicates if all variable names should be cleaned
+# @param date_format actual date format of variable in \code{date} argument
+# @param origin base date for variable convertion to date
+# @param .round indicates if the date should be rounded to the end,
+# middle or start of the period
+#
+# @return tbl a new data.frame with the compute variable
+#
+#
+#
+# @examples
+# \dontrun{
+# tbl <- data.frame(
+#   year = rep("2021", 12),
+#   month = month.name,
+#   day = sample(1:3, 12, TRUE),
+#   value = sample(100:1000, 12, TRUE)
+# )
+#
+# tbl
+#
+# vars_to_date(tbl, year = 1, month = 2, day = 3)
+# }
+vars_to_date <- function(
+    tbl, year = NULL, quarter = NULL, month = NULL,
+    day = NULL, date = NULL, drop_vars = TRUE,
+    clean_names = FALSE, date_format = "%d-%m-%y",
+    origin = "1900-01-01", .round = c("end", "middle", "start")) {
+  # . <- NULL
+  date_end <- NULL
   .round_step <- 1
   if (length(.round) > 1) {
     .round <- .round[[1]]
@@ -110,7 +118,9 @@ vars_to_date <- function(tbl, year = NULL, quarter = NULL, month = NULL, day = N
       stop("You need to indicate the variable 'month'")
     }
 
-    tbl$date <- as.Date(paste0(tbl[[yearn]], "-", tbl[[monthn]], "-", tbl[[dayn]]))
+    tbl$date <- as.Date(
+      paste0(tbl[[yearn]], "-", tbl[[monthn]], "-", tbl[[dayn]])
+    )
     tbl <- tbl %>%
       dplyr::relocate(date)
 
@@ -149,7 +159,13 @@ vars_to_date <- function(tbl, year = NULL, quarter = NULL, month = NULL, day = N
       stop("You need to indicate the variable 'year'")
     }
 
-    tbl <- vars_to_date(tbl, year = year, month = quarter, drop_vars = drop_vars, .round = NULL)
+    tbl <- vars_to_date(
+      tbl,
+      year = year,
+      month = quarter,
+      drop_vars = drop_vars,
+      .round = NULL
+    )
     tbl[[quartern]] <- lubridate::quarter(tbl$date)
 
     if (drop_vars) {
@@ -177,12 +193,12 @@ vars_to_date <- function(tbl, year = NULL, quarter = NULL, month = NULL, day = N
         dplyr::mutate(
           date_end = lubridate::add_with_rollback(date, months(.round_step)),
           date_end = lubridate::add_with_rollback(date_end, lubridate::days(-1))
-          )
-      if(.round == "end") {
+        )
+      if (.round == "end") {
         tbl$date <- tbl$date_end
-      } else if(.round == "middle"){
+      } else if (.round == "middle") {
         tbl <- tbl %>%
-          dplyr::mutate(date = date + (date_end - date)/2)
+          dplyr::mutate(date = date + (date_end - date) / 2)
         lubridate::day(tbl$date) <- 15
       }
       tbl$date_end <- NULL
@@ -203,18 +219,18 @@ get_pos <- function(arg, names) {
 }
 
 
-#' Convert a month variable to a numeric format
-#'
-#' @param tbl a data.frame with the month variable
-#' @param month the name or position of the month variable
-#'
-#' @return tbl a new data.frame with the month variable in numeric format
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#' numeric_month(tbl, "month")
-#' }
+# Convert a month variable to a numeric format
+#
+# @param tbl a data.frame with the month variable
+# @param month the name or position of the month variable
+#
+# @return tbl a new data.frame with the month variable in numeric format
+#
+#
+# @examples
+# \dontrun{
+# numeric_month(tbl, "month")
+# }
 numeric_month <- function(tbl, month) {
   if (is.character(utils::type.convert(tbl[[month]], as.is = TRUE))) {
     tbl[[month]] <- stringr::str_remove_all(tbl[[month]], stringr::regex("[^a-zA-Z]"))
@@ -231,18 +247,18 @@ numeric_month <- function(tbl, month) {
 }
 
 
-#' Convert a quarter variable to a numeric format
-#'
-#' @param tbl a data.frame with the quarter variable
-#' @param quarter the name or position of the quarter variable
-#'
-#' @return tbl a new data.frame with the quarter variable in numeric format
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#' numeric_quarter(tbl, "quarter")
-#' }
+# Convert a quarter variable to a numeric format
+#
+# @param tbl a data.frame with the quarter variable
+# @param quarter the name or position of the quarter variable
+#
+# @return tbl a new data.frame with the quarter variable in numeric format
+#
+#
+# @examples
+# \dontrun{
+# numeric_quarter(tbl, "quarter")
+# }
 numeric_quarter <- function(tbl, quarter) {
   . <- NULL
   qq <- c(
@@ -275,6 +291,27 @@ numeric_quarter <- function(tbl, quarter) {
 
 # Reformular
 clean_date <- function(tbl, date_format, origin) {
+  .eviews <- tbl |>
+    dplyr::pull(date) |>
+    stringr::str_detect(stringr::regex("[0-9]{2,4}[M|Q][0-9]{2}")) |>
+    mean()
+  if (.eviews >= 0.95) {
+    .qtr <- tbl |>
+      dplyr::pull(date) |>
+      stringr::str_detect(stringr::regex("[0-9]{2,4}[Q][0-9]{2}")) |>
+      mean()
+    if (.qtr >= 0.95) {
+      tbl <- tbl |>
+        tidyr::separate(date, c("year", "quarter"), "Q", convert = TRUE) |>
+        vars_to_date(year = "year", quarter = "quarter")
+    } else {
+      tbl <- tbl |>
+        tidyr::separate(date, c("year", "month"), "M", convert = TRUE) |>
+        vars_to_date(year = "year", month = "month")
+      print(tbl)
+    }
+    return(tbl)
+  }
   tbl <- tbl %>%
     dplyr::mutate(
       date = dplyr::case_when(
