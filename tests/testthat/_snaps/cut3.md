@@ -35,6 +35,23 @@
 ---
 
     Code
+      cut3(tbl, var_name = "age", breaks = c(5), .inf = TRUE)
+    Output
+              age freq sex
+      1  (-Inf,5]    5   F
+      2  (-Inf,5]    5   F
+      3  (-Inf,5]    5   F
+      4  (-Inf,5]    4   F
+      5  (-Inf,5]    3   F
+      6  (5, Inf]    3   M
+      7  (5, Inf]    5   M
+      8  (5, Inf]    3   M
+      9  (5, Inf]    4   M
+      10 (5, Inf]    5   M
+
+---
+
+    Code
       cut3(tbl, var_name = "age", breaks = c(2, 5, 8))
     Output
            age freq sex
@@ -48,6 +65,23 @@
       8  (5,8]    3   M
       9   <NA>    4   M
       10  <NA>    5   M
+
+---
+
+    Code
+      cut3(tbl, var_name = "age", breaks = c(2, 5, 8), .inf = TRUE)
+    Output
+              age freq sex
+      1  (-Inf,2]    5   F
+      2  (-Inf,2]    5   F
+      3     (2,5]    5   F
+      4     (2,5]    4   F
+      5     (2,5]    3   F
+      6     (5,8]    3   M
+      7     (5,8]    5   M
+      8     (5,8]    3   M
+      9  (8, Inf]    4   M
+      10 (8, Inf]    5   M
 
 ---
 
@@ -86,10 +120,44 @@
 ---
 
     Code
+      cut3(tbl, var_name = "age", breaks = stats::quantile, .inf = TRUE)
+    Output
+                age freq sex
+      1    (-Inf,1]    5   F
+      2    (1,3.25]    5   F
+      3    (1,3.25]    5   F
+      4  (3.25,5.5]    4   F
+      5  (3.25,5.5]    3   F
+      6  (5.5,7.75]    3   M
+      7  (5.5,7.75]    5   M
+      8   (7.75,10]    3   M
+      9   (7.75,10]    4   M
+      10  (7.75,10]    5   M
+
+---
+
+    Code
       cut3(tbl, var_name = "age", breaks = c(0, stats::quantile(tbl$age)))
     Output
                 age freq sex
       1       (0,1]    5   F
+      2    (1,3.25]    5   F
+      3    (1,3.25]    5   F
+      4  (3.25,5.5]    4   F
+      5  (3.25,5.5]    3   F
+      6  (5.5,7.75]    3   M
+      7  (5.5,7.75]    5   M
+      8   (7.75,10]    3   M
+      9   (7.75,10]    4   M
+      10  (7.75,10]    5   M
+
+---
+
+    Code
+      cut3(tbl, var_name = "age", breaks = stats::quantile, probs = c(0.3, 0.7))
+    Output
+                age freq sex
+      1        <NA>    5   F
       2    (1,3.25]    5   F
       3    (1,3.25]    5   F
       4  (3.25,5.5]    4   F
@@ -138,6 +206,23 @@
 ---
 
     Code
+      cut3(tbl, var_name = "age", breaks = 2, labels = c("low", "high"))
+    Output
+          age freq sex
+      1   low    5   F
+      2   low    5   F
+      3   low    5   F
+      4   low    4   F
+      5   low    3   F
+      6  high    3   M
+      7  high    5   M
+      8  high    3   M
+      9  high    4   M
+      10 high    5   M
+
+---
+
+    Code
       cut3(tbl, var_name = "age", breaks = 2, groups = "sex")
     Output
       # A tibble: 10 × 3
@@ -157,40 +242,6 @@
 ---
 
     Code
-      cut3(tbl, var_name = "age", breaks = 2, labels = c("low", "high"))
-    Output
-          age freq sex
-      1   low    5   F
-      2   low    5   F
-      3   low    5   F
-      4   low    4   F
-      5   low    3   F
-      6  high    3   M
-      7  high    5   M
-      8  high    3   M
-      9  high    4   M
-      10 high    5   M
-
----
-
-    Code
-      cut3(tbl, var_name = "age", breaks = stats::quantile, probs = c(0.3, 0.7))
-    Output
-                age freq sex
-      1        <NA>    5   F
-      2    (1,3.25]    5   F
-      3    (1,3.25]    5   F
-      4  (3.25,5.5]    4   F
-      5  (3.25,5.5]    3   F
-      6  (5.5,7.75]    3   M
-      7  (5.5,7.75]    5   M
-      8   (7.75,10]    3   M
-      9   (7.75,10]    4   M
-      10  (7.75,10]    5   M
-
----
-
-    Code
       cut3(tbl, var_name = "age", breaks = function(x) {
         quantile(x, probs = c(0.3, 0.7))
       })
@@ -206,6 +257,25 @@
       8       <NA>    3   M
       9       <NA>    4   M
       10      <NA>    5   M
+
+---
+
+    Code
+      cut3(tbl, var_name = "age", breaks = function(x) {
+        quantile(x, probs = c(0.3, 0.7))
+      }, .inf = TRUE)
+    Output
+                age freq sex
+      1  (-Inf,3.7]    5   F
+      2  (-Inf,3.7]    5   F
+      3  (-Inf,3.7]    5   F
+      4   (3.7,7.3]    4   F
+      5   (3.7,7.3]    3   F
+      6   (3.7,7.3]    3   M
+      7   (3.7,7.3]    5   M
+      8  (7.3, Inf]    3   M
+      9  (7.3, Inf]    4   M
+      10 (7.3, Inf]    5   M
 
 ---
 
