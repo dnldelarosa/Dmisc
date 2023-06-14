@@ -1,36 +1,36 @@
-# Multiple variables to unique date variable
-# `r lifecycle::badge("experimental")`
-#
-# @param tbl data.frame or tbl connection
-# @param year  year variable position or name
-# @param quarter quarter variable position or name
-# @param month month variable position or name
-# @param day day variable position or name
-# @param date a variable name or position containing a like date format
-# @param drop_vars indicates if variables should be dropped
-# @param clean_names indicates if all variable names should be cleaned
-# @param date_format actual date format of variable in \code{date} argument
-# @param origin base date for variable convertion to date
-# @param .round indicates if the date should be rounded to the end,
-# middle or start of the period
-#
-# @return tbl a new data.frame with the compute variable
-#
-#
-#
-# @examples
-# \dontrun{
-# tbl <- data.frame(
-#   year = rep("2021", 12),
-#   month = month.name,
-#   day = sample(1:3, 12, TRUE),
-#   value = sample(100:1000, 12, TRUE)
-# )
-#
-# tbl
-#
-# vars_to_date(tbl, year = 1, month = 2, day = 3)
-# }
+#' Multiple variables to unique date variable
+#' `r lifecycle::badge("experimental")`
+#'
+#' @param tbl data.frame or tbl connection
+#' @param year  year variable position or name
+#' @param quarter quarter variable position or name
+#' @param month month variable position or name
+#' @param day day variable position or name
+#' @param date a variable name or position containing a like date format
+#' @param drop_vars indicates if variables should be dropped
+#' @param clean_names indicates if all variable names should be cleaned
+#' @param date_format actual date format of variable in \code{date} argument
+#' @param origin base date for variable convertion to date
+#' @param .round indicates if the date should be rounded to the end,
+#' middle or start of the period
+#'
+#' @return tbl a new data.frame with the compute variable
+#'
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' tbl <- data.frame(
+#'   year = rep("2021", 12),
+#'   month = month.name,
+#'   day = sample(1:3, 12, TRUE),
+#'   value = sample(100:1000, 12, TRUE)
+#' )
+#'
+#' tbl
+#'
+#' vars_to_date(tbl, year = 1, month = 2, day = 3)
+#' }
 vars_to_date <- function(
     tbl, year = NULL, quarter = NULL, month = NULL,
     day = NULL, date = NULL, drop_vars = TRUE,

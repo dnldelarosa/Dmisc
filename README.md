@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# Dmisc
+# Dmisc: Daniel miscellaneous functions
 
 <!-- badges: start -->
 
@@ -18,8 +18,18 @@ coverage](https://codecov.io/gh/drdsdaniel/Dmisc/branch/main/graph/badge.svg)](h
 status](https://www.r-pkg.org/badges/version/Dmisc)](https://CRAN.R-project.org/package=Dmisc)
 <!-- badges: end -->
 
-This package contains functions that I use and they do not belong to a
-specific package. It contains functions for any thing.
+The Dmisc package provides a collection of versatile R functions
+developed by Daniel E. de la Rosa. These are general-purpose tools, not
+tied to any specific domain, aiming to aid a wide range of tasks in data
+analysis and visualization.
+
+## Code Reusability
+
+A primary motivation behind the development of Dmisc is to facilitate
+code reusability. Daniel created these functions to avoid code
+repetition in his own projects. However, if an equivalent function is
+found in another package with good support, the corresponding function
+in Dmisc may become deprecated.
 
 ## Installation
 
@@ -43,6 +53,10 @@ tryCatch(
 remotes::install_github("drdsdaniel/Dmisc")
 ```
 
+## Roadmap
+
+- [ ] Add weight support to the `cut3` function.
+
 ## Functions
 
 Browse the package site:
@@ -56,7 +70,7 @@ Please take a look at the [contributing
 guidelines](https://drdsdaniel.github.io/Dmisc/CONTRIBUTING.html) before
 filing an issue or pull request.
 
-Please note that the Rmdx project is released with a [Contributor Code
-of
+Please note that the `Dmisc` project is released with a [Contributor
+Code of
 Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.

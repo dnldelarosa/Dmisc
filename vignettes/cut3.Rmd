@@ -18,136 +18,238 @@ knitr::opts_chunk$set(
 
 ```{r }
 library(Dmisc)
-```
 
-Sometimes it is interesting to convert a numeric variable into a categorical one. For these purposes, there are several functions in R. Here we present some of them and how they compare to `cut3`.
-
-# Breaks
-
-The first and most important argument of these functions is `breaks`, which consists of an indicative of how are constructed the intervals in which the desired variable is to be cut.
-
-## A single number
-
-If the `breaks` argument consists of a single number, this is interpreted as the number of breaks to be applied to the variable of interest.
-```{r}
-tbl <- data.frame(
-  age = 1:10,
-  freq = c(5,5,5,4,3,3,5,3,4,5)
+# Datos sintéticos para los ejemplos.
+set.seed(123)
+df <- data.frame(
+  sex = rep(c('M', 'F'), each = 500),
+  age = c(sample(20:60, 500, TRUE), sample(30:70, 500, TRUE))
 )
-
-tbl
-
-tbl$age = cut(tbl$age, breaks = 2)
-tbl
 ```
 
-The same could be done using `cut3`, the only difference is that the latter is designed to work with dataframe instead of vectors, so the syntax could be a bit different, but the result is the same.
+When working with data, it is common to encounter the need to analyze numerical variables. In certain cases, using basic statistical measures such as mean, sum, minimum and maximum values, and others is sufficient, especially when looking at the relationship of these variables with categorical variables. 
 
-```{r}
-tbl <- data.frame(
-  age = 1:10,
-  freq = c(5,5,5,4,3,3,5,3,4,5)
-)
+When the situation requires comparing two numerical variables, we can use metrics like correlation, regression, covariance, and others, to establish a relationship between both. However, there often arises a need to convert these numerical variables into categorical ones to capture and highlight differences among different demographic or population groups. 
 
-cut3(tbl, var_name = "age", breaks = 2)
-```
+For this purpose, the statistical programming language `R` provides the `cut` function. As per its documentation, `cut` is a function designed to *convert a numerical variable into a factor one*[^1].
 
-## A numeric vector
+Moreover, there are third-party libraries that expand the capabilities of the `cut` function, adding more functionalities. An example of this is the `cut3` function from the `Dmisc` package. Next, we will examine how these functions work and compare the utility and effectiveness of `cut3` with other available alternatives.
 
-Another option available in both functions is to supply a numeric vector. In this case, the values contained in said vector will be treated as the cut-off points for the construction of the intervals in which the variable in question has to be cut.
-```{r}
-tbl <- data.frame(
-  age = 1:10,
-  freq = c(5,5,5,4,3,3,5,3,4,5)
-)
+[^1]: In R, a factor is a categorical variable type. It is similar to a text (character) variable type, but only takes a finite set of values (levels).
 
-tbl
+:::{.callout-note}
+The first and fundamental difference of `cut3`, compared to the rest of the functions designed for these purposes, is that the former is designed to operate on a data.frame, while the latter are designed to work with the numerical vector of interest.
 
-tbl$age = cut(tbl$age, breaks = c(0, 5, 10))
-tbl
-```
+In terms of advantages, this can mean greater flexibility and efficiency in some cases. Instead of having to isolate a numerical vector and work with it individually, `cut3` allows the user to operate directly on the complete data.frame. This can be particularly useful in situations where multiple columns need to be manipulated or analyzed simultaneously, *as will be seen later*.
 
-Again, the same can be achieved with the `cut3` function.
+However, this functionality also presents some disadvantages. The main one is that `cut3` overwrites the variable in question within the data.frame, and it is not intuitive how to assign it to a new variable.[^3]
+:::
+
+[^3]: This can be achieved by simply creating a variable that is a copy of the original before making the cut.
+
+## Cuts
+
+The most important argument of these functions, after the data, is `breaks`. This argument consists of an indication of how the intervals in the resulting categorical variable are constructed.
+
+### A Single Number
+
+When the `breaks` argument consists of a single number (an integer and greater than or equal to 2)[^2], it is interpreted as the number of cuts that should be made in the numerical variable when converting it into a categorical variable.
+
+[^2]: When `breaks` is specified in this way, the variable is divided into segments of equal length. For more details, refer to the `cut()` function documentation.
 
 ```{r}
-tbl <- data.frame(
-  age = 1:10,
-  freq = c(5,5,5,4,3,3,5,3,4,5)
-)
-
-cut3(tbl, var_name = "age", breaks = c(0, 5, 10))
+df2 <- df
+df2$age <- cut(df2$age, breaks = 4)
+table(df2)
 ```
 
-It is important to note that this vector of values must contain an initial value that is less than the minimum of the variable and a last value greater than or equal to the maximum of the variable. This is so due to the way in which the intervals are constructed.
-
-Note in the label of the created variable `(0,5]` that the lower limit of the interval is open `(`, which means that only values `greater than 0` are included. You can change this behavior, and do the first range closed using the argument `include.lowest`. While the upper bound is closed`] `, which means that values `less than or equal to 5` are included.
-
-If the vector of values does not meet the criteria described above, the values that do not fit in any interval will be marked as `NA` in the resulting variable. However, this is not the case for the `cut3` function. Due to the `.inf` argument, the supplied cut-off points will be extended by `-Inf` and `Inf`. This way any value is included in the resulting variable.
+In this case, except for a slight difference in terms of syntax, the same result could be achieved using `cut3`.
 
 ```{r}
-tbl <- data.frame(
-  age = 1:10,
-  freq = c(5,5,5,4,3,3,5,3,4,5)
+df3 <- Dmisc::cut3(
+  df, 
+  var_name = 'age', 
+  breaks = 4
 )
-
-cut3(tbl, var_name = "age", breaks = c(1, 5, 10))
-cut3(tbl, var_name = "age", breaks = c(1, 5, 10), include.lowest = T)
-cut3(tbl, var_name = "age", breaks = c(1, 5, 10), .inf = F)
+table(df3)
 ```
 
-Additionally, it is essential that the values of said vector be unique.
+### A Numeric Vector
 
-## Functions
+When the `breaks` argument is passed as a numeric vector, the values contained in this vector are interpreted as the cut points for constructing the intervals into which the variable in question will be divided.
 
-One of the main novelties of `cut3()` compared to `cut()` is that the vector of `breaks` can be a function that generates the numerical vector of the cuts. The most common use case for this functionality is perhaps if you want to use quantiles to divide the variable. 
-
-For these purposes, the `bf_args` argument must be used in which additional arguments are specified, which must be passed to the function used to construct the breakpoints.
 ```{r}
-tbl <- data.frame(
-  age = 1:10,
-  freq = c(5,5,5,4,3,3,5,3,4,5)
+df2 <- df
+df2$age <- cut(
+  df2$age, 
+  breaks = c(0, 20, 40, 60, 80, 100)
 )
-
-cut3(tbl, var_name = "age", breaks = quantile)
+table(df2)
 ```
 
+Again, the same can be achieved using the `cut3()` function.
 
-## Labels
-
-As you may have already noticed in the previous examples, the data labels of the resulting variable are constructed using the corresponding interval notation. However, this behavior can be overridden by supplying the `labels = F` argument. In this case, a simple autoincrementing number will be used to name the intervals.
 ```{r}
-tbl <- data.frame(
-  age = 1:10,
-  freq = c(5,5,5,4,3,3,5,3,4,5)
+df3 <- df
+df3 <- cut3(
+  df3, 
+  var_name = "age", 
+  breaks = c(0, 20, 40, 60, 80, 100)
 )
-
-cut3(tbl, var_name = "age", breaks = 2)
-cut3(tbl, var_name = "age", breaks = 2, labels = F)
+table(df3)
 ```
 
-Additionally, you can supply a vector specifying the labels you want to use in the construction of the variable. Labels will be assigned in the order they are specified. Also, the number of labels must be exactly equal to the number of resulting bins.
+It is important to note that this vector of values must contain an initial value `less than` the `minimum` of the variable and a final value `greater or equal` to the `maximum` of the variable. This is due to how the intervals are constructed.
+
+Note in the label of the created variable `(0,20]` that the lower limit of the interval is open `(`, which means that only values greater than 0 are included. You can change this behavior and make the first range closed using the `include.lowest` argument. While the upper limit is closed `]`, meaning it includes values less or equal to 20.
+
+If the vector of values does not meet the criteria described above, values that do not fit into any interval will be marked as `NA` in the resulting variable. Additionally, in the case of the `cut3()` function, if the user sets the .inf argument to True, the provided cut points will be extended with -Inf and Inf. This means that any value will be included in the resulting variable, even if it is outside the range of the original values. It's a useful feature when the maximum and minimum value of the variable is not known beforehand, and you want to include all values without having to set specific limits.
+
+```r
+cut3(
+  df, 
+  var_name = "age", 
+  breaks = c(0, 20, 40, 60, 80, 100)
+) # Will leave NAs
+
+cut3(
+  df, 
+  var_name = "age", 
+  breaks = c(20, 40, 60, 80), 
+  include.lowest = T
+) # Will leave NAs
+
+cut3(
+  df, 
+  var_name = "age", 
+  breaks = c(20, 40, 60, 80), 
+  .inf = F
+) # Will not leave NAs
+```
+
+Finally, it is essential that the values in this vector are unique. This is fundamentally relevant when the cut points are not manually assigned, but some other strategy is used for the ends.
+
+### Functions
+
+One of the main innovations of `cut3()` compared to `cut()` is that the `breaks` vector can be a function that generates the numeric vector of cuts. The most common use case for this feature is perhaps when quantiles are wanted to divide the variable.
+
+For these purposes, the `bf_args` argument should be used, which specifies additional arguments, which should be passed to the function used to construct the break points.
+
 ```{r}
-tbl <- data.frame(
-  age = 1:10,
-  freq = c(5,5,5,4,3,3,5,3,4,5)
+table(
+  cut3(
+    df, 
+    var_name = "age", 
+    breaks = quantile
+  )
 )
-
-cut3(tbl, var_name = "age", breaks = 2)
-cut3(tbl, var_name = "age", breaks = 2, labels = c("Menor o igual que 5", "Mayor a 5"))
 ```
 
+In the example code above, the `cut3()` function is used to divide the "age" variable in the `df` data.frame into groups or bins based on quantiles. Here, `breaks` is set as `quantile`, which means that the quantiles of the "age" distribution are used to define the break points.
+
+An interesting feature of this approach is that it allows for greater flexibility in defining the groups. For example, instead of dividing the variable into equal-sized groups, you can divide it into groups based on the distribution of the data. This can be particularly useful when dealing with variables that have a skewed distribution or are highly concentrated in certain ranges.
+
+Furthermore, by allowing `breaks` to be a function, `cut3()` offers the possibility of dynamically generating break points based on the data. This can facilitate the creation of more robust and adaptable analysis, as there is no need to define the break points beforehand.
+
+Finally, it should be mentioned that the `bf_args` argument allows you to pass additional arguments to the `breaks` function. This offers even more flexibility, as you can customize the `breaks` function to suit your specific needs. For example, you could change the quantiles used to divide the variable, or you could use a completely different function to generate the break points.
+
+#### Dmisc::cut3_quantiles
+
+The Dmisc package already includes the `cut3_quantile` function, which is a variant of cut3 designed specifically to divide a variable into quantiles.
+
+`cut3_quantile` takes a data.frame, a variable, and a set of probabilities that define the quantiles. If no probabilities are specified, by default the first quartile, median, and third quartile are used. It then calls cut3 with R's quantile function as an argument for the break points.
+
+```{r}
+table(
+  cut3_quantile(
+    df, 
+    var_name = "age"
+  )
+)
+```
+
+In the example code above, `cut3_quantile` divides the "age" variable in the `df` data.frame into quartiles.
+
+Therefore, if you want to divide a variable into quantiles, you can directly use `cut3_quantile` instead of passing `quantile` as an argument for `breaks` in `cut3`.
 
 ## Groups
 
-Another addition to `cut3 ()` consists of being able to define different cuts for different groups. This is especially useful when breaks are specified with functions.
-```{r}
-tbl <- data.frame(
-  sex = c(rep("M", 5), rep("F", 5)),
-  age = c(1:5, 6:10),
-  freq = c(5,5,5,4,3,3,5,3,4,5)
-)
+Another addition to `cut3()` is the ability to define different cuts for different groups. This is particularly useful when break points are specified using functions.
 
-cut3(tbl, var_name = "age", breaks = 2, .inf = F)
-cut3(tbl, var_name = "age", breaks = 2, .inf = F, groups = "sex")
+```{r}
+table(
+  cut3(
+    df, 
+    var_name = "age", 
+    breaks = 4, 
+    .inf = F
+  )
+)
 ```
 
+```{r}
+table(
+  cut3(
+    df, 
+    var_name = "age", 
+    breaks = 4, 
+    .inf = F, 
+    groups = "sex"
+  )
+)
+```
+
+In the previous code example, `cut3()` is used to divide the "age" variable in the data.frame `df` into groups, but the cuts are defined separately for each value of the "sex" variable. This means that the groups generated for "age" will be different for males and females, which can be very useful in analyses that require taking into account differences between groups.
+
+This feature of `cut3()` is very powerful as it allows adapting the break points to the specific characteristics of each group. In many cases, the distribution of a variable can significantly vary among different groups, and using the same break points for all groups might result in an inaccurate representation of the data.
+
+For instance, imagine that you are analyzing the age of participants in a study and you discover that the distribution of ages is quite different for males and females. If you use the same break points for both groups, you might end up with bins that contain many females but few males, or vice versa. By allowing you to define break points separately for each group, `cut3()` enables you to avoid this problem and ensure a more accurate representation of the data for each group.
+
+In addition, this function is particularly useful when break points are specified using functions, as these functions can adapt to the specific characteristics of each group. For example, you could use quantiles to define the break points, which would ensure that the bins contain approximately the same proportion of observations for each group, regardless of differences in the data distributions.
+
+## Weights
+
+TODO
+
+## Labels
+
+As you may have noticed in the previous examples, the labels of the data for the resulting variable are constructed using the corresponding interval notation. However, this behavior can be modified by providing the `labels = F` argument. In this case, a simple auto-incrementing number will be used to name the intervals.
+
+```{r}
+table(
+  cut3(
+    df, 
+    var_name = "age", 
+    breaks = 4, 
+    labels = F
+  )
+)
+```
+
+Furthermore, you can provide a vector specifying the labels you want to use in constructing the variable. Labels will be assigned in the order they are specified. Additionally, the number of labels must be exactly equal to the number of resulting bins.
+
+```{r}
+table(
+  cut3(
+    df, 
+    var_name = "age", 
+    breaks = 4, 
+    labels = c(
+      "1 - 25 years", 
+      "21 - 50 years", 
+      "51 - 75 years", 
+      "76 - 100 years"
+    )
+  )
+)
+```
+
+This can be useful if you wish to customize the labels to make them more descriptive or easier to understand. For instance, you could use labels that describe the characteristics of individuals in each group, or you could use labels that are more consistent with the terminology used in your field of study. This can make your results clearer and easier to interpret, for both you and other people who may be working with your data.
+
+## Conclusion
+
+The cut3 function from the Dmisc package in R offers advantages and disadvantages. Compared to functions like cut, cut3 can offer greater flexibility and efficiency by working directly with data.frames rather than just with numeric vectors. This can be particularly helpful when you need to manipulate or analyze multiple columns at once.
+
+However, it also presents drawbacks, such as overwriting the original variable within the data.frame, and can be less intuitive when needing to assign the result to a new variable. In terms of performance, the choice between cut and cut3 will largely depend on the context and the specific needs of your analysis.
+
+Lastly, it is always recommended to understand the differences and peculiarities of the different tools available before making a decision on which method to use to convert numeric variables into categorical ones.

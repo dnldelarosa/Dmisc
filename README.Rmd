@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Dmisc
+# Dmisc: Daniel miscellaneous functions
 
 <!-- badges: start -->
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
@@ -23,7 +23,12 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/Dmisc)](https://CRAN.R-project.org/package=Dmisc)
 <!-- badges: end -->
 
-This package contains functions that I use and they do not belong to a specific package. It contains functions for any thing.
+The Dmisc package provides a collection of versatile R functions developed by Daniel E. de la Rosa. These are general-purpose tools, not tied to any specific domain, aiming to aid a wide range of tasks in data analysis and visualization.
+
+## Code Reusability
+
+A primary motivation behind the development of Dmisc is to facilitate code reusability. Daniel created these functions to avoid code repetition in his own projects. However, if an equivalent function is found in another package with good support, the corresponding function in Dmisc may become deprecated.
+
 
 ## Installation
 
@@ -46,6 +51,10 @@ tryCatch(
 remotes::install_github("drdsdaniel/Dmisc")
 ```
 
+## Roadmap
+
+- [ ] Add weight support to the `cut3` function.
+
 ## Functions
 
 Browse the package site: [Dmisc](https://drdsdaniel.github.io/Dmisc/reference/index.html)
@@ -56,4 +65,4 @@ Have a feedback or want to contribute?
 
 Please take a look at the [contributing guidelines](https://drdsdaniel.github.io/Dmisc/CONTRIBUTING.html) before filing an issue or pull request.
 
-Please note that the Rmdx project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
+Please note that the `Dmisc` project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
