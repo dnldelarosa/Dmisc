@@ -106,6 +106,7 @@ breaker <- function(.data, breaks, bf_args) {
 #' @return same as \code{tbl} input with \code{var_name} converted to factor by
 #' quantiles
 #'
+#'@export
 #'
 #' @examples
 #' \dontrun{
