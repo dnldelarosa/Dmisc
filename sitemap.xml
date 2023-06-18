@@ -28,22 +28,10 @@
     <loc>/index.html</loc>
   </url>
   <url>
-    <loc>/reference/Sys_Date_locale.html</loc>
-  </url>
-  <url>
-    <loc>/reference/big_button.html</loc>
-  </url>
-  <url>
     <loc>/reference/cut3.html</loc>
   </url>
   <url>
     <loc>/reference/cut3_quantile.html</loc>
-  </url>
-  <url>
-    <loc>/reference/dbConnect.html</loc>
-  </url>
-  <url>
-    <loc>/reference/db_connect.html</loc>
   </url>
   <url>
     <loc>/reference/describe.html</loc>
@@ -55,46 +43,10 @@
     <loc>/reference/index.html</loc>
   </url>
   <url>
-    <loc>/reference/insert_html.html</loc>
-  </url>
-  <url>
-    <loc>/reference/numeric_month.html</loc>
-  </url>
-  <url>
-    <loc>/reference/numeric_quarter.html</loc>
-  </url>
-  <url>
-    <loc>/reference/octave_path.html</loc>
-  </url>
-  <url>
-    <loc>/reference/one_hot_encoding.html</loc>
-  </url>
-  <url>
     <loc>/reference/pipe.html</loc>
   </url>
   <url>
-    <loc>/reference/progress_bar.html</loc>
-  </url>
-  <url>
-    <loc>/reference/real_prices_indexer.html</loc>
-  </url>
-  <url>
-    <loc>/reference/test_split.html</loc>
-  </url>
-  <url>
-    <loc>/reference/train_split.html</loc>
-  </url>
-  <url>
-    <loc>/reference/train_test_split.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ts_dummy.html</loc>
-  </url>
-  <url>
-    <loc>/reference/use_renv.html</loc>
-  </url>
-  <url>
-    <loc>/reference/valid_split.html</loc>
+    <loc>/reference/tpipe.html</loc>
   </url>
   <url>
     <loc>/reference/vars_to_date.html</loc>
