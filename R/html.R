@@ -123,13 +123,15 @@ progress_bar <- function(progress, ...) {
         "font-family:", options$font_family, ";",
         "font-size:", options$font_size, "px;",
         "line-height:", options$height, "px;",
-        "text-align:center;"
+        "text-align:center;",
+        "white-space: nowrap;",  # prevent the text from wrapping to the next line
+        "overflow: visible;"  # allow the text to overflow the parent container
     )
 
     value_label <- paste0(as.character(round(progress, 2)), options$suffix)
 
     htmltools::tags$div(
-        style = glue::glue("background-color: #D3D3D3; width: {options$width};"),
+        style = glue::glue("background-color: #D3D3D3; width: {options$width}; display: inline-block;"),
         htmltools::tags$div(
             style = bar_style,
             htmltools::tags$div(value_label, style = value_style)

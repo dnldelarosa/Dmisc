@@ -20,7 +20,8 @@ get_arima_comp <- function(model, .comp = NULL){
     arima = c(.ar, .d, .ma),
     sarma = c(.sar, .sma),
     sarima = c(.sar, .D, .sma),
-    drift = tryCatch({!is.null(model[["coef"]][["drift"]])}, error = function(e){FALSE})
+    drift = tryCatch({!is.null(model[["coef"]][["drift"]])}, error = function(e){FALSE}),
+    mean = tryCatch({!is.null(model[["coef"]][["intercept"]])}, error = function(e){FALSE})
   )
   if(is.null(.comp)){
     res

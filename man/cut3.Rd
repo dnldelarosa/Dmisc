@@ -2,41 +2,38 @@
 % Please edit documentation in R/cut3.R
 \name{cut3}
 \alias{cut3}
-\title{Convert numeric to factor weighted and by group
+\title{Convert numeric variables to weighted factors by group
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}}
 \usage{
 cut3(tbl, var_name, breaks, groups = NULL, bf_args = list(), .inf = FALSE, ...)
 }
 \arguments{
-\item{tbl}{\link{data.frame}: Database connection or data.frame}
+\item{tbl}{\link{data.frame}: The data frame containing the data to be converted.}
 
-\item{var_name}{\link{character}: variable name}
+\item{var_name}{\link{character}: The name of the numeric variable to convert to a factor.}
 
-\item{breaks}{\link{numeric}: break points. See \code{base::\link[base:cut]{cut}}}
+\item{breaks}{\link{numeric}: Break points defining factor levels. See \verb{See Also} section for more details.}
 
-\item{groups}{\link{character}: name of a groups variable}
+\item{groups}{\link{character}: The name of the variable for grouping data before conversion.}
 
-\item{bf_args}{\link{list}: arguments to be passed to break function}
+\item{bf_args}{\link{list}: Additional arguments to be passed to the break function.}
 
-\item{.inf}{\link{logical}: indicates if the breaks need to be extended by
--Inf and Inf}
+\item{.inf}{\link{logical}: Whether to extend break points with -Inf and Inf.}
 
-\item{...}{argument passed to \code{base::\link[base:cut]{cut}}}
+\item{...:}{Additional arguments passed to \code{\link[base:cut]{base::cut}}.}
 }
 \value{
-same as \code{tbl} input with \code{var_name} converted to factor
+A data frame identical to the input \code{tbl}, with \code{var_name} converted to a factor.
 }
 \description{
-Convert numeric to factor weighted and by group
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+This function converts a numeric column in a data frame to a factor variable,
+allowing for custom break points and grouping.
 }
 \examples{
-\dontrun{
 datos <- data.frame(edad = seq(1:100))
 dplyr::count(cut3(datos, "edad", 5), edad)
 }
-}
 \seealso{
-\code{vignette("cut3", package = "Dmisc")}
-\code{base::\link[base:cut]{cut}}
+\code{\link[base:cut]{base::cut}}, for the underlying cut function used.
+\code{vignette("cut3", package = "Dmisc")}, for examples and extended usage.
 }

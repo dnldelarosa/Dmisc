@@ -25,6 +25,7 @@ train_test_plot <- function(..., .select = NULL) {
     dplyr::bind_rows(.id = "group") |>
     tidyr::pivot_longer(-.exclude) |>
     ggplot2::ggplot(ggplot2::aes(x = date, y = value, color = group)) +
+    ggplot2::geom_point() +
     ggplot2::geom_line() +
     ggplot2::facet_wrap(~name, ncol = 1, scales = "free_y") +
     ggplot2::theme_bw() +

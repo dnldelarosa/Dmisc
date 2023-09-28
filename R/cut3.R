@@ -1,28 +1,28 @@
-#' Convert numeric to factor weighted and by group
+#' Convert numeric variables to weighted factors by group
 #' `r lifecycle::badge("experimental")`
 #'
-#' @param tbl [data.frame]: Database connection or data.frame
-#' @param var_name [character]: variable name
-#' @param breaks [numeric]: break points. See \code{base::\link[base:cut]{cut}}
-#' @param groups [character]: name of a groups variable
-#' @param bf_args [list]: arguments to be passed to break function
-#' @param .inf [logical]: indicates if the breaks need to be extended by
-#' -Inf and Inf
-#' @param ... argument passed to \code{base::\link[base:cut]{cut}}
+#' This function converts a numeric column in a data frame to a factor variable,
+#' allowing for custom break points and grouping.
+#'
+#' @param tbl [data.frame]: The data frame containing the data to be converted.
+#' @param var_name [character]: The name of the numeric variable to convert to a factor.
+#' @param breaks [numeric]: Break points defining factor levels. See `See Also` section for more details.
+#' @param groups [character]: The name of the variable for grouping data before conversion.
+#' @param bf_args [list]: Additional arguments to be passed to the break function.
+#' @param .inf [logical]: Whether to extend break points with -Inf and Inf.
+#' @param ...: Additional arguments passed to \code{\link[base:cut]{base::cut}}.
 #'
 #' @seealso
-#'   \code{vignette("cut3", package = "Dmisc")}
-#'   \code{base::\link[base:cut]{cut}}
+#' \code{\link[base:cut]{base::cut}}, for the underlying cut function used.
+#' \code{vignette("cut3", package = "Dmisc")}, for examples and extended usage.
 #'
-#' @return same as \code{tbl} input with \code{var_name} converted to factor
+#' @return A data frame identical to the input \code{tbl}, with \code{var_name} converted to a factor.
 #'
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' datos <- data.frame(edad = seq(1:100))
 #' dplyr::count(cut3(datos, "edad", 5), edad)
-#' }
 cut3 <- function(
     tbl,
     var_name,

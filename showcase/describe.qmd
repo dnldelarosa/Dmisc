@@ -1,0 +1,17 @@
+---
+title: "Resumen de datos en R"
+format: beamer
+---
+
+
+```{r}
+#| include: false
+
+devtools::load_all(".")
+```
+
+```{r}
+palmerpenguins::penguins %>% 
+  Dmisc:::describe()
+```
+
