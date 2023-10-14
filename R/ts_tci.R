@@ -1,4 +1,6 @@
 ts_tc <- function(.ts, .vars = NULL, .type = c('i', 'p', 'c'), .base = 1){
+  tc <- NULL
+  year <- NULL
     .names <- names(ts_to_df(.ts))
     .names <- ifelse(is.null(.vars), .names[.names != 'date'], .vars)
     .type <- ifelse(length(.type) > 1, .type[[1]], .type)

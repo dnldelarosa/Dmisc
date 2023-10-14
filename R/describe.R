@@ -12,13 +12,15 @@
 #'
 #' @return A table containing summary statistics for each variable in the data frame
 #'
-#'
+#' @export
 #'
 #' @examples
-#' \dontrun{
+#' # Using summary
+#' summary(cars)
+#'
+#' # Using describe
 #' describe(cars, flextable = TRUE)
 #' describe(cars, flextable = TRUE, ft_args = list(cwidth = 1))
-#' }
 describe <- function(data, digits = 4, t = TRUE, flextable = FALSE, ft_args = list(), ...) {
   data <- as.data.frame(data)
   res <- list()

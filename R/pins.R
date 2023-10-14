@@ -21,6 +21,8 @@
 pin_get_or_create <- function(.data, .board, .name, type = 'csv', ...) {
   .versions <- character()
   .version <- NULL
+  . <- NULL
+  created <- NULL
   tryCatch(
     {
       .versions <- pins::pin_versions(.board, .name)[['version']]
@@ -42,7 +44,7 @@ pin_get_or_create <- function(.data, .board, .name, type = 'csv', ...) {
     .versions <- pins::pin_versions(.board, .name)
     .version <- .versions %>%
       dplyr::arrange(created) %>%
-      tail(1) %>%
+      utils::tail(1) %>%
       dplyr::pull(version) %>%
       .[[1]]
   }

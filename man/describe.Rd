@@ -27,8 +27,10 @@ A table containing summary statistics for each variable in the data frame
 This function generates a summary table for a data frame, containing summary statistics for each variable in the data frame.
 }
 \examples{
-\dontrun{
+# Using summary
+summary(cars)
+
+# Using describe
 describe(cars, flextable = TRUE)
 describe(cars, flextable = TRUE, ft_args = list(cwidth = 1))
-}
 }

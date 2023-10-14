@@ -1,19 +1,38 @@
 
-#' Unpack and assign values to specified names in an environment
-#' `r lifecycle::badge("experimental")`
-#'
-#' @param names A character vector specifying the names of variables to be assigned.
-#' @param values A list or vector containing the values to be assigned to the names.
-#' @param .envir The environment where the variables will be assigned. Defaults to the global environment.
-#' @param .warn Logical flag indicating whether to show a warning message. Defaults to TRUE.
-#'
-#' @return NULL. The function performs assignments in the specified environment.
-#' @export
-#'
-#' @examples
-#' c("x", "y") %<...% list(1, 2)
-`%<...%` <- function(names, values, .envir = .GlobalEnv, .warn = TRUE) {
-  # Emitir una advertencia si 'warn' es TRUE
+# Unpack and assign values to specified names in an environment
+# `r lifecycle::badge("experimental")`
+#
+# @param names A character vector specifying the names of variables to be assigned.
+# @param values A list or vector containing the values to be assigned to the names.
+# @param ... Additional arguments, including
+#   \itemize{
+#     \item{.envir}{The environment where the variables will be assigned. Defaults to the global environment.}
+#     \item{.warn}{Logical flag indicating whether to show a warning message. Defaults to TRUE.}
+#   }
+#
+# @return NULL. The function performs assignments in the specified environment.
+#
+#
+# @rdname unpkg-assign
+#
+# @examples
+# \dontrun{
+# c("x", "y") %<...% list(1, 2)
+# }
+`%<...%` <- function(names, values, ...) {
+  # Collect additional arguments
+  args <- list(...)
+
+  # Set default values if not provided
+  if (is.null(args[['.envir']])){
+    .envir <- .GlobalEnv
+  }
+
+  if (is.null(args[['.warn']])){
+    .warn <- TRUE
+  }
+
+  # Issue a warning if '.warn' is TRUE
   if (.warn) {
     warning("This function assigns variables to the global environment by default. ",
             "This may overwrite existing objects. To assign to a different environment, ",
@@ -47,21 +66,8 @@
 
 
 
-#' Wrapper around `%<...%` to unpack and assign values to specified names in an environment
-#' `r lifecycle::badge("experimental")`
-#'
-#' @param values A list or vector containing the values to be assigned to the names.
-#' @param names A character vector specifying the names of variables to be assigned.
-#' @param .envir The environment where the variables will be assigned. Defaults to the global environment.
-#' @param .warn Logical flag indicating whether to show a warning message. Defaults to TRUE.
-#'
-#' @return NULL. The function performs assignments in the specified environment.
-#' @export
-#'
-#' @examples
-#' values <- list(1, 2)
-#' names <- c("x", "y")
-#' values %...>% names
-`%...>%` <- function(values, names, .envir = .GlobalEnv, .warn = TRUE) {
-  `%<...%`(names, values, .envir = .envir, .warn = .warn)
+# @rdname unpkg-assign
+# @order 2
+`%...>%` <- function(values, names, ...) {
+  `%<...%`(names, values, ...)
 }

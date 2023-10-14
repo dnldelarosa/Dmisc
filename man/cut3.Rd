@@ -20,7 +20,7 @@ cut3(tbl, var_name, breaks, groups = NULL, bf_args = list(), .inf = FALSE, ...)
 
 \item{.inf}{\link{logical}: Whether to extend break points with -Inf and Inf.}
 
-\item{...:}{Additional arguments passed to \code{\link[base:cut]{base::cut}}.}
+\item{...}{Additional arguments passed to \code{\link[base:cut]{base::cut}}.}
 }
 \value{
 A data frame identical to the input \code{tbl}, with \code{var_name} converted to a factor.

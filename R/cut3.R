@@ -10,7 +10,7 @@
 #' @param groups [character]: The name of the variable for grouping data before conversion.
 #' @param bf_args [list]: Additional arguments to be passed to the break function.
 #' @param .inf [logical]: Whether to extend break points with -Inf and Inf.
-#' @param ...: Additional arguments passed to \code{\link[base:cut]{base::cut}}.
+#' @param ... Additional arguments passed to \code{\link[base:cut]{base::cut}}.
 #'
 #' @seealso
 #' \code{\link[base:cut]{base::cut}}, for the underlying cut function used.
