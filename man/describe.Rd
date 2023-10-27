@@ -31,6 +31,6 @@ This function generates a summary table for a data frame, containing summary sta
 summary(cars)
 
 # Using describe
+describe(cars)
 describe(cars, flextable = TRUE)
-describe(cars, flextable = TRUE, ft_args = list(cwidth = 1))
 }

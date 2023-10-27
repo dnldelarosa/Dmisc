@@ -20,7 +20,7 @@
 #'
 #' # Using describe
 #' describe(cars)
-#' describe(cars, flextable = TRUE, ft_args = list(cwidth = 1))
+#' describe(cars, flextable = TRUE)
 describe <- function(data, digits = 4, t = TRUE, flextable = FALSE, ft_args = list(), ...) {
   data <- as.data.frame(data)
   res <- list()

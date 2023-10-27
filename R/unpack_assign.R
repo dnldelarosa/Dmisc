@@ -1,36 +1,39 @@
 
-# Unpack and assign values to specified names in an environment
-# `r lifecycle::badge("experimental")`
-#
-# @param names A character vector specifying the names of variables to be assigned.
-# @param values A list or vector containing the values to be assigned to the names.
-# @param ... Additional arguments, including
-#   \itemize{
-#     \item{.envir}{The environment where the variables will be assigned. Defaults to the global environment.}
-#     \item{.warn}{Logical flag indicating whether to show a warning message. Defaults to TRUE.}
-#   }
-#
-# @return NULL. The function performs assignments in the specified environment.
-#
-#
-# @rdname unpkg-assign
-#
-# @examples
-# \dontrun{
-# c("x", "y") %<...% list(1, 2)
-# }
-`%<...%` <- function(names, values, ...) {
+#' Unpack and assign values to specified names in an environment
+#' `r lifecycle::badge("experimental")`
+#'
+#' @param names A list or character vector specifying the names of variables to be assigned.
+#' @seealso Additional arguments that can be passed to names include
+#'   \itemize{
+#'     \item{.envir}{The environment where the variables will be assigned. Defaults to the global environment.}
+#'     \item{.warn}{Logical flag indicating whether to show a warning message. Defaults to TRUE.}
+#'   }
+#' @param values A list or vector containing the values to be assigned to the names.
+#'
+#' @return NULL. The function performs assignments in the specified environment.
+#'
+#'
+#' @rdname unpkg-assign
+#'
+#' @examples
+#' \dontrun{
+#' c("x", "y") %<...% list(1, 2)
+#' }
+`%<...%` <- function(names, values) {
   # Collect additional arguments
-  args <- list(...)
-
-  # Set default values if not provided
-  if (is.null(args[['.envir']])){
+  tryCatch({
+    .envir <- names[['.envir']]
+    names[['.envir']] <- NULL
+  }, error = function(x){
     .envir <- .GlobalEnv
-  }
+  })
 
-  if (is.null(args[['.warn']])){
+  tryCatch({
+    .warn <- names[['.warn']]
+    .warn <- NULL
+  }, error = function(x){
     .warn <- TRUE
-  }
+  })
 
   # Issue a warning if '.warn' is TRUE
   if (.warn) {
@@ -68,6 +71,6 @@
 
 # @rdname unpkg-assign
 # @order 2
-`%...>%` <- function(values, names, ...) {
-  `%<...%`(names, values, ...)
+`%...>%` <- function(values, names) {
+  `%<...%`(names, values)
 }
