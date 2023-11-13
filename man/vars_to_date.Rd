@@ -51,7 +51,6 @@ Multiple variables to unique date variable
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
 \examples{
-\dontrun{
 tbl <- data.frame(
   year = rep("2021", 12),
   month = month.name,
@@ -62,5 +61,23 @@ tbl <- data.frame(
 tbl
 
 vars_to_date(tbl, year = 1, month = 2, day = 3)
-}
+
+# y soporta varias frecuencias y formatos de fechas
+
+tbl <- data.frame(
+  year = rep("2021", 12),
+  quarter = sample(
+            c(
+              "Enero-Marzo",
+              "Abril-Junio",
+              "Julio-Septiembre",
+              "Octubre-Diciembre"
+             )
+           ),
+  value = sample(100:1000, 12, TRUE)
+)
+
+tbl
+
+vars_to_date(tbl, year = 1, quarter = 2)
 }
