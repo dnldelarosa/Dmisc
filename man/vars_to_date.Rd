@@ -62,7 +62,7 @@ tbl
 
 vars_to_date(tbl, year = 1, month = 2, day = 3)
 
-# y soporta varias frecuencias y formatos de fechas
+# and supports various frequencies and date formats
 
 tbl <- data.frame(
   year = rep("2021", 12),
@@ -72,7 +72,9 @@ tbl <- data.frame(
               "Abril-Junio",
               "Julio-Septiembre",
               "Octubre-Diciembre"
-             )
+             ),
+            12,
+            TRUE
            ),
   value = sample(100:1000, 12, TRUE)
 )
