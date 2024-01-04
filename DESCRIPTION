@@ -1,6 +1,6 @@
 Package: Dmisc
 Title: Daniel miscellaneous functions
-Version: 0.3.4
+Version: 0.3.5
 Authors@R: 
     person(given = "Daniel E.",
            family = "de la Rosa",
@@ -22,13 +22,15 @@ Imports:
     glue,
     lifecycle,
     magrittr,
+    patchwork,
     rlang,
     stringr,
-    tidyr
+    tidyr,
+    yardstick
 Suggests: 
-    cli, 
+    cli,
     DBI,
-    DT, 
+    DT,
     flextable,
     forecast,
     ggcorrplot,
@@ -37,10 +39,9 @@ Suggests:
     janitor,
     keyring,
     knitr,
-    lmtest ,
+    lmtest,
     lubridate,
-    patchwork,
-    pins ,
+    pins,
     purrr,
     renv,
     RPostgres,
@@ -55,5 +56,5 @@ Suggests:
     tseries,
     vars,
     withr,
-    xts ,
+    xts,
     zoo

@@ -21,18 +21,22 @@
 #' }
 `%<...%` <- function(names, values) {
   # Collect additional arguments
+  .envir <- .GlobalEnv
   tryCatch({
     .envir <- names[['.envir']]
     names[['.envir']] <- NULL
   }, error = function(x){
-    .envir <- .GlobalEnv
+    #cli::cli_warn("The '.envir' argument must be a valid environment. ",
+    #             "The global environment will be used by default.")
   })
 
+  .warn <- TRUE
   tryCatch({
     .warn <- names[['.warn']]
     .warn <- NULL
   }, error = function(x){
-    .warn <- TRUE
+    #cli::cli_warn("The '.warn' argument must be a logical value. ",
+    #             "A warning will be issued by default.")
   })
 
   # Issue a warning if '.warn' is TRUE
