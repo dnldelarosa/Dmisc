@@ -76,6 +76,7 @@
 
 # @rdname unpkg-assign
 # @order 2
+# @export
 `%...>%` <- function(values, names) {
   `%<...%`(names, values)
 }
