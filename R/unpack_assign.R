@@ -12,6 +12,7 @@
 #'
 #' @return NULL. The function performs assignments in the specified environment.
 #'
+#' @export
 #'
 #' @rdname unpkg-assign
 #'

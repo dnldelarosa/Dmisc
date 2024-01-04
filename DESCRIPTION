@@ -1,6 +1,6 @@
 Package: Dmisc
 Title: Daniel miscellaneous functions
-Version: 0.3.5
+Version: 0.3.6
 Authors@R: 
     person(given = "Daniel E.",
            family = "de la Rosa",
@@ -22,11 +22,9 @@ Imports:
     glue,
     lifecycle,
     magrittr,
-    patchwork,
     rlang,
     stringr,
     tidyr,
-    yardstick
 Suggests: 
     cli,
     DBI,
@@ -41,6 +39,7 @@ Suggests:
     knitr,
     lmtest,
     lubridate,
+    patchwork,
     pins,
     purrr,
     renv,
@@ -57,4 +56,5 @@ Suggests:
     vars,
     withr,
     xts,
+    yardstick,
     zoo
