@@ -74,9 +74,21 @@
 
 
 
-# @rdname unpkg-assign
-# @order 2
-# @export
+
+#' Assign values to specified names in an environment and unpack the values (reverse of `%<...%`)
+#'
+#' @param values A list or vector containing the values to be assigned to the names.
+#' @param names A list or character vector specifying the names of variables to be assigned.
+#'
+#' @return NULL. The function performs assignments in the specified environment.
+#' @export
+#' 
+#' @rdname unpkg-right-assign
+#'
+#' @examples
+#' \dontrun{
+#' list(1, 2) %...>% c("x", "y")
+#' }
 `%...>%` <- function(values, names) {
   `%<...%`(names, values)
 }
