@@ -9,17 +9,32 @@ revert_scale <- function(scaled_data, center = NULL, scale = NULL) {
 }
 
 
+ts_revert_scale <- function(ts, center = NULL, scale = NULL) {
+  if('mts' %in% class(ts)){
+    stop("Not implemented for mts.")
+  }
+  .res <- revert_scale(ts, center, scale)
+  attr(.res, 'scaled:center') <- NULL
+  attr(.res, 'scaled:scale') <- NULL
+  .res
+}
+
+
 
 ts_scale <- function(ts, center = TRUE, scale = TRUE) {
   if('mts' %in% class(ts)){
     stop("Not implemented for mts.")
   }
-  ts(
-    scale(ts, center, scale),
+  scaled <- scale(ts, center, scale)
+  .res <- ts(
+    scaled,
     start = stats::start(ts),
     end = stats::end(ts),
     frequency = stats::frequency(ts)
   )
+  attr(.res, 'scaled:center') <- attr(scaled, 'scaled:center')
+  attr(.res, 'scaled:scale') <- attr(scaled, 'scaled:scale')
+  .res
 }
 
 scale2 <- function(data, scaled){
