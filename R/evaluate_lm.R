@@ -83,6 +83,8 @@ evaluate_lm <- function(model, valid = NULL, test = NULL, .undiff = NULL, .train
   if (.train_stats) {
     result[["model-summary"]] <- summary(model)
 
+    # instalar_paquete_si_falta("yardstick")
+    rlang::check_installed("yardstick")
     for (m in .metrics) {
       metric_func <- utils::getFromNamespace(paste0(m, "_vec"), "yardstick")
       if (!is.function(metric_func)) {
@@ -95,6 +97,8 @@ evaluate_lm <- function(model, valid = NULL, test = NULL, .undiff = NULL, .train
     note2 <- NULL
     result[["correlations"]] <- ggcorrplot::ggcorrplot(stats::cor(model$model), type = "lower", lab = TRUE)
     if (.resid_tests) {
+      # instalar_paquete_si_falta("patchwork")
+      rlang::check_installed("patchwork")
       if (!"package:patchwork" %in% search()) {
         requireNamespace('patchwork')
       }
@@ -208,6 +212,8 @@ evaluate_lm <- function(model, valid = NULL, test = NULL, .undiff = NULL, .train
       fcs
     )
 
+    # instalar_paquete_si_falta("yardstick")
+    rlang::check_installed("yardstick")
     metric <- c()
     for (m in .metrics) {
       metric_func <- utils::getFromNamespace(paste0(m, "_vec"), "yardstick")

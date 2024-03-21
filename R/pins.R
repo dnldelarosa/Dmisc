@@ -40,7 +40,7 @@ pin_get_or_create <- function(.data, .board, .name, type = 'csv', ...) {
     }
   }
   if (is.null(.version)) {
-    pins::pin_write(.board, .data, .name, type, ...)
+    pins::pin_write(.board, .data, .name, type = type, ...)
     .versions <- pins::pin_versions(.board, .name)
     .version <- .versions %>%
       dplyr::arrange(created) %>%

@@ -12,6 +12,7 @@
 #'
 #' @return NULL. The function performs assignments in the specified environment.
 #'
+#' @export
 #'
 #' @rdname unpkg-assign
 #'
@@ -21,18 +22,22 @@
 #' }
 `%<...%` <- function(names, values) {
   # Collect additional arguments
+  .envir <- .GlobalEnv
   tryCatch({
     .envir <- names[['.envir']]
     names[['.envir']] <- NULL
   }, error = function(x){
-    .envir <- .GlobalEnv
+    #cli::cli_warn("The '.envir' argument must be a valid environment. ",
+    #             "The global environment will be used by default.")
   })
 
+  .warn <- TRUE
   tryCatch({
     .warn <- names[['.warn']]
     .warn <- NULL
   }, error = function(x){
-    .warn <- TRUE
+    #cli::cli_warn("The '.warn' argument must be a logical value. ",
+    #             "A warning will be issued by default.")
   })
 
   # Issue a warning if '.warn' is TRUE
@@ -69,8 +74,21 @@
 
 
 
-# @rdname unpkg-assign
-# @order 2
+
+#' Assign values to specified names in an environment and unpack the values (reverse of `%<...%`)
+#'
+#' @param values A list or vector containing the values to be assigned to the names.
+#' @param names A list or character vector specifying the names of variables to be assigned.
+#'
+#' @return NULL. The function performs assignments in the specified environment.
+#' @export
+#' 
+#' @rdname unpkg-right-assign
+#'
+#' @examples
+#' \dontrun{
+#' list(1, 2) %...>% c("x", "y")
+#' }
 `%...>%` <- function(values, names) {
   `%<...%`(names, values)
 }

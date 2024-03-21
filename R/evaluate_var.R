@@ -138,6 +138,8 @@ evaluate_var <- function(model, valid = NULL, test = NULL, xreg = NULL, .undiff 
       result[["model-summary"]] <- summary(model)
     }
 
+    # instalar_paquete_si_falta("yardstick")
+    rlang::check_installed("yardstick")
     for (m in .metrics) {
       metric_func <- utils::getFromNamespace(paste0(m, "_vec"), "yardstick")
       if (!is.function(metric_func)) {
@@ -155,6 +157,8 @@ evaluate_var <- function(model, valid = NULL, test = NULL, xreg = NULL, .undiff 
     note1 <- "The training metrics are different from those in the model summary because the indicated transformations were applied to the former, while not to the summary ones."
     note2 <- NULL
     if (.resid_tests) {
+      # instalar_paquete_si_falta("patchwork")
+      rlang::check_installed("patchwork")
       if (!"package:patchwork" %in% search()) {
         requireNamespace('patchwork')
       }
@@ -245,6 +249,8 @@ evaluate_var <- function(model, valid = NULL, test = NULL, xreg = NULL, .undiff 
     }
     estimate <- dplyr::bind_rows(fitted, fcs)
 
+    # instalar_paquete_si_falta("yardstick")
+    rlang::check_installed("yardstick")
     metric <- list()
     for (m in .metrics) {
       metric_func <- utils::getFromNamespace(paste0(m, "_vec"), "yardstick")
