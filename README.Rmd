@@ -21,6 +21,7 @@ knitr::opts_chunk$set(
 [![R build status](https://github.com/drdsdaniel/Dmisc/workflows/R-CMD-check/badge.svg)](https://github.com/drdsdaniel/Dmisc/actions)
 [![Codecov test coverage](https://codecov.io/gh/drdsdaniel/Dmisc/branch/main/graph/badge.svg)](https://codecov.io/gh/drdsdaniel/Dmisc?branch=main)
 [![CRAN status](https://www.r-pkg.org/badges/version/Dmisc)](https://CRAN.R-project.org/package=Dmisc)
+![r-universe](https://adatar-do.r-universe.dev/badges/Dmisc)
 <!-- badges: end -->
 
 The Dmisc package provides a collection of versatile R functions developed by Daniel E. de la Rosa. These are general-purpose tools, not tied to any specific domain, aiming to aid a wide range of tasks in data analysis and visualization.

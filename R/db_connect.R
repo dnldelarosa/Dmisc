@@ -12,6 +12,9 @@
 # Para utilizar el driver correcto.
 # @param k_service_id [character]: "keyring service id" si está utilizando keyring
 #  para almacenar sus credenciales.
+# @param trusted_connection [logical]: si es `TRUE` se conectará a la base de datos
+#  con autenticación de Windows. Útil para SQL Server.
+# @param ...: otros argumentos que se pasan a la función de conexión de la base de datos.
 #
 # @return conexión a base de datos. Vea \code{DBI::\link[DBI:dbConnect]{dbConnect}}
 #
@@ -31,27 +34,21 @@ db_connect <- function(db_user = NULL,
                        db_name = "encft",
                        db_host = "localhost",
                        db_port = 5432,
-                       k_service_id = "postgre") {
+                       k_service_id = "postgre",
+                       trusted_connection = 'Yes',
+                       ...
+                       ) {
   if (db_name %in% c("enft1", "enft2")) {
-    warning(
+    cli::cli_alert_warning(
       paste0("Usa db_name = 'enft' en lugar de db_name = '", db_name, "'.")
     )
+    db_name <- "enft"
   }
 
-  if (!requireNamespace("DBI", quietly = TRUE)) {
-    stop(
-      "Package \"DBI\" needed for this function to work. Please install it.",
-      call. = FALSE
-    )
-  }
+  rlang::check_installed("DBI")
 
   if (!is.null(k_service_id)) {
-    if (!requireNamespace("keyring", quietly = TRUE)) {
-      stop(
-        "Package \"keyring\" needed for this function to work. Please install it.",
-        call. = FALSE
-      )
-    }
+    rlang::check_installed("keyring")
     uname <- keyring::key_list(k_service_id)[1, 2]
     pass <- keyring::key_get(k_service_id, uname)
   } else {
@@ -59,13 +56,19 @@ db_connect <- function(db_user = NULL,
     pass <- db_pass
   }
 
+  if (db_sys == 'SQL Server') {
+    rlang::check_installed("odbc")
+    DBI::dbConnect(odbc::odbc(),
+      Driver = "ODBC Driver 17 for SQL Server",
+      Server = db_host,
+      Database = db_name,
+      Trusted_Connection = trusted_connection,
+      ...
+    )
+  }
+
   if (db_sys == "PostgreSQL") {
-    if (!requireNamespace("RPostgres", quietly = TRUE)) {
-      stop(
-        "Package \"RPostgres\" needed for this function to work. Please install it.",
-        call. = FALSE
-      )
-    }
+    rlang::check_installed("RPostgres")
     DBI::dbConnect(RPostgres::Postgres(),
       dbname = db_name,
       host = db_host,
