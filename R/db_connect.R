@@ -58,25 +58,33 @@ db_connect <- function(db_user = NULL,
 
   if (db_sys == 'SQL Server') {
     rlang::check_installed("odbc")
-    DBI::dbConnect(odbc::odbc(),
+    conn <- DBI::dbConnect(odbc::odbc(),
       Driver = "ODBC Driver 17 for SQL Server",
       Server = db_host,
       Database = db_name,
       Trusted_Connection = trusted_connection,
       ...
     )
+
+    return(conn)
   }
 
   if (db_sys == "PostgreSQL") {
     rlang::check_installed("RPostgres")
-    DBI::dbConnect(RPostgres::Postgres(),
+    conn <- DBI::dbConnect(RPostgres::Postgres(),
       dbname = db_name,
       host = db_host,
       port = db_port,
       user = uname,
       password = pass
     )
+
+    return(conn)
   }
+
+  stop(cli::cli_alert_error(
+    paste0("El sistema de base de datos '", db_sys, "' no está soportado.")
+  ), call. = FALSE)
 }
 
 
