@@ -1,6 +1,6 @@
 Package: Dmisc
 Title: Daniel miscellaneous functions
-Version: 0.3.9
+Version: 0.3.11
 Authors@R: 
     person(given = "Daniel E.",
            family = "de la Rosa",
@@ -22,6 +22,7 @@ Imports:
     glue,
     lifecycle,
     magrittr,
+    odbc,
     rlang,
     stringr,
     tidyr,

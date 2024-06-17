@@ -16,6 +16,7 @@ status](https://github.com/drdsdaniel/Dmisc/workflows/R-CMD-check/badge.svg)](ht
 coverage](https://codecov.io/gh/drdsdaniel/Dmisc/branch/main/graph/badge.svg)](https://codecov.io/gh/drdsdaniel/Dmisc?branch=main)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/Dmisc)](https://CRAN.R-project.org/package=Dmisc)
+![r-universe](https://adatar-do.r-universe.dev/badges/Dmisc)
 <!-- badges: end -->
 
 The Dmisc package provides a collection of versatile R functions
