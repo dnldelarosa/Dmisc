@@ -37,9 +37,8 @@ db_connect <- function(
     db_port = 5432,
     k_service_id = "postgre",
     ...,
-                       trusted_connection = 'Yes',
-                       ...
-                       ) {
+    trusted_connection = 'Yes'
+  ) {
   .args <- list(...)
 
   if (db_name %in% c("enft1", "enft2")) {
