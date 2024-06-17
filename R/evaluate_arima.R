@@ -73,7 +73,7 @@ evaluate_arima <- function(
   if (.train_stats) {
     result[["model-summary"]] <- summary(model)
 
-    instalar_paquete_si_falta("yardstick")
+    rlang::check_installed("yardstick")
     for (m in .metrics) {
       metric_func <- utils::getFromNamespace(paste0(m, "_vec"), "yardstick")
       if (!is.function(metric_func)) {
@@ -87,7 +87,7 @@ evaluate_arima <- function(
     note2 <- NULL
     result[["training_metrics"]] <- as.matrix(metric)
     if (.resid_tests) {
-      instalar_paquete_si_falta("patchwork")
+      rlang::check_installed("patchwork")
       if (!"package:patchwork" %in% search()) {
         requireNamespace('patchwork')
       }
@@ -180,7 +180,7 @@ evaluate_arima <- function(
     )
 
     metric <- c()
-    instalar_paquete_si_falta("yardstick")
+    rlang::check_installed("yardstick")
     for (m in .metrics) {
       metric_func <- utils::getFromNamespace(paste0(m, "_vec"), "yardstick")
       if (!is.function(metric_func)) {

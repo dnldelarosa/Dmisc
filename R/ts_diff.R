@@ -30,10 +30,10 @@ ts_diff <- function(.ts, .n = 1, .subset = NULL, .na.omit = TRUE, ...) {
     ts_to_df()
   if (is.null(.subset)) {
     res <- res |>
-      dplyr::mutate(dplyr::across(-date, ~ .x - lag(.x, .n)))
+      dplyr::mutate(dplyr::across(-date, ~ .x - dplyr::lag(.x, .n)))
   } else {
     res <- res |>
-      dplyr::mutate(dplyr::across(dplyr::all_of(.subset), ~ .x - lag(.x, .n)))
+      dplyr::mutate(dplyr::across(dplyr::all_of(.subset), ~ .x - dplyr::lag(.x, .n)))
   }
   if (.na.omit) {
     res <- tidyr::drop_na(res)
