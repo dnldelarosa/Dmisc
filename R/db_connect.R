@@ -82,7 +82,9 @@ db_connect <- function(
       user = uname,
       password = pass
     )
-  } 
+
+    return(conn)
+  }
 
   stop(cli::cli_alert_error(
     paste0("El sistema de base de datos '", db_sys, "' no está soportado.")
