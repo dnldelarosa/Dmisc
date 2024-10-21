@@ -37,8 +37,7 @@ db_connect <- function(
     db_port = 5432,
     k_service_id = "postgre",
     ...,
-    trusted_connection = 'Yes'
-  ) {
+    trusted_connection = "Yes") {
   .args <- list(...)
 
   if (db_name %in% c("enft1", "enft2")) {
@@ -49,7 +48,7 @@ db_connect <- function(
   }
 
   rlang::check_installed("DBI")
-  rlang::check_installed('odbc')
+  rlang::check_installed("odbc")
 
   if (!is.null(k_service_id)) {
     rlang::check_installed("keyring")
@@ -60,7 +59,7 @@ db_connect <- function(
     pass <- db_pass
   }
 
-  if (db_sys == 'SQL Server') {
+  if (db_sys == "SQL Server") {
     rlang::check_installed("odbc")
     conn <- DBI::dbConnect(odbc::odbc(),
       Driver = "ODBC Driver 17 for SQL Server",
@@ -86,9 +85,16 @@ db_connect <- function(
     return(conn)
   }
 
-  stop(cli::cli_alert_error(
-    paste0("El sistema de base de datos '", db_sys, "' no está soportado.")
-  ), call. = FALSE)
+  stop(
+    cli::cli_alert_danger(
+      paste0(
+        "El sistema de base de datos '",
+        db_sys,
+        "' no está soportado."
+      )
+    ),
+    call. = FALSE
+  )
 }
 
 
